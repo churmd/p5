@@ -1,14 +1,17 @@
-var symbolSize = 200;
+var numStreams = 20;
+var symbolSize;
 
 function setup() {
   // put setup code here
   createCanvas(window.innerWidth, window.innerHeight);
   background(0);
+
+  symbolSize = width / numStreams;
   textSize(symbolSize);
 
   streams = [];
   x = 0;
-  for(var i = 0; i <= (width / symbolSize); i++){
+  for(var i = 0; i <= numStreams; i++){
     var stream = new Stream(x);
     stream.setup();
     streams.push(stream);
@@ -27,7 +30,7 @@ function draw() {
 function Symbol(x, y, velocity){
   this.x = x;
   this.y = y;
-  this.changeProb = random();
+  this.changeProb = random(0.5, 1);
   this.velocity = velocity;
   this.value;
 
@@ -60,9 +63,9 @@ function Stream(x){
   this.symbols = [];
 
   this.setup = function() {
-    y = -100;
-    velocity = 1;
-    this.len = 2;
+    y = random(-100, -1000);
+    velocity = random(1,5);
+    this.len = random(5,10);
 
     for(var i = 0; i < this.len; i++){
       var sym = new Symbol(this.x, y, velocity);
