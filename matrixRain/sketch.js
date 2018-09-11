@@ -3,7 +3,8 @@ var symbolSize;
 
 function setup() {
   // put setup code here
-  createCanvas(window.innerWidth, window.innerHeight);
+  var cnv = createCanvas(window.innerWidth, window.innerHeight);
+  cnv.style('display', 'block');
   background(0);
 
   symbolSize = width / numStreams;
