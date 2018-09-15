@@ -1,4 +1,4 @@
-var numStreams = 20;
+var numStreams = 50;
 var symbolSize;
 
 function setup() {
@@ -21,19 +21,20 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(0, 100);
   streams.forEach(function(s){
     s.render();
     s.update();
   });
 }
 
-function Symbol(x, y, velocity){
+function Symbol(x, y, velocity, white){
   this.x = x;
   this.y = y;
   this.changeProb = random(0.5, 1);
   this.velocity = velocity;
   this.value;
+  this.white = white;
 
   this.setRandomSymbol = function(){
     var decimal = random(12448, 12543); //Katakana unicode range
@@ -41,8 +42,11 @@ function Symbol(x, y, velocity){
   }
 
   this.render = function(){
-    fill(0, 255, 70);
-    //print("x = " + this.x + "y = " + this.y);
+    if(this.white){
+      fill(180, 255, 180);
+    } else {
+      fill(0, 255, 70);
+    }
     text(this.value, this.x, this.y);
   }
 
@@ -64,14 +68,16 @@ function Stream(x){
   this.symbols = [];
 
   this.setup = function() {
-    y = random(-100, -1000);
-    velocity = random(1,5);
-    this.len = random(5,10);
+    var y = random(-100, -1000);
+    var velocity = random(1,10);
+    this.len = random(5, 20);
+    var white = random([true, false]);
 
     for(var i = 0; i < this.len; i++){
-      var sym = new Symbol(this.x, y, velocity);
+      var sym = new Symbol(this.x, y, velocity, white);
       this.symbols.push(sym);
       y -= symbolSize;
+      white = false;
     }
   }
 
