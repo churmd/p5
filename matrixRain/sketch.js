@@ -3,7 +3,7 @@ var symbolSize;
 
 function setup() {
   // put setup code here
-  var cnv = createCanvas(window.innerWidth, window.innerHeight);
+  var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('display', 'block');
   background(0);
 

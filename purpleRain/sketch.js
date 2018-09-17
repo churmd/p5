@@ -2,7 +2,8 @@ let dropCount = 1000;
 
 function setup() {
   // put setup code here
-  createCanvas(windowWidth, windowHeight);
+  var cnv = createCanvas(windowWidth, windowHeight);
+  cnv.style('display', 'block');
 
   drops = [];
   for(i = 0; i < dropCount; i++){
