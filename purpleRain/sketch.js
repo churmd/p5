@@ -14,7 +14,8 @@ function setup() {
 function draw() {
   // put drawing code here
   clear();
-
+  
+  noStroke();
   fill('purple');
 
   for(i = 0; i < dropCount; i++){
