@@ -18,7 +18,7 @@ class MyCircle{
 
   grow(){
     if(this.growing){
-      this.d++;
+      this.d = this.d + 0.3;
     }
   }
 

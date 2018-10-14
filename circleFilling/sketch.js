@@ -3,7 +3,7 @@ var img;
 var full;
 
 function preload() {
-  //img = loadImage('fdsasdfsdf.jpg');
+  setImage("http://cdn.cnn.com/cnnnext/dam/assets/181010130950-australia-best-beaches-cossies-beach-cocos.jpg");
 }
 
 function setup() {
@@ -14,8 +14,6 @@ function setup() {
   full = false;
 
   allCircles = [];
-  var c1 = new MyCircle(0.5, 0.5, 50, color(100, 10, 10));
-  allCircles.push(c1);
 }
 
 function draw() {
@@ -39,12 +37,13 @@ function draw() {
 
 function addCircle(){
   var attempts = 0;
-  var cutOff = 10;
+  var cutOff = 100;
 
   while(attempts < cutOff){
     var x = random();
     var y = random();
-    var tempC = new MyCircle(x, y, 1, color("white"));
+    var colour = color(getImageColour(x, y));
+    var tempC = new MyCircle(x, y, 1, colour);
 
     if(!collision(tempC)){
       allCircles.push(tempC);
@@ -91,4 +90,20 @@ function canGrow(circle){
   }
 
   return true;
+}
+
+function setImage(url){
+  loadImage(url, function(i) {
+      img = i;
+      img.loadPixels();
+    }, function(e) {
+      console.log(e);
+    })
+}
+
+function getImageColour(xPerc, yPerc){
+  var xPix = round(img.width * xPerc);
+  var yPix = round(img.height * yPerc);
+
+  return img.get(xPix, yPix);
 }
