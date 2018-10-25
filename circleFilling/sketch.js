@@ -1,23 +1,42 @@
 var allCircles;
 var img;
 var full;
+var input;
 
 function preload() {
-  setImage("http://cdn.cnn.com/cnnnext/dam/assets/181010130950-australia-best-beaches-cossies-beach-cocos.jpg");
+    setImage("https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png");
 }
 
 function setup() {
-  // put setup code here
-  var cnv = createCanvas(windowWidth, windowHeight);
+  var topDiv = createDiv();
+  topDiv.style('margin', '10px auto');
+  var bottomDiv = createDiv();
+  bottomDiv.style('margin', '10px auto');
+
+  var cnv = createCanvas(windowWidth * 0.9, windowHeight * 0.9);
   cnv.style('display', 'block');
+  cnv.style('margin-left', 'auto');
+  cnv.style('margin-right', 'auto');
+  // var x = (windowWidth - width) / 2;
+  // var y = (windowHeight - height) / 2;
+  // cnv.position(x, y);
+  cnv.parent(topDiv);
 
   full = false;
 
   allCircles = [];
+
+  input = createInput("Enter image URL");
+  input.size(width / 2);
+  input.changed(changeImage);
+  input.style('display', 'block');
+  input.style('margin-left', 'auto');
+  input.style('margin-right', 'auto');
+  input.parent(bottomDiv);
 }
 
 function draw() {
-  background(51);
+  background(150);
 
   if(full){
     allCircles = [];
@@ -96,9 +115,17 @@ function setImage(url){
   loadImage(url, function(i) {
       img = i;
       img.loadPixels();
+      allCircles = [];
     }, function(e) {
       console.log(e);
     })
+}
+
+function changeImage(){
+  var url = input.value();
+  console.log(url);
+  input.value('');
+  setImage(url);
 }
 
 function getImageColour(xPerc, yPerc){
