@@ -1,6 +1,7 @@
 var radius;
 var points = [];
 var centre;
+var oldMarker;
 var oldPoint;
 
 function setup() {
@@ -13,7 +14,7 @@ function setup() {
   var smallestDim = min(displayWidth, displayHeight);
   radius = (smallestDim * 0.9) / 2;
 
-  var numPoints = 3;
+  var numPoints = 5;
   points = createPoints(numPoints);
 
   strokeWeight(8);
@@ -23,15 +24,15 @@ function setup() {
     point(v.x, v.y);
   }
 
-  oldPoint = createVector(random(displayWidth), random(displayHeight));
+  oldMarker = createVector(random(displayWidth), random(displayHeight));
 }
 
 function draw() {
-  var newPoint = movePoint();
-  stroke(255, 0, 255);
-  strokeWeight(6);
-  point(newPoint.x, newPoint.y);
-  oldPoint = newPoint;
+  var newMarker = moveMarker();
+  stroke(255, 0, 255, 100);
+  strokeWeight(4);
+  point(newMarker.x, newMarker.y);
+  oldMarker = newMarker;
 }
 
 function createPoints(numPoints) {
@@ -48,10 +49,12 @@ function createPoints(numPoints) {
   return newPoints;
 }
 
-function movePoint() {
-  var randomPoint = random(points);
-  var x = lerp(oldPoint.x, randomPoint.x, 0.5);
-  var y = lerp(oldPoint.y, randomPoint.y, 0.5);
+function moveMarker() {
+  var availablePoints = points.filter(p => p !== oldPoint);
+  var randomPoint = random(availablePoints);
+  var x = lerp(oldMarker.x, randomPoint.x, 0.5);
+  var y = lerp(oldMarker.y, randomPoint.y, 0.5);
   var newPoint = createVector(x, y);
+  oldPoint = randomPoint;
   return newPoint;
 }
