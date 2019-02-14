@@ -2,7 +2,6 @@ var base = 100;
 var factor = 0;
 
 function setup() {
-  // put setup code here
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('display', 'block');
 }
@@ -17,7 +16,6 @@ function getIndexVector(index, base, radius) {
 }
 
 function draw() {
-  // put drawing code here
   background(51);
 
   if(factor != Number.MAX_VALUE) {
