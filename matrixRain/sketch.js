@@ -93,3 +93,7 @@ function Stream(x){
     }
   }
 }
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
+}

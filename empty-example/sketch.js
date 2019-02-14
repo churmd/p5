@@ -1,9 +1,12 @@
 function setup() {
-  // put setup code here
-  createCanvas(displayWidth, displayHeight);
-  background('red');
+  var cnv = createCanvas(windowWidth, windowHeight);
+  cnv.style('display', 'block');
 }
 
 function draw() {
-  // put drawing code here
+  background(51);
+}
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
 }

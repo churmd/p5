@@ -14,7 +14,7 @@ function setup() {
 function draw() {
   // put drawing code here
   clear();
-  
+
   noStroke();
   fill('purple');
 
@@ -22,4 +22,8 @@ function draw() {
     drops[i].show();
     drops[i].update();
   }
+}
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
 }
