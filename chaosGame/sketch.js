@@ -14,7 +14,7 @@ function setup() {
   var smallestDim = min(displayWidth, displayHeight);
   radius = (smallestDim * 0.9) / 2;
 
-  var numPoints = 5;
+  var numPoints = 3;
   points = createPoints(numPoints);
 
   strokeWeight(8);
@@ -50,7 +50,8 @@ function createPoints(numPoints) {
 }
 
 function moveMarker() {
-  var availablePoints = points.filter(p => p !== oldPoint);
+  //var availablePoints = points.filter(p => p !== oldPoint);
+  var availablePoints = points;
   var randomPoint = random(availablePoints);
   var x = lerp(oldMarker.x, randomPoint.x, 0.5);
   var y = lerp(oldMarker.y, randomPoint.y, 0.5);
