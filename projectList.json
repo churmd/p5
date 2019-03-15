@@ -1,0 +1,32 @@
+[
+  {
+    "name" : "Chaos Game",
+    "link" : "chaosGame/index.html",
+    "desc" : "Place a series of N points. Draw a dot at a random place on the screen. Randomly chose a point and move the dot halfway to it, and then repeat forever. Depending on the number of points, different patterns will appear."
+  },
+  {
+    "name" : "Cicle Filling Images",
+    "link" : "circleFilling/index.html",
+    "desc" : "Repeatedly spawn expanding circles on the screen that stop epanding when they touch another circle and have their colour set relative to a linked image."
+  },
+  {
+    "name" : "Lissajous Curve Table",
+    "link" : "LissajousCurveTable/index.html",
+    "desc" : "A table with rotating cogs in the first row and column. The speed of the cogs increases going right/down. Horizontal and vertical lines are then drawn from a point on the cogs edge. Where these lines intersect a path is traced."
+  },
+  {
+    "name" : "Matrix Rain",
+    "link" : "matrixRain/index.html",
+    "desc" : "The falling streams of symbols seen in the Matrix films."
+  },
+  {
+    "name" : "Purple Rain",
+    "link" : "purpleRain/index.html",
+    "desc" : "My first project using p5. A simple rain simulation coloured purple, in reference to Prince."
+  },
+  {
+    "name" : "Modulo Times Table Circle",
+    "link" : "timesTablesCirclePattern/index.html",
+    "desc" : "A cicle with numbers 0 to N-1 around the outside. Each number is then multiplied by a factor F modulo N, and a line is drawn from it to the result. The factor is then increased as time goes on."
+  }
+]
