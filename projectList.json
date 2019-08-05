@@ -28,5 +28,10 @@
     "name" : "Modulo Times Table Circle",
     "link" : "timesTablesCirclePattern/index.html",
     "desc" : "A cicle with numbers 0 to N-1 around the outside. Each number is then multiplied by a factor F modulo N, and a line is drawn from it to the result. The factor is then increased as time goes on."
+  },
+  {
+    "name" : "Ray Casting",
+    "link" : "RayCasting/index.html",
+    "desc" : "A light casting n number of rays that reflect off of surrounding walls."
   }
 ]
