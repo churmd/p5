@@ -3,14 +3,25 @@ class LightSource {
     this.x = x;
     this.y = y;
     this.posistion = createVector(x,y);
-    this.rays = [];
+    this.rays = this.createRays();
+  }
 
-    for(var a = 0; a < 2*PI; a += PI/128) {
-      var dirVec = p5.Vector.fromAngle(a);
+  createRays() {
+    var rays = [];
+    for(var a = 0; a < 360; a ++) {
+      var dirVec = p5.Vector.fromAngle(radians(a));
       var dirFromLight = dirVec.add(this.posistion);
       var ray = new LineSegment(this.posistion, dirFromLight);
-      this.rays.push(ray);
+      rays.push(ray);
     }
+    return rays;
+  }
+
+  updatePosition(x, y) {
+    this.x = x;
+    this.y = y;
+    this.posistion = createVector(x,y);
+    this.rays = this.createRays();
   }
 
   rayCollisions(wallList) {
