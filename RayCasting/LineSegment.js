@@ -15,18 +15,22 @@ class LineSegment {
   }
 
   intersection(lineSegment2) {
-    var tDenom = (this.x1 - this.x2) * (lineSegment2.y1 - lineSegment2.y2) - (this.y1 - this.y2) * (lineSegment2.x1 - lineSegment2.x2);
+    var denom = (this.x1 - this.x2) * (lineSegment2.y1 - lineSegment2.y2) - (this.y1 - this.y2) * (lineSegment2.x1 - lineSegment2.x2);
 
     // lines are parallel or coincident
-    if (tDenom == 0) {
+    if (denom == 0) {
       return null;
     }
 
     var tNum = (this.x1 - lineSegment2.x1) * (lineSegment2.y1 - lineSegment2.y2) - (this.y1 - lineSegment2.y1) * (lineSegment2.x1 - lineSegment2.x2);
-    var t = tNum / tDenom;
+    var t = tNum / denom;
 
-    // intersection happens else where on the line, not in the segment that has been defined
-    if (t < 0 || t > 1) {
+    var uNum = (this.x1 - this.x2) * (this.y1 - lineSegment2.y1) - (this.y1 - this.y2) * (this.x1 - lineSegment2.x1);
+    var u = uNum / denom;
+
+    // If t is not between 0 and 1, the intersection happens else where on the line, not in the segment that has been defined
+    // If u is less than 0, the intersection is in the wrong direction of this line segment
+    if (t < 0 || t > 1 || u < 0) {
       return null;
     }
 
@@ -40,8 +44,4 @@ class LineSegment {
     var cY = this.x2 - this.x1;
     return new LineSegment(createVector(this.x1, this.y1), createVector(this.x1 + cX, this.y1 + cY));
   }
-
-
-  // Look at angle between at the point lines intersect
-  // Try both directions on the line that was intersected and pick the smaller angle
 }
