@@ -48,17 +48,21 @@ class LightSource {
     return collisions;
   }
 
-  show(wallList) {
+  show(wallList, numRainbows) {
     push();
 
     fill(255);
     ellipse(this.x, this.y, 10, 10);
 
+    colorMode(HSL, 360);
+    var hue = 0;
+    var sat = (numRainbows == 0) ? 0 : 250;
+
     var rayCollisions = this.rayCollisions(wallList);
     rayCollisions.forEach(collision => {
       var ray = new LineSegment(this.posistion, collision);
-      ray.show(color(255, 50))
-      // line(this.x, this.y, collision.x, collision.y);
+      hue < 360 ? hue += numRainbows : hue = 0;
+      ray.show(color(hue, sat, 200))
     });
 
     pop();
