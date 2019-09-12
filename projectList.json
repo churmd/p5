@@ -32,6 +32,6 @@
   {
     "name" : "Ray Casting",
     "link" : "RayCasting/index.html",
-    "desc" : "A light casting n number of rays that reflect off of surrounding walls."
+    "desc" : "A movable light source emitting rays in all directions. The rays end when they hit a wall."
   }
 ]
