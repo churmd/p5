@@ -33,5 +33,10 @@
     "name" : "Ray Casting",
     "link" : "RayCasting/index.html",
     "desc" : "A movable light source emitting rays in all directions. The rays end when they hit a wall."
+  },
+  {
+    "name" : "Maurer Rose",
+    "link" : "MaurerRose/index.html",
+    "desc" : "A set of points along rose curve connected with straight lines. Animated so that the set of points and number of rose petals changes over time."
   }
 ]
