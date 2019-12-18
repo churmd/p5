@@ -1,56 +1,71 @@
 const numBranches = 6;
-const pointRadius = 5;
-let snowflakeBranch = [];
-let point;
+const pointRadius = 3;
+const secondsToKeepFinishedSnowflake = 3;
+let snowflakeBranch;
+let newestPoint;
+let sameSnowflakeCounter;
 
 function setup() {
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('display', 'block');
-  point = createVector(windowWidth/2, 0);
+  frameRate(10);
+  clearSnowflake();
 }
 
 function draw() {
-  background(51);
+  let countBeforeClearing = getFrameRate() * secondsToKeepFinishedSnowflake;
+  if (sameSnowflakeCounter > countBeforeClearing) {
+    clearSnowflake();
+  }
 
+  let pointAdded = addNextPoint();
+  if (!pointAdded) {
+    sameSnowflakeCounter++;
+    return;
+  }
+
+  // Center drawing on screen
+  // rotate so top and bottom snowflake branches are vertically aligned
   translate(windowWidth/2, windowHeight/2);
-  addNextPoint();
-  snowflakeBranch.forEach(point => {
-    showPoint(point);
-  })
+  rotate(TWO_PI / (numBranches * 2) );
 
+  let rotationAmount = TWO_PI / numBranches;
+  for(let i = 0; i < numBranches; i++) {
+    rotate(rotationAmount);
 
-  // fill(200,0,0);
-  // ellipse(0,020,20);
-  // fill(255,255,255);
-  //
-  // randomWalkPoint(point, TWO_PI / (numBranches * 2));
-  // if(point.x < 1 || isIntersecting(point)) {
-  //   snowflakeBranch.push(point);
-  //   point = createVector(windowWidth/2, 0);
-  // }
-  //
-  // showPoint(point);
-  // snowflakeBranch.forEach(point => {
-  //   showPoint(point);
-  // })
+    showPoint(newestPoint);
 
-  // let point2 = createVector(windowWidth/2, 0);
-  // snowflakeBranch.push(point2);
-  // console.log(isIntersecting(point));
+    push();
+    scale(1, -1);
+    showPoint(newestPoint);
+    pop();
+  }
 }
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
+  clearSnowflake();
+}
+
+// Clears the screen and resets the snowflake branch to be empty.
+function clearSnowflake() {
+  background(51);
+  snowflakeBranch = [];
+  newestPoint = null;
+  sameSnowflakeCounter = 0;
 }
 
 function showPoint(point) {
   ellipse(point.x, point.y, pointRadius * 2, pointRadius * 2);
 }
 
+// Add another point to the snowflake branch, if there is space on screen.
+// Returns true if a new point was added the the branch, false if not.
 function addNextPoint() {
-  let point = createVector(windowWidth/2, 0);
+  let minWindowSize = min(windowWidth/2, windowHeight/2)
+  let point = createVector(minWindowSize, 0);
   let counter = 0;
-  
+
   while(true) {
     randomWalkPoint(point, TWO_PI / (numBranches * 2));
     if(point.x < 1 || isIntersecting(point)) {
@@ -61,15 +76,19 @@ function addNextPoint() {
 
   if (counter > 0) {
     snowflakeBranch.push(point);
+    newestPoint = point;
+    return true;
+  } else {
+    return false;
   }
 }
 
+// Check if a point is intersecting with any of the existing points in the snowflake branch
 function isIntersecting(point) {
   for (let i = 0; i < snowflakeBranch.length; i++) {
     let existingPoint = snowflakeBranch[i];
     let distanceBetween = dist(existingPoint.x, existingPoint.y, point.x, point.y);
     if (distanceBetween <= pointRadius * 2) {
-      console.log("intersecting");
       return true;
     }
   }
@@ -83,7 +102,7 @@ function randomWalkPoint(point, angleThreshold) {
 
   let angle = point.heading();
   angle = constrain(angle, 0, angleThreshold);
-// console.log("constrainedAngle " + angle);
+
   let magnitude = point.mag();
   let point2 = p5.Vector.fromAngle(angle);
   point2.setMag(magnitude);
