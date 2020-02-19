@@ -4,10 +4,9 @@ function setup() {
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.style('display', 'block');
 
-  birds.push(new Bird(300,300,1));
-  birds.push(new Bird(500,300,2));
-  birds.push(new Bird(400,500,3));
-  birds.push(new Bird(400,400,4));
+  for (let i = 0; i < 50; i++) {
+    birds.push(new Bird(random(0, windowWidth),random(0, windowHeight),i));
+  }
 }
 
 function draw() {

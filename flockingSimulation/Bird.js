@@ -11,6 +11,8 @@ class Bird {
     push();
     fill(255);
     ellipse(this.pos.x, this.pos.y, this.r * 2, this.r * 2);
+    fill(255,255,255,50);
+    ellipse(this.pos.x, this.pos.y, this.neighbourhood * 2, this.neighbourhood * 2);
     pop();
   }
 
@@ -20,14 +22,17 @@ class Bird {
       return bird.uuid !== this.uuid && distance < this.neighbourhood;
     })
 
-    const sepHeading = this.separate(otherBirds).mult(2);
-    const alignHeading = this.align(otherBirds).mult(1);
-    const cohHeading = this.cohesion(otherBirds).mult(1);
+    const sepHeading = this.separate(otherBirds).mult(100);
+    const alignHeading = this.align(otherBirds).mult(100);
+    const cohHeading = this.cohesion(otherBirds).mult(80);
 
-    this.heading.add(sepHeading);
-    this.heading.add(alignHeading);
-    this.heading.add(cohHeading);
-    this.heading.normalize();
+    const desiredHeading = createVector(0,0);
+    desiredHeading.add(sepHeading);
+    desiredHeading.add(alignHeading);
+    desiredHeading.add(cohHeading);
+    desiredHeading.normalize();
+
+    this.changeHeading(desiredHeading);
 
     this.pos.add(this.heading);
     this.keepInBounds(0, 0, maxX, maxY);
@@ -75,23 +80,37 @@ class Bird {
   }
 
   keepInBounds(minX, minY, maxX, maxY) {
+    const closestInbounds = this.pos.copy();
+
     if (this.pos.x < minX) {
-      this.pos.x = minX;
+      closestInbounds.x = minX;
     }
 
     if (this.pos.y < minY) {
-      this.pos.y = minY;
+      closestInbounds.y = minY;
     }
 
     if (this.pos.x > maxX) {
-      this.pos.x = maxX;
+      closestInbounds.x = maxX;
     }
 
     if (this.pos.y > maxY) {
-      this.pos.y = maxY;
+      closestInbounds.y = maxY;
     }
 
-    let inverseHeading = p5.Vector.mult(this.heading, -1);
-    this.heading = p5.Vector.add(p5.Vector.mult(this.heading, 0.6), p5.Vector.mult(inverseHeading, 0.4))
+    if (!closestInbounds.equals(this.pos)) {
+      const headingToInbounds = p5.Vector.sub(closestInbounds, this.pos);
+      this.changeHeading(headingToInbounds);
+    }
+  }
+
+  changeHeading(desiredHeading) {
+    const desiredHeadingRatio = 0.1;
+    const currentHeadingRatio = 1 - desiredHeadingRatio;
+    const desiredPart = p5.Vector.mult(desiredHeading, desiredHeadingRatio);
+    const currentPart = p5.Vector.mult(this.heading, currentHeadingRatio);
+    const newHeading = currentPart.add(desiredPart);
+    newHeading.normalize();
+    this.heading = newHeading;
   }
 }
