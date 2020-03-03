@@ -9,10 +9,14 @@ class Bird {
 
   show() {
     push();
+    translate(this.pos.x, this.pos.y);
+    rotate(this.heading.heading()+(PI/2));
+
     fill(255);
-    ellipse(this.pos.x, this.pos.y, this.r * 2, this.r * 2);
-    fill(255,255,255,50);
-    ellipse(this.pos.x, this.pos.y, this.neighbourhood * 2, this.neighbourhood * 2);
+    triangle(-10,10,0,-10,10,10);
+    fill(0);
+    ellipse(0,0,5,5);
+
     pop();
   }
 
