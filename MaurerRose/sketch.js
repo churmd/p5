@@ -26,7 +26,6 @@ function draw() {
   drawRose();
   pop();
 
-  console.log(n);
   if (play) {
     if (n > maxN) {
       n = 1;
