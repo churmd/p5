@@ -6,11 +6,19 @@ class Bird {
     this.heading = createVector(random(-1, 1),random(-1, 1));
   }
 
-  show() {
+  show(neighbourhood, showNeighbourhood) {
     push();
 
     translate(this.pos.x, this.pos.y);
     rotate(this.heading.heading()+(PI/2));
+
+    if (showNeighbourhood) {
+      push();
+      fill(255, 50);
+      noStroke();
+      ellipse(0, 0, neighbourhood * 2, neighbourhood * 2);
+      pop();
+    }
 
     fill(255);
     triangle(-10,10,0,-10,10,10);

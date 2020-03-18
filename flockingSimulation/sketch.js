@@ -4,6 +4,7 @@ let alignMult = 50;
 let cohMult = 40;
 let neighbourhood = 100;
 let sepMultSlider, alignMultSlider, cohMultSlider, neighbourhoodSlider;
+let neighbourhoodCheckbox;
 
 function setup() {
   var cnv = createCanvas(windowWidth, windowHeight * 0.9);
@@ -30,7 +31,7 @@ function draw() {
   birds.forEach(bird => {
     bird.update(birds, sepMult, alignMult, cohMult,
       neighbourhood, windowWidth, windowHeight * 0.9);
-    bird.show();
+    bird.show(neighbourhood, neighbourhoodCheckbox.checked());
   })
 }
 
@@ -50,4 +51,9 @@ function createControls() {
 
   neighbourhoodSlider = createSlider(0, 200, neighbourhood);
   neighbourhoodSlider.parent('neighbourhoodDiv')
+  neighbourhoodSlider.style('display', 'inline-block')
+
+  neighbourhoodCheckbox = createCheckbox('Show', false);
+  neighbourhoodCheckbox.parent('neighbourhoodDiv')
+  neighbourhoodCheckbox.style('display', 'inline-block')
 }
