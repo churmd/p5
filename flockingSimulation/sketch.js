@@ -1,23 +1,53 @@
 let birds = [];
+let sepMult = 50;
+let alignMult = 50;
+let cohMult = 40;
+let neighbourhood = 100;
+let sepMultSlider, alignMultSlider, cohMultSlider, neighbourhoodSlider;
 
 function setup() {
-  var cnv = createCanvas(windowWidth, windowHeight);
+  var cnv = createCanvas(windowWidth, windowHeight * 0.9);
+  cnv.parent('canvas');
   cnv.style('display', 'block');
 
   for (let i = 0; i < 50; i++) {
-    birds.push(new Bird(random(0, windowWidth),random(0, windowHeight),i));
+    const rndX = random(0, windowWidth);
+    const rndY = random(0, windowHeight * 0.9);
+    birds.push(new Bird(rndX, rndY, i));
   }
+
+  this.createControls();
 }
 
 function draw() {
   background(51);
 
+  sepMult = sepMultSlider.value();
+  alignMult = alignMultSlider.value();
+  cohMult = cohMultSlider.value();
+  neighbourhood = neighbourhoodSlider.value();
+
   birds.forEach(bird => {
-    bird.update(birds, windowWidth, windowHeight);
+    bird.update(birds, sepMult, alignMult, cohMult,
+      neighbourhood, windowWidth, windowHeight * 0.9);
     bird.show();
   })
 }
 
 function windowResized(){
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth, windowHeight  * 0.9);
+}
+
+function createControls() {
+  sepMultSlider = createSlider(0, 100, sepMult);
+  sepMultSlider.parent('sepDiv');
+
+  alignMultSlider = createSlider(0, 100, alignMult);
+  alignMultSlider.parent('alignDiv')
+
+  cohMultSlider = createSlider(0, 100, cohMult);
+  cohMultSlider.parent('cohDiv')
+
+  neighbourhoodSlider = createSlider(0, 200, neighbourhood);
+  neighbourhoodSlider.parent('neighbourhoodDiv')
 }

@@ -3,12 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-    <style> body {padding: 0; margin: 0;} </style>
+    <style>
+      body {padding: 0; margin: 0;}
+      .slider {display: inline-block; text-align: center;}
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
     <script src="Bird.js"></script>
     <script src="sketch.js"></script>
   </head>
   <body>
+    <div id='canvas'></div>
+    <div id='controls'>
+      <div id='sepDiv' class='slider'>
+        <p>Separation</p>
+      </div>
+      <div id='alignDiv' class='slider'>
+        <p>Alignment</p>
+      </div>
+      <div id='cohDiv' class='slider'>
+        <p>Cohesion</p>
+      </div>
+      <div id='neighbourhoodDiv' class='slider'>
+        <p>Neighbourhood</p>
+      </div>
+    </div>
   </body>
 </html>

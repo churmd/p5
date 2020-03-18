@@ -3,32 +3,30 @@ class Bird {
     this.uuid = id;
     this.pos = createVector(x, y);
     this.r = 5;
-    this.neighbourhood = 100;
     this.heading = createVector(random(-1, 1),random(-1, 1));
   }
 
   show() {
     push();
+
     translate(this.pos.x, this.pos.y);
     rotate(this.heading.heading()+(PI/2));
 
     fill(255);
     triangle(-10,10,0,-10,10,10);
-    fill(0);
-    ellipse(0,0,5,5);
 
     pop();
   }
 
-  update(birds, maxX, maxY) {
+  update(birds, sepMult, alignMult, cohMult, neighbourhood, maxX, maxY) {
     const otherBirds = birds.filter(bird => {
       const distance = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y);
-      return bird.uuid !== this.uuid && distance < this.neighbourhood;
+      return bird.uuid !== this.uuid && distance < neighbourhood;
     })
 
-    const sepHeading = this.separate(otherBirds).mult(100);
-    const alignHeading = this.align(otherBirds).mult(100);
-    const cohHeading = this.cohesion(otherBirds).mult(80);
+    const sepHeading = this.separate(otherBirds).mult(sepMult);
+    const alignHeading = this.align(otherBirds).mult(alignMult);
+    const cohHeading = this.cohesion(otherBirds).mult(cohMult);
 
     const desiredHeading = createVector(0,0);
     desiredHeading.add(sepHeading);
