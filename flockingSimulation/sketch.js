@@ -11,7 +11,7 @@ function setup() {
   cnv.parent('canvas');
   cnv.style('display', 'block');
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100; i++) {
     const rndX = random(0, windowWidth);
     const rndY = random(0, windowHeight * 0.9);
     birds.push(new Bird(rndX, rndY, i));
