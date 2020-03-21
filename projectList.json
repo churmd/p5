@@ -1,5 +1,10 @@
 [
   {
+    "name" : "Flocking Simulation",
+    "link" : "flockingSimulation/index.html",
+    "desc" : "A simulated flock of birds using Boids program."
+  },
+  {
     "name" : "Snowflake Generator",
     "link" : "snowflakeGenerator/index.html",
     "desc" : "Repeatedly grow a random snowflake until it reaches full size and then begin again."
