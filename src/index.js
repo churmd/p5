@@ -7,6 +7,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Notfound from "./NotFound";
 import ModuloTimesTable from './sketches/moduloTimesTableCircle/ModuloTimesTable';
 import SnowflakeGenerator from './sketches/snowfalkeGenerator/SnowflakeGenerator';
+import FlockingSimulation from './sketches/flockingSimulation/FlockingSimulation';
 
 const routing = (
 	<Router>
@@ -14,6 +15,7 @@ const routing = (
 			<Route exact path="/" component={App} />
 			<Route exact path="/moduloTimesTable" component={ModuloTimesTable} />
 			<Route exact path="/snowflakeGenerator" component={SnowflakeGenerator} />
+			<Route exact path="/flockingSimulation" component={FlockingSimulation} />
 			<Route component={Notfound} />
 		</Switch>
 	</Router>
