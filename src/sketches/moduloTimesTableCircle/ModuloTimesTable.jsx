@@ -28,7 +28,7 @@ class ModuloTimesTable extends React.Component {
 			const radius = p.min(p.windowWidth / 2, p.windowHeight / 2);
 			const outerRadius = radius * 0.95;
 			const innerRadius = radius * 0.9;
-			const pointSize = 10;
+			const pointSize = 14;
 			const halfPointSize = pointSize / 2;
 
 			p.translate(p.windowWidth / 2, p.windowHeight / 2);

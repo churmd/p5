@@ -1,10 +1,22 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Link } from "react-router-dom";
 
 function App() {
-  return (
-    <h1>P5 App</h1>
-  );
+	return (
+		<div>
+			<h1>P5 App</h1>
+			<p>
+				<Link to={"/flockingSimulation"}>Flocking Simulation</Link>
+			</p>
+			<p>
+				<Link to={"/snowflakeGenerator"}>Snowflake Generator</Link>
+			</p>
+			<p>
+				<Link to={"/moduloTimesTable"}>Modulo Times Table Circle</Link>
+			</p>
+		</div>
+	);
 }
 
 export default App;

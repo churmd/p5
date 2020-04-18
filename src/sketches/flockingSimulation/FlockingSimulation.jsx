@@ -85,18 +85,18 @@ class FlockingSimulation extends React.Component {
 	render() {
 		return (
 			<div ref={this.myRef}>
-				<div id="canvas"></div>
-				<div id="controls">
-					<div id="sepDiv" class="slider">
+				<div id='canvas'></div>
+				<div id='controls'>
+					<div id='sepDiv' class='slider'>
 						<p>Separation</p>
 					</div>
-					<div id="alignDiv" class="slider">
+					<div id='alignDiv' class='slider'>
 						<p>Alignment</p>
 					</div>
-					<div id="cohDiv" class="slider">
+					<div id='cohDiv' class='slider'>
 						<p>Cohesion</p>
 					</div>
-					<div id="neighbourhoodDiv" class="slider">
+					<div id='neighbourhoodDiv' class='slider'>
 						<p>Neighbourhood</p>
 					</div>
 				</div>
