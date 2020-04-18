@@ -15,7 +15,11 @@ function App() {
 			<p>
 				<Link to={"/moduloTimesTable"}>Modulo Times Table Circle</Link>
 			</p>
+			<p>
+				<Link to={"/lissajousCurveTable"}>Lissajous Curve Table</Link>
+			</p>
 		</div>
+		
 	);
 }
 
