@@ -9,6 +9,7 @@ import ModuloTimesTable from './sketches/moduloTimesTableCircle/ModuloTimesTable
 import SnowflakeGenerator from './sketches/snowfalkeGenerator/SnowflakeGenerator';
 import FlockingSimulation from './sketches/flockingSimulation/FlockingSimulation';
 import LissajousCurveTable from './sketches/lissajousCurveTable/LissajousCurveTable';
+import MatrixRain from './sketches/matrixRain/MatrixRain';
 
 const routing = (
 	<Router>
@@ -18,6 +19,7 @@ const routing = (
 			<Route exact path="/snowflakeGenerator" component={SnowflakeGenerator} />
 			<Route exact path="/flockingSimulation" component={FlockingSimulation} />
 			<Route exact path="/lissajousCurveTable" component={LissajousCurveTable} />
+			<Route exact path="/matrixRain" component={MatrixRain} />
 			<Route component={Notfound} />
 		</Switch>
 	</Router>
