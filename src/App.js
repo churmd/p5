@@ -21,6 +21,9 @@ function App() {
 			<p>
 				<Link to={"/lissajousCurveTable"}>Lissajous Curve Table</Link>
 			</p>
+			<p>
+				<Link to={"/maurerRose"}>Maurer Rose</Link>
+			</p>
 		</div>
 		
 	);
