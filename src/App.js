@@ -24,6 +24,9 @@ function App() {
 			<p>
 				<Link to={"/maurerRose"}>Maurer Rose</Link>
 			</p>
+			<p>
+				<Link to={"/chaosGame"}>Chaos Game</Link>
+			</p>
 		</div>
 		
 	);

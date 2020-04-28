@@ -11,6 +11,7 @@ import FlockingSimulation from './sketches/flockingSimulation/FlockingSimulation
 import LissajousCurveTable from './sketches/lissajousCurveTable/LissajousCurveTable';
 import MatrixRain from './sketches/matrixRain/MatrixRain';
 import MaurerRose from './sketches/maurerRose/MaurerRose';
+import ChaosGame from './sketches/chaosGame/ChaosGame';
 
 const routing = (
 	<Router>
@@ -22,6 +23,7 @@ const routing = (
 			<Route exact path="/lissajousCurveTable" component={LissajousCurveTable} />
 			<Route exact path="/matrixRain" component={MatrixRain} />
 			<Route exact path="/maurerRose" component={MaurerRose} />
+			<Route exact path="/chaosGame" component={ChaosGame} />
 			<Route component={Notfound} />
 		</Switch>
 	</Router>
