@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
+import SketchTile from "./components/sketchTile/SketchTile";
+import matrixRainImag from "./images/matrixRain.png";
 
 function App() {
 	return (
@@ -27,8 +29,8 @@ function App() {
 			<p>
 				<Link to={"/chaosGame"}>Chaos Game</Link>
 			</p>
+			<SketchTile title='Test' desc='test desc' image={matrixRainImag} />
 		</div>
-		
 	);
 }
 
