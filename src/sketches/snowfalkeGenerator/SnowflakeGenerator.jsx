@@ -26,7 +26,7 @@ class SnowflakeGenerator extends React.Component {
 			const countBeforeClearing =
 				p.getFrameRate() * secondsToKeepFinishedSnowflake;
 			if (sameSnowflakeCounter > countBeforeClearing) {
-				p.clearSnowflake();
+				clearSnowflake();
 			}
 
 			const pointAdded = addNextPoint();
