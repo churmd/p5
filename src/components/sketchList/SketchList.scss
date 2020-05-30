@@ -1,0 +1,10 @@
+.sketch-list {
+	width: 70%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+
+	.sketch-tile {
+		margin-bottom: 1em;
+	}
+}

@@ -12,18 +12,19 @@ import LissajousCurveTable from './sketches/lissajousCurveTable/LissajousCurveTa
 import MatrixRain from './sketches/matrixRain/MatrixRain';
 import MaurerRose from './sketches/maurerRose/MaurerRose';
 import ChaosGame from './sketches/chaosGame/ChaosGame';
+import * as routePaths from './constants/RoutePaths';
 
 const routing = (
 	<Router>
 		<Switch>
-			<Route exact path="/" component={App} />
+			<Route exact path={routePaths.home} component={App} />
 			<Route exact path="/moduloTimesTable" component={ModuloTimesTable} />
-			<Route exact path="/snowflakeGenerator" component={SnowflakeGenerator} />
-			<Route exact path="/flockingSimulation" component={FlockingSimulation} />
-			<Route exact path="/lissajousCurveTable" component={LissajousCurveTable} />
-			<Route exact path="/matrixRain" component={MatrixRain} />
-			<Route exact path="/maurerRose" component={MaurerRose} />
-			<Route exact path="/chaosGame" component={ChaosGame} />
+			<Route exact path={routePaths.snowflakeGenerator} component={SnowflakeGenerator} />
+			<Route exact path={routePaths.flockingSimulation} component={FlockingSimulation} />
+			<Route exact path={routePaths.lissajousCurveTable} component={LissajousCurveTable} />
+			<Route exact path={routePaths.matrixRain} component={MatrixRain} />
+			<Route exact path={routePaths.maurerRose} component={MaurerRose} />
+			<Route exact path={routePaths.chaosGame} component={ChaosGame} />
 			<Route component={Notfound} />
 		</Switch>
 	</Router>
