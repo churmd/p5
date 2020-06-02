@@ -12,7 +12,7 @@ import SketchTile from "../sketchTile/SketchTile";
 
 function SketchList(props) {
 	return (
-		<div class='sketch-list'>
+		<div className='sketch-list'>
 			<SketchTile
 				title='Flocking Simulation'
 				desc='A simulated flock of birds using Boids program.'

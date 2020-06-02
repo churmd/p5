@@ -2,6 +2,7 @@ import React from "react";
 import p5 from "p5";
 import Cog from "./Cog";
 import { intersect } from "mathjs";
+import "./LissajousCurveTable.scss";
 
 class LissajousCurveTable extends React.Component {
 	constructor(props) {
@@ -16,14 +17,16 @@ class LissajousCurveTable extends React.Component {
 		let patterns;
 
 		p.setup = () => {
-			const cnvSize = 800;
-			const cnv = p.createCanvas(cnvSize, cnvSize);
+			const minDim = Math.min(p.windowWidth, p.windowHeight);
+			const cnv = p.createCanvas(minDim, minDim);
 			cnv.style("display", "block");
 			cnv.style("margin", "auto");
 
+			p.frameRate(30);
+
 			numCogs = 8;
 			gridSize = numCogs + 1;
-			diameter = cnvSize / gridSize;
+			diameter = minDim / gridSize;
 			cogsTop = [];
 			cogsSide = [];
 			patterns = [[]];
@@ -102,6 +105,10 @@ class LissajousCurveTable extends React.Component {
 				}
 			}
 		};
+
+		p.windowResized = () => {
+			p.setup();
+		};
 	};
 
 	componentDidMount() {
@@ -109,7 +116,7 @@ class LissajousCurveTable extends React.Component {
 	}
 
 	render() {
-		return <div ref={this.myRef}></div>;
+		return <div className='lissajous-curve-table' ref={this.myRef}></div>;
 	}
 }
 export default LissajousCurveTable;

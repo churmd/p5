@@ -11,14 +11,14 @@ function SketchTile(props) {
 	}
 
 	return (
-		<div class='sketch-tile'>
+		<div className='sketch-tile'>
 			<img
 				src={props.image}
 				alt='Avatar'
-				class='image'
+				className='image'
 				onClick={handleClick}
 			></img>
-			<div class='text'>
+			<div className='text'>
 				<h2>{props.title}</h2>
 				<p>{props.desc}</p>
 			</div>
