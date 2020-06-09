@@ -1,10 +1,10 @@
 .sketch-tile {
-	max-height: 80%;
-
 	.image {
+		max-height: 80vh;
 		width: 100%;
 		height: auto;
 		cursor: pointer;
+		object-fit: cover;
 	}
 
 	.text {

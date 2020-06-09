@@ -24,6 +24,7 @@ function SketchList(props) {
 				desc='Repeatedly grow a random snowflake until it reaches full size and then begin again.'
 				image={snowflakeGeneratorImg}
 				routerPath={routePaths.snowflakeGenerator}
+				isMobileFriendly
 			/>
 			<SketchTile
 				title='Modulo Times Table'
@@ -54,6 +55,7 @@ function SketchList(props) {
 				desc='Place a series of N points, 3 points in this example. Draw a dot at a random place on the screen. Randomly chose a point and move the dot halfway to it, and then repeat forever. Depending on the number of points, different patterns will appear.'
 				image={chaosGameImg}
 				routerPath={routePaths.chaosGame}
+				isMobileFriendly
 			/>
 		</div>
 	);
