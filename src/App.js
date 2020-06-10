@@ -1,16 +1,51 @@
 import React from "react";
-import "./App.scss";
-import SketchList from "./components/sketchList/SketchList";
-import Description from "./components/description/Description";
+
+import { Route, HashRouter as Router, Switch } from "react-router-dom";
+import Notfound from "./NotFound";
+import ModuloTimesTable from "./sketches/moduloTimesTableCircle/ModuloTimesTable";
+import SnowflakeGenerator from "./sketches/snowfalkeGenerator/SnowflakeGenerator";
+import FlockingSimulation from "./sketches/flockingSimulation/FlockingSimulation";
+import LissajousCurveTable from "./sketches/lissajousCurveTable/LissajousCurveTable";
+import MatrixRain from "./sketches/matrixRain/MatrixRain";
+import MaurerRose from "./sketches/maurerRose/MaurerRose";
+import ChaosGame from "./sketches/chaosGame/ChaosGame";
+import * as routePaths from "./constants/RoutePaths";
+import Home from "./components/home/Home";
+
+const routing = (
+	<Router>
+		<Switch>
+			<Route exact path={routePaths.home} component={Home} />
+			<Route
+				exact
+				path={routePaths.moduloTimesTable}
+				component={ModuloTimesTable}
+			/>
+			<Route
+				exact
+				path={routePaths.snowflakeGenerator}
+				component={SnowflakeGenerator}
+			/>
+			<Route
+				exact
+				path={routePaths.flockingSimulation}
+				component={FlockingSimulation}
+			/>
+			<Route
+				exact
+				path={routePaths.lissajousCurveTable}
+				component={LissajousCurveTable}
+			/>
+			<Route exact path={routePaths.matrixRain} component={MatrixRain} />
+			<Route exact path={routePaths.maurerRose} component={MaurerRose} />
+			<Route exact path={routePaths.chaosGame} component={ChaosGame} />
+			<Route component={Notfound} />
+		</Switch>
+	</Router>
+);
 
 function App() {
-	return (
-		<div className='app'>
-			<h1>P5 Animations</h1>
-			<Description />
-			<SketchList />
-		</div>
-	);
+	return <React.StrictMode>{routing}</React.StrictMode>;
 }
 
 export default App;
