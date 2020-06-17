@@ -14,6 +14,12 @@ function SketchList(props) {
 	return (
 		<div className='sketch-list'>
 			<SketchTile
+				title='Beautiful Trigonometry'
+				desc='TODO'
+				image={flockingSimulationImg}
+				routerPath={routePaths.beautifulTrig}
+			/>
+			<SketchTile
 				title='Flocking Simulation'
 				desc='A simulated flock of birds using Boids program.'
 				image={flockingSimulationImg}
