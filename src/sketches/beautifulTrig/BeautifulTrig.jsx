@@ -80,9 +80,14 @@ class BeautifulTrig extends React.Component {
 				const pointAngle = angle + i * pointOffset;
 				const sinePosition = p.cos(pointAngle) * circleRadius;
 
+				p.colorMode(p.HSL, 360);
+				const hue = (360 / numLines) * i;
+				const sat = 250;
+				const colour = p.color(hue, sat, 200);
+				p.fill(colour);
 				p.stroke(0);
 				p.strokeWeight(2);
-				p.fill(255);
+
 				p.ellipse(sinePosition, 0, pointSize, pointSize);
 
 				p.pop();
@@ -98,7 +103,9 @@ class BeautifulTrig extends React.Component {
 
 			p.stroke(0);
 			p.strokeWeight(2);
-			p.fill(0, 0, 150);
+			p.colorMode(p.HSL, 360);
+			const colour = p.color(0, 0, 360);
+			p.fill(colour);
 			p.ellipse(xPos, yPos, pointSize, pointSize);
 
 			p.pop();
