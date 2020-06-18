@@ -10,18 +10,32 @@ class BeautifulTrig extends React.Component {
 	sketch = (p) => {
 		let angle = 0;
 		let numLines = 1;
+		let showTrigEnabled = false;
 		const rotationSpeed = 0.01;
 
 		p.setup = () => {
-			const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+			const cnv = p.createCanvas(getCanvasWidth(), getCanvasHeight());
 			cnv.style("display", "block");
+
+			const showTrigButton = p.createButton("Show Trigonometry");
+			showTrigButton.parent("controls");
+			showTrigButton.mousePressed(() => {
+				showTrigEnabled = !showTrigEnabled;
+				if (showTrigEnabled) {
+					showTrigButton.html("Hide Trigonometry");
+					numLines = 2;
+				} else {
+					showTrigButton.html("Show Trigonometry");
+					p.redraw();
+				}
+			});
 		};
 
 		p.draw = () => {
 			p.background(200);
 
-			const width = window.innerWidth;
-			const height = window.innerHeight;
+			const width = getCanvasWidth();
+			const height = getCanvasHeight();
 			const circleDiameter = Math.min(width, height) * 0.9;
 			const circleRadius = circleDiameter / 2;
 
@@ -32,14 +46,7 @@ class BeautifulTrig extends React.Component {
 			showPoints(circleRadius);
 			showOuterCirclePoint(circleRadius);
 
-			angle += rotationSpeed;
-			if (angle > p.TWO_PI) {
-				angle -= p.TWO_PI;
-				numLines += 1;
-				if (numLines > 32) {
-					numLines = 1;
-				}
-			}
+			updateState();
 		};
 
 		const showLines = (circleRadius) => {
@@ -111,8 +118,29 @@ class BeautifulTrig extends React.Component {
 			p.pop();
 		};
 
+		const updateState = () => {
+			angle += rotationSpeed;
+			if (angle > p.TWO_PI) {
+				angle -= p.TWO_PI;
+				if (!showTrigEnabled) {
+					numLines += 1;
+					if (numLines > 32) {
+						numLines = 1;
+					}
+				}
+			}
+		};
+
 		p.windowResized = () => {
-			p.resizeCanvas(window.innerWidth, window.innerHeight);
+			p.resizeCanvas(getCanvasWidth(), getCanvasHeight());
+		};
+
+		const getCanvasHeight = () => {
+			return window.innerHeight * 0.95;
+		};
+
+		const getCanvasWidth = () => {
+			return window.innerWidth;
 		};
 	};
 
@@ -121,7 +149,12 @@ class BeautifulTrig extends React.Component {
 	}
 
 	render() {
-		return <div ref={this.myRef}></div>;
+		return (
+			<div>
+				<div ref={this.myRef}></div>
+				<div id='controls'></div>
+			</div>
+		);
 	}
 }
 export default BeautifulTrig;
