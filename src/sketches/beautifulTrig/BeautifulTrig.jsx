@@ -10,7 +10,7 @@ class BeautifulTrig extends React.Component {
 	sketch = (p) => {
 		let angle = 0;
 		let numLines = 1;
-		let stepSize = 0.01;
+		const rotationSpeed = 0.01;
 
 		p.setup = () => {
 			const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
@@ -20,19 +20,19 @@ class BeautifulTrig extends React.Component {
 		p.draw = () => {
 			p.background(200);
 
-			let width = window.innerWidth;
-			let height = window.innerHeight;
-			let lineLength = Math.min(width, height) * 0.9;
-			let halfLineLength = lineLength / 2;
+			const width = window.innerWidth;
+			const height = window.innerHeight;
+			const circleDiameter = Math.min(width, height) * 0.9;
+			const circleRadius = circleDiameter / 2;
 
 			p.translate(width / 2, height / 2);
 
-			showLines(halfLineLength);
-			showOuterCircleLine(lineLength);
-			showPoints(halfLineLength);
-			showOuterCirclePoint(halfLineLength);
+			showLines(circleRadius);
+			showOuterCircleLine(circleDiameter);
+			showPoints(circleRadius);
+			showOuterCirclePoint(circleRadius);
 
-			angle += stepSize;
+			angle += rotationSpeed;
 			if (angle > p.TWO_PI) {
 				angle -= p.TWO_PI;
 				numLines += 1;
@@ -42,62 +42,64 @@ class BeautifulTrig extends React.Component {
 			}
 		};
 
-		let showLines = (halfLineLength) => {
+		const showLines = (circleRadius) => {
 			// Rotate counter clockwise to match taking a catesian coordinate from the origin along the positve x axis
-			let roatationStep = -p.PI / numLines;
+			const roatationStep = -p.PI / numLines;
 			for (let i = 0; i < numLines; i++) {
 				p.push();
 
 				p.rotate(i * roatationStep);
 				p.stroke(0);
 				p.strokeWeight(1);
-				p.line(-halfLineLength, 0, halfLineLength, 0);
+				p.line(-circleRadius, 0, circleRadius, 0);
 
 				p.pop();
 			}
 		};
 
-		let showOuterCircleLine = (diameter) => {
+		const showOuterCircleLine = (circleDiameter) => {
 			p.push();
 
 			p.stroke(0);
 			p.strokeWeight(5);
 			p.noFill();
-			p.ellipse(0, 0, diameter, diameter);
+			p.ellipse(0, 0, circleDiameter, circleDiameter);
 
 			p.pop();
 		};
 
-		let showPoints = (halfLineLength) => {
+		const showPoints = (circleRadius) => {
 			// Rotate counter clockwise to match taking a catesian coordinate from the origin along the positve x axis
-			let roatationStep = -p.PI / numLines;
-			let pointOffset = p.PI / numLines;
+			const roatationStep = -p.PI / numLines;
+			const pointOffset = p.PI / numLines;
+			const pointSize = 0.05 * circleRadius;
 			for (let i = 0; i < numLines; i++) {
 				p.push();
 				p.rotate(i * roatationStep);
 
-				let pointAngle = angle + i * pointOffset;
-				let sinePosition = p.cos(pointAngle) * halfLineLength;
+				const pointAngle = angle + i * pointOffset;
+				const sinePosition = p.cos(pointAngle) * circleRadius;
 
 				p.stroke(0);
 				p.strokeWeight(2);
 				p.fill(255);
-				p.ellipse(sinePosition, 0, 20, 20);
+				p.ellipse(sinePosition, 0, pointSize, pointSize);
 
 				p.pop();
 			}
 		};
 
-		let showOuterCirclePoint = (halfLineLength) => {
-			let xPos = p.cos(angle) * halfLineLength;
-			let yPos = p.sin(angle) * halfLineLength;
+		const showOuterCirclePoint = (circleRadius) => {
+			const xPos = p.cos(angle) * circleRadius;
+			const yPos = p.sin(angle) * circleRadius;
+			const pointSize = 0.05 * circleRadius;
 
 			p.push();
 
 			p.stroke(0);
 			p.strokeWeight(2);
 			p.fill(0, 0, 150);
-			p.ellipse(xPos, yPos, 20, 20);
+			p.ellipse(xPos, yPos, pointSize, pointSize);
 
 			p.pop();
 		};
