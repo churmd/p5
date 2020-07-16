@@ -11,6 +11,7 @@ import MaurerRose from "./sketches/maurerRose/MaurerRose";
 import ChaosGame from "./sketches/chaosGame/ChaosGame";
 import * as routePaths from "./constants/RoutePaths";
 import Home from "./components/home/Home";
+import BeautifulTrig from "./sketches/beautifulTrig/BeautifulTrig";
 
 const routing = (
 	<Router>
@@ -39,6 +40,11 @@ const routing = (
 			<Route exact path={routePaths.matrixRain} component={MatrixRain} />
 			<Route exact path={routePaths.maurerRose} component={MaurerRose} />
 			<Route exact path={routePaths.chaosGame} component={ChaosGame} />
+			<Route
+				exact
+				path={routePaths.beautifulTrig}
+				component={BeautifulTrig}
+			/>
 			<Route component={Notfound} />
 		</Switch>
 	</Router>
