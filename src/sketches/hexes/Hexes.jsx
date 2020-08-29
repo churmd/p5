@@ -9,18 +9,39 @@ class Hexes extends React.Component {
     }
 
     sketch = (p) => {
-        let h;
+        p.angleMode(p.DEGREES);
+        let hexSideLength = 50;
+        let horizontalDist = p.sin(60) * hexSideLength * 2;
+        let verticleDist = 2 * hexSideLength * 0.75;
+        let hexes = [];
 
         p.setup = () => {
             const cnv = p.createCanvas(getCanvasWidth(), getCanvasHeight());
             cnv.style("display", "block");
 
-            h = new Hex(p, 0.5, 0.5, 100);
+            let percHorDist = horizontalDist / getCanvasWidth();
+            let percVerDist = verticleDist / getCanvasHeight();
+
+            let h1 = new Hex(p, 0.5, 0.5, hexSideLength);
+            let h2 = new Hex(p, 0.5 + percHorDist, 0.5, hexSideLength);
+            let h3 = new Hex(
+                p,
+                0.5 + percHorDist / 2,
+                0.5 + percVerDist,
+                hexSideLength
+            );
+
+            hexes.push(h1);
+            hexes.push(h2);
+            hexes.push(h3);
         };
 
         p.draw = () => {
             p.background(51);
-            h.show(getCanvasWidth(), getCanvasHeight());
+
+            hexes.forEach((hex) => {
+                hex.show(getCanvasWidth(), getCanvasHeight());
+            });
         };
 
         p.windowResized = () => {

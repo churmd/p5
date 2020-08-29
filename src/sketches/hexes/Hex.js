@@ -1,51 +1,33 @@
 import p5 from "p5";
 
 export default class Hex {
-    constructor(p, x, y, height) {
+    constructor(p, x, y, sideLength) {
         this.p = p;
         this.x = x;
         this.y = y;
-        this.traingleSideLength = height / 2;
+        this.sideLength = sideLength;
     }
 
     show(canvasWidth, canvasHeight) {
         let hexCenterX = this.x * canvasWidth;
         let hexCenterY = this.y * canvasHeight;
 
-        let pointA = p5.Vector.fromAngle(
-            this.p.radians(-90),
-            this.traingleSideLength
-        );
+        let pointA = p5.Vector.fromAngle(this.p.radians(-90), this.sideLength);
         pointA.add(hexCenterX, hexCenterY);
 
-        let pointB = p5.Vector.fromAngle(
-            this.p.radians(-30),
-            this.traingleSideLength
-        );
+        let pointB = p5.Vector.fromAngle(this.p.radians(-30), this.sideLength);
         pointB.add(hexCenterX, hexCenterY);
 
-        let pointC = p5.Vector.fromAngle(
-            this.p.radians(30),
-            this.traingleSideLength
-        );
+        let pointC = p5.Vector.fromAngle(this.p.radians(30), this.sideLength);
         pointC.add(hexCenterX, hexCenterY);
 
-        let pointD = p5.Vector.fromAngle(
-            this.p.radians(90),
-            this.traingleSideLength
-        );
+        let pointD = p5.Vector.fromAngle(this.p.radians(90), this.sideLength);
         pointD.add(hexCenterX, hexCenterY);
 
-        let pointE = p5.Vector.fromAngle(
-            this.p.radians(150),
-            this.traingleSideLength
-        );
+        let pointE = p5.Vector.fromAngle(this.p.radians(150), this.sideLength);
         pointE.add(hexCenterX, hexCenterY);
 
-        let pointF = p5.Vector.fromAngle(
-            this.p.radians(210),
-            this.traingleSideLength
-        );
+        let pointF = p5.Vector.fromAngle(this.p.radians(210), this.sideLength);
         pointF.add(hexCenterX, hexCenterY);
 
         this.p.push();
