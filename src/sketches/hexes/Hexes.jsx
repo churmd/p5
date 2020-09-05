@@ -39,26 +39,20 @@ class Hexes extends React.Component {
             let horizontalDist = p.sin(60) * hexSideLength * 2;
             let verticleDist = 2 * hexSideLength * 0.75;
 
-            let midWidth = getCanvasWidth() / 2;
-            let midHeight = getCanvasHeight() / 2;
+            let numCols = Math.ceil(getCanvasWidth() / horizontalDist) + 1;
+            let numRows = Math.ceil(getCanvasHeight() / verticleDist) + 1;
 
-            let h1 = new Hex(p, midWidth, midHeight, hexSideLength);
-            let h2 = new Hex(
-                p,
-                midWidth + horizontalDist,
-                midHeight,
-                hexSideLength
-            );
-            let h3 = new Hex(
-                p,
-                midWidth + horizontalDist / 2,
-                midHeight + verticleDist,
-                hexSideLength
-            );
-
-            hexes.push(h1);
-            hexes.push(h2);
-            hexes.push(h3);
+            for (let i = 0; i < numCols; i++) {
+                for (let j = 0; j < numRows; j++) {
+                    let xPos = i * horizontalDist;
+                    if (j % 2 === 1) {
+                        xPos += horizontalDist / 2;
+                    }
+                    let yPos = j * verticleDist;
+                    let h = new Hex(p, xPos, yPos, hexSideLength);
+                    hexes.push(h);
+                }
+            }
         };
 
         const getCanvasHeight = () => {
