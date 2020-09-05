@@ -9,31 +9,14 @@ class Hexes extends React.Component {
     }
 
     sketch = (p) => {
-        p.angleMode(p.DEGREES);
-        let hexSideLength = 50;
-        let horizontalDist = p.sin(60) * hexSideLength * 2;
-        let verticleDist = 2 * hexSideLength * 0.75;
         let hexes = [];
 
         p.setup = () => {
             const cnv = p.createCanvas(getCanvasWidth(), getCanvasHeight());
             cnv.style("display", "block");
 
-            let percHorDist = horizontalDist / getCanvasWidth();
-            let percVerDist = verticleDist / getCanvasHeight();
-
-            let h1 = new Hex(p, 0.5, 0.5, hexSideLength);
-            let h2 = new Hex(p, 0.5 + percHorDist, 0.5, hexSideLength);
-            let h3 = new Hex(
-                p,
-                0.5 + percHorDist / 2,
-                0.5 + percVerDist,
-                hexSideLength
-            );
-
-            hexes.push(h1);
-            hexes.push(h2);
-            hexes.push(h3);
+            p.angleMode(p.DEGREES);
+            createHexes();
         };
 
         p.draw = () => {
@@ -46,6 +29,36 @@ class Hexes extends React.Component {
 
         p.windowResized = () => {
             p.resizeCanvas(getCanvasWidth(), getCanvasHeight());
+            createHexes();
+        };
+
+        const createHexes = () => {
+            hexes = [];
+
+            let hexSideLength = getSideLength();
+            let horizontalDist = p.sin(60) * hexSideLength * 2;
+            let verticleDist = 2 * hexSideLength * 0.75;
+
+            let midWidth = getCanvasWidth() / 2;
+            let midHeight = getCanvasHeight() / 2;
+
+            let h1 = new Hex(p, midWidth, midHeight, hexSideLength);
+            let h2 = new Hex(
+                p,
+                midWidth + horizontalDist,
+                midHeight,
+                hexSideLength
+            );
+            let h3 = new Hex(
+                p,
+                midWidth + horizontalDist / 2,
+                midHeight + verticleDist,
+                hexSideLength
+            );
+
+            hexes.push(h1);
+            hexes.push(h2);
+            hexes.push(h3);
         };
 
         const getCanvasHeight = () => {
@@ -54,6 +67,11 @@ class Hexes extends React.Component {
 
         const getCanvasWidth = () => {
             return window.innerWidth;
+        };
+
+        const getSideLength = () => {
+            let minDim = Math.min(getCanvasHeight(), getCanvasWidth());
+            return 0.05 * minDim;
         };
     };
 

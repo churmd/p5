@@ -8,27 +8,24 @@ export default class Hex {
         this.sideLength = sideLength;
     }
 
-    show(canvasWidth, canvasHeight) {
-        let hexCenterX = this.x * canvasWidth;
-        let hexCenterY = this.y * canvasHeight;
-
+    show() {
         let pointA = p5.Vector.fromAngle(this.p.radians(-90), this.sideLength);
-        pointA.add(hexCenterX, hexCenterY);
+        pointA.add(this.x, this.y);
 
         let pointB = p5.Vector.fromAngle(this.p.radians(-30), this.sideLength);
-        pointB.add(hexCenterX, hexCenterY);
+        pointB.add(this.x, this.y);
 
         let pointC = p5.Vector.fromAngle(this.p.radians(30), this.sideLength);
-        pointC.add(hexCenterX, hexCenterY);
+        pointC.add(this.x, this.y);
 
         let pointD = p5.Vector.fromAngle(this.p.radians(90), this.sideLength);
-        pointD.add(hexCenterX, hexCenterY);
+        pointD.add(this.x, this.y);
 
         let pointE = p5.Vector.fromAngle(this.p.radians(150), this.sideLength);
-        pointE.add(hexCenterX, hexCenterY);
+        pointE.add(this.x, this.y);
 
         let pointF = p5.Vector.fromAngle(this.p.radians(210), this.sideLength);
-        pointF.add(hexCenterX, hexCenterY);
+        pointF.add(this.x, this.y);
 
         this.p.push();
 
