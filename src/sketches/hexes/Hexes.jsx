@@ -21,9 +21,10 @@ class Hexes extends React.Component {
 
         p.draw = () => {
             p.background(51);
+            p.translate(getCanvasWidth() / 2, getCanvasHeight() / 2);
 
             hexes.forEach((hex) => {
-                hex.show(getCanvasWidth(), getCanvasHeight());
+                hex.show();
             });
         };
 
@@ -36,23 +37,73 @@ class Hexes extends React.Component {
             hexes = [];
 
             let hexSideLength = getSideLength();
-            let horizontalDist = p.sin(60) * hexSideLength * 2;
-            let verticleDist = 2 * hexSideLength * 0.75;
+            let horizontalHexSpacing = p.sin(60) * hexSideLength * 2;
+            let verticleHexSpacing = 2 * hexSideLength * 0.75;
 
-            let numCols = Math.ceil(getCanvasWidth() / horizontalDist) + 1;
-            let numRows = Math.ceil(getCanvasHeight() / verticleDist) + 1;
+            let midWidth = getCanvasWidth() / 2;
+            let midHeight = getCanvasHeight() / 2;
 
-            for (let i = 0; i < numCols; i++) {
-                for (let j = 0; j < numRows; j++) {
-                    let xPos = i * horizontalDist;
-                    if (j % 2 === 1) {
-                        xPos += horizontalDist / 2;
-                    }
-                    let yPos = j * verticleDist;
-                    let h = new Hex(p, xPos, yPos, hexSideLength);
-                    hexes.push(h);
+            let maxHexXPos = midWidth + horizontalHexSpacing / 2;
+            let maxHexYPos = midHeight + verticleHexSpacing / 2;
+
+            let visited = [];
+            let explore = [];
+            explore.push({ x: 0, y: 0 });
+
+            while (explore.length > 0) {
+                let coord = explore.pop();
+                const matchesThisCoord = (element) => {
+                    return (
+                        element.x.toFixed() === coord.x.toFixed() &&
+                        element.y.toFixed() === coord.y.toFixed()
+                    );
+                };
+
+                if (visited.some(matchesThisCoord)) {
+                    continue;
                 }
+
+                if (
+                    coord.x > maxHexXPos ||
+                    coord.x < -maxHexXPos ||
+                    coord.y > maxHexYPos ||
+                    coord.y < -maxHexYPos
+                ) {
+                    continue;
+                }
+
+                visited.push(coord);
+
+                explore.push({
+                    x: coord.x - horizontalHexSpacing,
+                    y: coord.y,
+                });
+                explore.push({
+                    x: coord.x + horizontalHexSpacing,
+                    y: coord.y,
+                });
+                explore.push({
+                    x: coord.x - horizontalHexSpacing / 2,
+                    y: coord.y + verticleHexSpacing,
+                });
+                explore.push({
+                    x: coord.x + horizontalHexSpacing / 2,
+                    y: coord.y + verticleHexSpacing,
+                });
+                explore.push({
+                    x: coord.x - horizontalHexSpacing / 2,
+                    y: coord.y - verticleHexSpacing,
+                });
+                explore.push({
+                    x: coord.x + horizontalHexSpacing / 2,
+                    y: coord.y - verticleHexSpacing,
+                });
             }
+
+            visited.forEach((coord) => {
+                let h = new Hex(p, coord.x, coord.y, hexSideLength);
+                hexes.push(h);
+            });
         };
 
         const getCanvasHeight = () => {
