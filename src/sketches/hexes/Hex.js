@@ -1,11 +1,36 @@
 import p5 from "p5";
 
 export default class Hex {
-    constructor(p, x, y, sideLength) {
+    constructor(p, x, y, maxSideLength) {
         this.p = p;
         this.x = x;
         this.y = y;
-        this.sideLength = sideLength;
+        this.maxSideLength = maxSideLength;
+        this.sideLength = p.random(maxSideLength);
+        this.growing = p.random([true, false]);
+    }
+
+    update() {
+        const growRate = 0.1;
+        if (this.sideLength >= this.maxSideLength) {
+            this.growing = false;
+        }
+
+        if (this.sideLength <= 1) {
+            this.growing = true;
+        }
+
+        if (this.growing) {
+            this.sideLength += growRate;
+            if (this.sideLength > this.maxSideLength) {
+                this.sideLength = this.maxSideLength;
+            }
+        } else {
+            this.sideLength -= growRate;
+            if (this.sideLength < 1) {
+                this.sideLength = 1;
+            }
+        }
     }
 
     show() {

@@ -24,6 +24,7 @@ class Hexes extends React.Component {
             p.translate(getCanvasWidth() / 2, getCanvasHeight() / 2);
 
             hexes.forEach((hex) => {
+                hex.update();
                 hex.show();
             });
         };
@@ -52,11 +53,14 @@ class Hexes extends React.Component {
 
             while (explore.length > 0) {
                 let coord = explore.pop();
+
+                // Coordinates are floating points, so checking for equality is difficult
+                // and converting to int leads to rounding issues.
+                // So just check there is not a very close coordinate already visited.
                 const matchesThisCoord = (element) => {
-                    return (
-                        element.x.toFixed() === coord.x.toFixed() &&
-                        element.y.toFixed() === coord.y.toFixed()
-                    );
+                    let xDiff = Math.abs(element.x - coord.x);
+                    let yDiff = Math.abs(element.y - coord.y);
+                    return xDiff < 2 && yDiff < 2;
                 };
 
                 if (visited.some(matchesThisCoord)) {
