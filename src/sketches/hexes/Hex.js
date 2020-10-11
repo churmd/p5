@@ -6,12 +6,25 @@ export default class Hex {
         this.x = x;
         this.y = y;
         this.maxSideLength = maxSideLength;
-        this.sideLength = p.random(maxSideLength);
-        this.growing = p.random([true, false]);
+        this.sideLength = maxSideLength;
+        this.growing = false;
+        this.growthRate = 0;
+    }
+
+    setSideLength(sideLength) {
+        this.sideLength = sideLength;
+    }
+
+    grow() {
+        this.growing = true;
+    }
+
+    shrink() {
+        this.growing = false;
     }
 
     update() {
-        const growRate = 0.1;
+        this.growthRate = 0.1;
         if (this.sideLength >= this.maxSideLength) {
             this.growing = false;
         }
@@ -21,12 +34,12 @@ export default class Hex {
         }
 
         if (this.growing) {
-            this.sideLength += growRate;
+            this.sideLength += this.growthRate;
             if (this.sideLength > this.maxSideLength) {
                 this.sideLength = this.maxSideLength;
             }
         } else {
-            this.sideLength -= growRate;
+            this.sideLength -= this.growthRate;
             if (this.sideLength < 1) {
                 this.sideLength = 1;
             }

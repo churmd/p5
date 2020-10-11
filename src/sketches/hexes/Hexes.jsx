@@ -1,6 +1,6 @@
 import React from "react";
 import p5 from "p5";
-import HexGrid from "./HexGrid";
+import CenterOutHexGrid from "./CenterOutHexGrid";
 
 class Hexes extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class Hexes extends React.Component {
         };
 
         const createHexGrid = () => {
-            return new HexGrid(
+            return new CenterOutHexGrid(
                 p,
                 getCanvasWidth(),
                 getCanvasHeight(),
