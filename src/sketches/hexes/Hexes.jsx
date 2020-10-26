@@ -1,6 +1,9 @@
 import React from "react";
 import p5 from "p5";
 import CenterOutHexGrid from "./CenterOutHexGrid";
+import HexGrid from "./HexGrid";
+import RandomHexGrid from "./RandomHexGrid";
+import "./Hexes.scss";
 
 class Hexes extends React.Component {
     constructor(props) {
@@ -9,8 +12,15 @@ class Hexes extends React.Component {
     }
 
     sketch = (p) => {
+        let hexGrid;
+        let currentPattern;
+        let patternRadioGroup;
+
+        const randomPattern = "Random";
+        const centerOutPattern = "CenterOutPattern";
+
         const getCanvasHeight = () => {
-            return window.innerHeight;
+            return window.innerHeight * 0.9;
         };
 
         const getCanvasWidth = () => {
@@ -23,19 +33,48 @@ class Hexes extends React.Component {
         };
 
         const createHexGrid = () => {
-            return new CenterOutHexGrid(
-                p,
-                getCanvasWidth(),
-                getCanvasHeight(),
-                getSideLength()
-            );
+            switch (currentPattern) {
+                case randomPattern:
+                    return new RandomHexGrid(
+                        p,
+                        getCanvasWidth(),
+                        getCanvasHeight(),
+                        getSideLength()
+                    );
+                case centerOutPattern:
+                    return new CenterOutHexGrid(
+                        p,
+                        getCanvasWidth(),
+                        getCanvasHeight(),
+                        getSideLength()
+                    );
+                default:
+                    return new HexGrid(
+                        p,
+                        getCanvasWidth(),
+                        getCanvasHeight(),
+                        getSideLength()
+                    );
+            }
         };
 
-        let hexGrid;
+        const createControls = () => {
+            patternRadioGroup = p.createRadio();
+            patternRadioGroup.option(randomPattern);
+            patternRadioGroup.option(centerOutPattern);
+            patternRadioGroup.parent("radioOptions");
+
+            patternRadioGroup.selected(randomPattern);
+
+            currentPattern = patternRadioGroup.selected();
+        };
 
         p.setup = () => {
             const cnv = p.createCanvas(getCanvasWidth(), getCanvasHeight());
+            cnv.parent("canvas");
             cnv.style("display", "block");
+
+            createControls();
 
             p.angleMode(p.DEGREES);
             hexGrid = createHexGrid();
@@ -43,6 +82,11 @@ class Hexes extends React.Component {
 
         p.draw = () => {
             p.background(51);
+
+            if (patternRadioGroup.selected() !== currentPattern) {
+                currentPattern = patternRadioGroup.selected();
+                hexGrid = createHexGrid();
+            }
 
             hexGrid.update();
             hexGrid.show();
@@ -59,7 +103,14 @@ class Hexes extends React.Component {
     }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <div id='canvas'></div>
+                <div id='controls'>
+                    <div id='radioOptions'></div>
+                </div>
+            </div>
+        );
     }
 }
 export default Hexes;

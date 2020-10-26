@@ -9,6 +9,8 @@ export default class Hex {
         this.sideLength = maxSideLength;
         this.growing = false;
         this.growthRate = 0;
+        this.fillColour = p.color(255, 255, 255);
+        this.outlineColour = p.color(0, 0, 0);
     }
 
     setSideLength(sideLength) {
@@ -21,6 +23,11 @@ export default class Hex {
 
     shrink() {
         this.growing = false;
+    }
+
+    setColour(fillColour, outlineColour) {
+        this.fillColour = fillColour;
+        this.outlineColour = outlineColour;
     }
 
     update() {
@@ -67,9 +74,9 @@ export default class Hex {
 
         this.p.push();
 
-        this.p.fill(255);
-        this.p.strokeWeight(2);
-        this.p.stroke(0);
+        this.p.fill(this.fillColour);
+        this.p.strokeWeight(1);
+        this.p.stroke(this.outlineColour);
 
         this.p.beginShape();
         this.p.vertex(pointA.x, pointA.y);
