@@ -20,7 +20,7 @@ class Hexes extends React.Component {
         const centerOutPattern = "CenterOutPattern";
 
         const getCanvasHeight = () => {
-            return window.innerHeight * 0.9;
+            return window.innerHeight;
         };
 
         const getCanvasWidth = () => {
@@ -102,10 +102,45 @@ class Hexes extends React.Component {
         this.myP5 = new p5(this.sketch, this.myRef.current);
     }
 
+    toggleCavasFullScreen = () => {
+        const canvasElem = document.getElementById("canvas");
+        const currentFullScreenElem = document.fullscreenElement;
+        if (canvasElem === currentFullScreenElem) {
+            this.exitFullScreen(canvasElem);
+        } else {
+            this.openFullScreen(canvasElem);
+        }
+    };
+
+    openFullScreen = (elem) => {
+        if (elem.requestFullscreen) {
+            console.log(elem);
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    };
+
+    exitFullScreen = (elem) => {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            /* IE11 */
+            document.msExitFullscreen();
+        }
+    };
+
     render() {
         return (
             <div ref={this.myRef}>
-                <div id='canvas'></div>
+                <div id='canvas' onClick={this.toggleCavasFullScreen}></div>
                 <div id='controls'>
                     <div id='radioOptions'></div>
                 </div>
