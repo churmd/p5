@@ -1,13 +1,5 @@
 import React from "react";
 import "./SketchList.scss";
-// import flockingSimulationImg from "../../images/flockingSimulation/flockingSimulation.jpeg";
-// import snowflakeGeneratorImg from "../../images/snowflakeGenerator.jpeg";
-// import moduloTimesTableImg from "../../images/moduloTimesTable.jpeg";
-// import matrixRainImag from "../../images/matrixRain.jpeg";
-// import lissajousCurveTableImg from "../../images/lissajousCurveTable.jpeg";
-// import maurerRoseImg from "../../images/maurerRose.jpeg";
-// import chaosGameImg from "../../images/chaosGame/chaosGame.jpeg";
-// import beautifulTrigImg from "../../images/beautifulTrig/beautifulTrigDisabled.jpeg";
 import BeautifulTrigImg from "../sketchImages/BeautifulTrigImg";
 import * as routePaths from "../../constants/RoutePaths";
 import SketchTile from "../sketchTile/SketchTile";
@@ -18,10 +10,18 @@ import MatrixRainImg from "../sketchImages/MatrixRain";
 import LissajousCurveTableImg from "../sketchImages/LissajousCurveTableImg";
 import MaurerRoseImg from "../sketchImages/MaurerRose";
 import ChaosGameImg from "../sketchImages/ChaosGameImg";
+import HexesImg from "../sketchImages/HexesImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
+            <SketchTile
+                title='Hexes'
+                desc='A page of tiled hexes that grow/shrink in a random or center-out pattern. Click on the hexes animation to make it full screen.'
+                image={<HexesImg loading='auto' />}
+                routerPath={routePaths.hexes}
+                isMobileFriendly
+            />
             <SketchTile
                 title='Beautiful Trigonometry'
                 desc='Points on the spokes of a circle following a main point as it rotates around the edge of the circle. Press the button to show how the points are calulated and how trigonometry is related to circles.'

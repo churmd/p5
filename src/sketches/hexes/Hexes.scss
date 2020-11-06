@@ -1,0 +1,13 @@
+#canvas {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#controls {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    #radioOptions {
+        display: flex;
+        margin: auto;
+    }
+}

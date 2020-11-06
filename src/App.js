@@ -12,46 +12,48 @@ import ChaosGame from "./sketches/chaosGame/ChaosGame";
 import * as routePaths from "./constants/RoutePaths";
 import Home from "./components/home/Home";
 import BeautifulTrig from "./sketches/beautifulTrig/BeautifulTrig";
+import Hexes from "./sketches/hexes/Hexes";
 
 const routing = (
-	<Router>
-		<Switch>
-			<Route exact path={routePaths.home} component={Home} />
-			<Route
-				exact
-				path={routePaths.moduloTimesTable}
-				component={ModuloTimesTable}
-			/>
-			<Route
-				exact
-				path={routePaths.snowflakeGenerator}
-				component={SnowflakeGenerator}
-			/>
-			<Route
-				exact
-				path={routePaths.flockingSimulation}
-				component={FlockingSimulation}
-			/>
-			<Route
-				exact
-				path={routePaths.lissajousCurveTable}
-				component={LissajousCurveTable}
-			/>
-			<Route exact path={routePaths.matrixRain} component={MatrixRain} />
-			<Route exact path={routePaths.maurerRose} component={MaurerRose} />
-			<Route exact path={routePaths.chaosGame} component={ChaosGame} />
-			<Route
-				exact
-				path={routePaths.beautifulTrig}
-				component={BeautifulTrig}
-			/>
-			<Route component={Notfound} />
-		</Switch>
-	</Router>
+    <Router>
+        <Switch>
+            <Route exact path={routePaths.home} component={Home} />
+            <Route
+                exact
+                path={routePaths.moduloTimesTable}
+                component={ModuloTimesTable}
+            />
+            <Route
+                exact
+                path={routePaths.snowflakeGenerator}
+                component={SnowflakeGenerator}
+            />
+            <Route
+                exact
+                path={routePaths.flockingSimulation}
+                component={FlockingSimulation}
+            />
+            <Route
+                exact
+                path={routePaths.lissajousCurveTable}
+                component={LissajousCurveTable}
+            />
+            <Route exact path={routePaths.matrixRain} component={MatrixRain} />
+            <Route exact path={routePaths.maurerRose} component={MaurerRose} />
+            <Route exact path={routePaths.chaosGame} component={ChaosGame} />
+            <Route
+                exact
+                path={routePaths.beautifulTrig}
+                component={BeautifulTrig}
+            />
+            <Route exact path={routePaths.hexes} component={Hexes} />
+            <Route component={Notfound} />
+        </Switch>
+    </Router>
 );
 
 function App() {
-	return <React.StrictMode>{routing}</React.StrictMode>;
+    return <React.StrictMode>{routing}</React.StrictMode>;
 }
 
 export default App;
