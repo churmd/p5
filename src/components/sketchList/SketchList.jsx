@@ -1,13 +1,5 @@
 import React from "react";
 import "./SketchList.scss";
-// import flockingSimulationImg from "../../images/flockingSimulation/flockingSimulation.jpeg";
-// import snowflakeGeneratorImg from "../../images/snowflakeGenerator.jpeg";
-// import moduloTimesTableImg from "../../images/moduloTimesTable.jpeg";
-// import matrixRainImag from "../../images/matrixRain.jpeg";
-// import lissajousCurveTableImg from "../../images/lissajousCurveTable.jpeg";
-// import maurerRoseImg from "../../images/maurerRose.jpeg";
-// import chaosGameImg from "../../images/chaosGame/chaosGame.jpeg";
-// import beautifulTrigImg from "../../images/beautifulTrig/beautifulTrigDisabled.jpeg";
 import BeautifulTrigImg from "../sketchImages/BeautifulTrigImg";
 import * as routePaths from "../../constants/RoutePaths";
 import SketchTile from "../sketchTile/SketchTile";
@@ -18,14 +10,15 @@ import MatrixRainImg from "../sketchImages/MatrixRain";
 import LissajousCurveTableImg from "../sketchImages/LissajousCurveTableImg";
 import MaurerRoseImg from "../sketchImages/MaurerRose";
 import ChaosGameImg from "../sketchImages/ChaosGameImg";
+import HexesImg from "../sketchImages/HexesImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
                 title='Hexes'
-                desc='Some tiled hexes.'
-                image={<BeautifulTrigImg loading='auto' />}
+                desc='A page of tiled hexes that grow/shrink in a random or center-out pattern. Click on the hexes animation to make it full screen.'
+                image={<HexesImg loading='auto' />}
                 routerPath={routePaths.hexes}
                 isMobileFriendly
             />
