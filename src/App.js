@@ -8,6 +8,7 @@ import FlockingSimulation from "./sketches/flockingSimulation/FlockingSimulation
 import LissajousCurveTable from "./sketches/lissajousCurveTable/LissajousCurveTable";
 import MatrixRain from "./sketches/matrixRain/MatrixRain";
 import MaurerRose from "./sketches/maurerRose/MaurerRose";
+import MazeGenerator from "./sketches/mazeGenerator/MazeGenerator";
 import ChaosGame from "./sketches/chaosGame/ChaosGame";
 import * as routePaths from "./constants/RoutePaths";
 import Home from "./components/home/Home";
@@ -40,6 +41,11 @@ const routing = (
             />
             <Route exact path={routePaths.matrixRain} component={MatrixRain} />
             <Route exact path={routePaths.maurerRose} component={MaurerRose} />
+            <Route
+                exact
+                path={routePaths.mazeGenerator}
+                component={MazeGenerator}
+            />
             <Route exact path={routePaths.chaosGame} component={ChaosGame} />
             <Route
                 exact

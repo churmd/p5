@@ -16,6 +16,13 @@ function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
+                title='Maze Generator'
+                desc='Generates a solvable maze.'
+                image={<HexesImg loading='auto' />}
+                routerPath={routePaths.mazeGenerator}
+                isMobileFriendly
+            />
+            <SketchTile
                 title='Hexes'
                 desc='A page of tiled hexes that grow/shrink in a random or center-out pattern. Click on the hexes animation to make it full screen.'
                 image={<HexesImg loading='auto' />}
@@ -32,7 +39,7 @@ function SketchList(props) {
             <SketchTile
                 title='Flocking Simulation'
                 desc='A simulated flock of birds using Boids program.'
-                image={<FlockingSimulationImg loading='auto' />}
+                image={<FlockingSimulationImg />}
                 routerPath={routePaths.flockingSimulation}
             />
             <SketchTile
