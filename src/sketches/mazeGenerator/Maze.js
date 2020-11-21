@@ -1,10 +1,12 @@
-import Tile from "./Tile";
+import { Tile } from "./Tile";
 
 export default class Maze {
     constructor(width, height) {
         this.width = width;
         this.height = height;
         this.tiles = [[]];
+        this.startCoord = { x: 0, y: 0 };
+        this.goalCoord = { x: 0, y: 0 };
 
         for (let y = 0; y < height; y++) {
             this.tiles[y] = [];
@@ -18,6 +20,8 @@ export default class Maze {
                 this.__addAdjacentTiles(this.tiles[y][x]);
             }
         }
+
+        this.__createMazePath();
     }
 
     __addAdjacentTiles(tile) {
@@ -25,19 +29,19 @@ export default class Maze {
         const y = tile.y;
 
         if (this.__isValidCoord(x - 1, y)) {
-            tile.addAdjacentTile(this.tiles[y][x - 1]);
+            tile.setLeftConnection(this.tiles[y][x - 1]);
         }
 
         if (this.__isValidCoord(x, y - 1)) {
-            tile.addAdjacentTile(this.tiles[y - 1][x]);
+            tile.setAboveConnection(this.tiles[y - 1][x]);
         }
 
         if (this.__isValidCoord(x + 1, y)) {
-            tile.addAdjacentTile(this.tiles[y][x + 1]);
+            tile.setRightConnection(this.tiles[y][x + 1]);
         }
 
         if (this.__isValidCoord(x, y + 1)) {
-            tile.addAdjacentTile(this.tiles[y + 1][x]);
+            tile.setBelowConnection(this.tiles[y + 1][x]);
         }
     }
 
@@ -52,6 +56,48 @@ export default class Maze {
             return false;
         } else {
             return true;
+        }
+    }
+
+    __removeTileFromArray(array, tile) {
+        return array.filter((elem) => {
+            const xMatch = elem.x === tile.x;
+            const yMatch = elem.y === tile.y;
+            return !(xMatch && yMatch);
+        });
+    }
+
+    __createMazePath() {
+        let visistedTiles = new Set();
+        let walls = [];
+
+        // init
+        const start = this.tiles[0][0];
+        visistedTiles.add(start);
+        walls = walls.concat(start.getWallConnections());
+
+        while (walls.length > 0) {
+            const index = Math.floor(Math.random() * walls.length);
+            const randomWall = walls[index];
+
+            const tileA = randomWall.tileA;
+            const tileB = randomWall.tileB;
+            const tileAVisited = visistedTiles.has(tileA);
+            const tileBVisited = visistedTiles.has(tileB);
+
+            if (tileAVisited && !tileBVisited) {
+                walls = walls.concat(tileB.getWallConnections());
+                tileA.removeWallBetween(tileB);
+                tileB.removeWallBetween(tileA);
+                visistedTiles.add(tileB);
+            } else if (!tileAVisited && tileBVisited) {
+                walls = walls.concat(tileA.getWallConnections());
+                tileA.removeWallBetween(tileB);
+                tileB.removeWallBetween(tileA);
+                visistedTiles.add(tileA);
+            }
+
+            walls.splice(index, 1);
         }
     }
 
