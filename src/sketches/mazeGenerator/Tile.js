@@ -4,10 +4,6 @@ class Connection {
         this.tileB = tileB;
         this.isWall = true;
     }
-
-    isEdgeConnection() {
-        return this.tileA === null || this.tileB === null;
-    }
 }
 
 class Tile {
@@ -68,39 +64,55 @@ class Tile {
         connectionToAdjacentTile.isWall = false;
     }
 
-    show(p, topLeftXPix, topLeftYPix, tileLength) {
-        const wallThickness = tileLength / 8;
-
+    showTile(p, topLeftXPix, topLeftYPix, tileLength) {
         p.push();
 
         p.fill(255);
+        p.strokeWeight(1);
+        p.stroke(200);
         p.rect(topLeftXPix, topLeftYPix, tileLength, tileLength);
 
+        p.pop();
+    }
+
+    showWalls(p, topLeftXPix, topLeftYPix, tileLength) {
+        const wallThickness = tileLength / 8;
+        const topRightXPix = topLeftXPix + tileLength;
+        const topRightYPix = topLeftYPix;
+        const bottomLeftXPix = topLeftXPix;
+        const bottomLeftYPix = topLeftYPix + tileLength;
+        const bottomRightXPix = topLeftXPix + tileLength;
+        const bottomRightYPix = topLeftYPix + tileLength;
+
+        p.push();
+
+        p.strokeWeight(wallThickness);
+        p.stroke(0);
         p.fill(0);
 
         if (!this.connectionAbove || this.connectionAbove.isWall) {
-            p.rect(topLeftXPix, topLeftYPix, tileLength, wallThickness);
+            p.line(topLeftXPix, topLeftYPix, topRightXPix, topRightYPix);
         }
 
         if (!this.connectionBelow || this.connectionBelow.isWall) {
-            p.rect(
-                topLeftXPix,
-                topLeftYPix + (tileLength - wallThickness),
-                tileLength,
-                wallThickness
+            p.line(
+                bottomLeftXPix,
+                bottomLeftYPix,
+                bottomRightXPix,
+                bottomRightYPix
             );
         }
 
         if (!this.connectionLeft || this.connectionLeft.isWall) {
-            p.rect(topLeftXPix, topLeftYPix, wallThickness, tileLength);
+            p.line(topLeftXPix, topLeftYPix, bottomLeftXPix, bottomLeftYPix);
         }
 
         if (!this.connectionRight || this.connectionRight.isWall) {
-            p.rect(
-                topLeftXPix + (tileLength - wallThickness),
-                topLeftYPix,
-                wallThickness,
-                tileLength
+            p.line(
+                topRightXPix,
+                topRightYPix,
+                bottomRightXPix,
+                bottomRightYPix
             );
         }
 

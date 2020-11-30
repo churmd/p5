@@ -22,7 +22,9 @@ export default class Maze {
         }
 
         // init maze path
-        const start = this.tiles[0][0];
+        const randomX = Math.floor(Math.random() * width);
+        const randomY = Math.floor(Math.random() * height);
+        const start = this.tiles[randomY][randomX];
         this.visistedTiles.add(start);
         this.walls = this.walls.concat(start.getWallConnections());
     }
@@ -156,7 +158,25 @@ export default class Maze {
             for (let x = 0; x < this.width; x++) {
                 const topLeftXPix = xOffset + x * tileLength;
                 const topLeftYPix = yOffset + y * tileLength;
-                this.tiles[y][x].show(p, topLeftXPix, topLeftYPix, tileLength);
+                this.tiles[y][x].showTile(
+                    p,
+                    topLeftXPix,
+                    topLeftYPix,
+                    tileLength
+                );
+            }
+        }
+
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
+                const topLeftXPix = xOffset + x * tileLength;
+                const topLeftYPix = yOffset + y * tileLength;
+                this.tiles[y][x].showWalls(
+                    p,
+                    topLeftXPix,
+                    topLeftYPix,
+                    tileLength
+                );
             }
         }
 

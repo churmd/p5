@@ -25,11 +25,11 @@ class MazeGeneratoe extends React.Component {
 
             p.frameRate(4);
 
-            maze = new Maze(10, 10);
+            maze = new Maze(20, 20);
         };
 
         p.draw = () => {
-            p.background(0);
+            p.background(51);
             maze.show(p, getCanvasWidth(), getCanvasHeight());
             maze.update();
         };
