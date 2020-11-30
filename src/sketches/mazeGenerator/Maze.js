@@ -5,8 +5,8 @@ export default class Maze {
         this.width = width;
         this.height = height;
         this.tiles = [[]];
-        this.startCoord = { x: 0, y: 0 };
-        this.goalCoord = { x: 0, y: 0 };
+        this.visistedTiles = new Set();
+        this.walls = [];
 
         for (let y = 0; y < height; y++) {
             this.tiles[y] = [];
@@ -21,7 +21,10 @@ export default class Maze {
             }
         }
 
-        this.__createMazePath();
+        // init maze path
+        const start = this.tiles[0][0];
+        this.visistedTiles.add(start);
+        this.walls = this.walls.concat(start.getWallConnections());
     }
 
     __addAdjacentTiles(tile) {
@@ -67,7 +70,7 @@ export default class Maze {
         });
     }
 
-    __createMazePath() {
+    __createFullMazePath() {
         let visistedTiles = new Set();
         let walls = [];
 
@@ -99,6 +102,44 @@ export default class Maze {
 
             walls.splice(index, 1);
         }
+    }
+
+    __createMazeUntilWallRemoved() {
+        if (this.walls.length > 0) {
+            let wallRemoved = false;
+
+            const index = Math.floor(Math.random() * this.walls.length);
+            const randomWall = this.walls[index];
+
+            const tileA = randomWall.tileA;
+            const tileB = randomWall.tileB;
+            const tileAVisited = this.visistedTiles.has(tileA);
+            const tileBVisited = this.visistedTiles.has(tileB);
+
+            if (tileAVisited && !tileBVisited) {
+                this.walls = this.walls.concat(tileB.getWallConnections());
+                tileA.removeWallBetween(tileB);
+                tileB.removeWallBetween(tileA);
+                this.visistedTiles.add(tileB);
+                wallRemoved = true;
+            } else if (!tileAVisited && tileBVisited) {
+                this.walls = this.walls.concat(tileA.getWallConnections());
+                tileA.removeWallBetween(tileB);
+                tileB.removeWallBetween(tileA);
+                this.visistedTiles.add(tileA);
+                wallRemoved = true;
+            }
+
+            this.walls.splice(index, 1);
+
+            if (!wallRemoved) {
+                this.__createMazeUntilWallRemoved();
+            }
+        }
+    }
+
+    update() {
+        this.__createMazeUntilWallRemoved();
     }
 
     show(p, canvasWidth, canvasHeight) {
