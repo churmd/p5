@@ -9,6 +9,7 @@
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
         "@testing-library/user-event": "^7.2.1",
+        "@types/react": "^17.0.0",
         "gh-pages": "^3.1.0",
         "mathjs": "^6.6.5",
         "node-sass": "^4.14.1",
@@ -43,8 +44,5 @@
             "last 1 safari version"
         ]
     },
-    "devDependencies": {
-        "react-snap": "^1.23.0",
-        "terser-brunch": "^4.0.0"
-    }
+    "devDependencies": {}
 }

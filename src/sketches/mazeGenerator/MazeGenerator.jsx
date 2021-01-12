@@ -1,6 +1,7 @@
 import React from "react";
 import p5 from "p5";
 import Maze from "./Maze";
+import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
 class MazeGeneratoe extends React.Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class MazeGeneratoe extends React.Component {
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+            cnv.parent("canvas");
             cnv.style("display", "block");
 
             p.frameRate(4);
@@ -44,7 +46,11 @@ class MazeGeneratoe extends React.Component {
     }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <FullscreenElem id='canvas' />
+            </div>
+        );
     }
 }
 export default MazeGeneratoe;

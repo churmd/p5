@@ -154,6 +154,13 @@ export default class Maze {
 
         p.push();
 
+        this.__showTiles(p, xOffset, yOffset, tileLength);
+        this.__showWalls(p, xOffset, yOffset, tileLength);
+
+        p.pop();
+    }
+
+    __showTiles(p, xOffset, yOffset, tileLength) {
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
                 const topLeftXPix = xOffset + x * tileLength;
@@ -166,7 +173,9 @@ export default class Maze {
                 );
             }
         }
+    }
 
+    __showWalls(p, xOffset, yOffset, tileLength) {
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
                 const topLeftXPix = xOffset + x * tileLength;
@@ -179,7 +188,5 @@ export default class Maze {
                 );
             }
         }
-
-        p.pop();
     }
 }
