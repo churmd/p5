@@ -10,7 +10,9 @@ class MazeGeneratoe extends React.Component {
     }
 
     sketch = (p) => {
+        const FRAME_RATE = 30;
         let maze;
+        let framesSinceMazeCompleted = 0;
 
         const getCanvasHeight = () => {
             return window.innerHeight;
@@ -25,17 +27,21 @@ class MazeGeneratoe extends React.Component {
             cnv.parent("canvas");
             cnv.style("display", "block");
 
-            p.frameRate(60);
+            p.frameRate(FRAME_RATE);
 
+            framesSinceMazeCompleted = 0;
             maze = new Maze(20, 20);
         };
 
         p.draw = () => {
             p.background(51);
 
-            // if (maze.completed()) {
-            //     maze = new Maze(20, 20);
-            // }
+            if (framesSinceMazeCompleted === FRAME_RATE) {
+                framesSinceMazeCompleted = 0;
+                maze = new Maze(20, 20);
+            } else if (maze.completed()) {
+                framesSinceMazeCompleted++;
+            }
 
             maze.show(p, getCanvasWidth(), getCanvasHeight());
             maze.update();
