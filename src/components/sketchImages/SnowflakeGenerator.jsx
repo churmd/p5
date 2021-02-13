@@ -1,7 +1,6 @@
 import React from "react";
 import SketchImage from "./SketchImage";
 import PropTypes from "prop-types";
-import * as routePaths from "../../constants/RoutePaths";
 import SnowflakeGenerator1920 from "../../images/snowflakeGenerator/snowflakeGenerator-1920w.jpeg";
 import SnowflakeGenerator1080 from "../../images/snowflakeGenerator/snowflakeGenerator-1080w.jpeg";
 import SnowflakeGenerator720 from "../../images/snowflakeGenerator/snowflakeGenerator-720w.jpeg";
@@ -21,7 +20,6 @@ function SnowflakeGeneratorImg(props) {
     return (
         <SketchImage
             image={SnowflakeGenerator1920}
-            routerPath={routePaths.snowflakeGenerator}
             srcset={srcSetString}
             sizes='80vw'
             loading={props.loading}

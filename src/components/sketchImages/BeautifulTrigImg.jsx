@@ -1,7 +1,6 @@
 import React from "react";
 import SketchImage from "./SketchImage";
 import PropTypes from "prop-types";
-import * as routePaths from "../../constants/RoutePaths";
 import BeautifulTrigFile1920 from "../../images/beautifulTrig/beautifulTrigDisabled-1920w.jpeg";
 import BeautifulTrigFile1080 from "../../images/beautifulTrig/beautifulTrigDisabled-1080w.jpeg";
 import BeautifulTrigFile720 from "../../images/beautifulTrig/beautifulTrigDisabled-720w.jpeg";
@@ -21,7 +20,6 @@ function BeautifulTrigImg(props) {
     return (
         <SketchImage
             image={BeautifulTrigFile1920}
-            routerPath={routePaths.beautifulTrig}
             srcset={srcSetString}
             sizes='80vw'
             loading={props.loading}

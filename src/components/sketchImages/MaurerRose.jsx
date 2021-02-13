@@ -1,7 +1,6 @@
 import React from "react";
 import SketchImage from "./SketchImage";
 import PropTypes from "prop-types";
-import * as routePaths from "../../constants/RoutePaths";
 import MaurerRose1920 from "../../images/maurerRose/maurerRose-1920w.jpeg";
 import MaurerRose1080 from "../../images/maurerRose/maurerRose-1080w.jpeg";
 import MaurerRose720 from "../../images/maurerRose/maurerRose-720w.jpeg";
@@ -21,7 +20,6 @@ function MaurerRoseImg(props) {
     return (
         <SketchImage
             image={MaurerRose1920}
-            routerPath={routePaths.maurerRose}
             srcset={srcSetString}
             sizes='80vw'
             loading={props.loading}

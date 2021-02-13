@@ -11,10 +11,18 @@ import LissajousCurveTableImg from "../sketchImages/LissajousCurveTableImg";
 import MaurerRoseImg from "../sketchImages/MaurerRose";
 import ChaosGameImg from "../sketchImages/ChaosGameImg";
 import HexesImg from "../sketchImages/HexesImg";
+import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
+            <SketchTile
+                title='Maze Generator'
+                desc='Generates a solvable maze.'
+                image={<MazeGeneratorImg loading='auto' />}
+                routerPath={routePaths.mazeGenerator}
+                isMobileFriendly
+            />
             <SketchTile
                 title='Hexes'
                 desc='A page of tiled hexes that grow/shrink in a random or center-out pattern. Click on the hexes animation to make it full screen.'
@@ -32,7 +40,7 @@ function SketchList(props) {
             <SketchTile
                 title='Flocking Simulation'
                 desc='A simulated flock of birds using Boids program.'
-                image={<FlockingSimulationImg loading='auto' />}
+                image={<FlockingSimulationImg />}
                 routerPath={routePaths.flockingSimulation}
             />
             <SketchTile

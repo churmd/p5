@@ -4,6 +4,7 @@ import CenterOutHexGrid from "./CenterOutHexGrid";
 import HexGrid from "./HexGrid";
 import RandomHexGrid from "./RandomHexGrid";
 import "./Hexes.scss";
+import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
 class Hexes extends React.Component {
     constructor(props) {
@@ -102,45 +103,10 @@ class Hexes extends React.Component {
         this.myP5 = new p5(this.sketch, this.myRef.current);
     }
 
-    toggleCavasFullScreen = () => {
-        const canvasElem = document.getElementById("canvas");
-        const currentFullScreenElem = document.fullscreenElement;
-        if (canvasElem === currentFullScreenElem) {
-            this.exitFullScreen(canvasElem);
-        } else {
-            this.openFullScreen(canvasElem);
-        }
-    };
-
-    openFullScreen = (elem) => {
-        if (elem.requestFullscreen) {
-            console.log(elem);
-            elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) {
-            /* Safari */
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-            /* IE11 */
-            elem.msRequestFullscreen();
-        }
-    };
-
-    exitFullScreen = (elem) => {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            /* Safari */
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-            /* IE11 */
-            document.msExitFullscreen();
-        }
-    };
-
     render() {
         return (
             <div ref={this.myRef}>
-                <div id='canvas' onClick={this.toggleCavasFullScreen}></div>
+                <FullscreenElem id='canvas' />
                 <div id='controls'>
                     <div id='radioOptions'></div>
                 </div>

@@ -7,5 +7,6 @@ export const hexes = "/hexes";
 export const lissajousCurveTable = "/lissajousCurveTable";
 export const matrixRain = "/matrixRain";
 export const maurerRose = "/maurerRose";
+export const mazeGenerator = "/mazeGenerator";
 export const moduloTimesTable = "/moduloTimesTable";
 export const snowflakeGenerator = "/snowflakeGenerator";

@@ -1,7 +1,6 @@
 import React from "react";
 import SketchImage from "./SketchImage";
 import PropTypes from "prop-types";
-import * as routePaths from "../../constants/RoutePaths";
 import HexesFile1920 from "../../images/hexes/randomHexes-1920w.jpeg";
 import HexesFile1080 from "../../images/hexes/randomHexes-1080w.jpeg";
 import HexesFile720 from "../../images/hexes/randomHexes-720w.jpeg";
@@ -21,7 +20,6 @@ function HexesImg(props) {
     return (
         <SketchImage
             image={HexesFile1920}
-            routerPath={routePaths.hexes}
             srcset={srcSetString}
             sizes='80vw'
             loading={props.loading}
