@@ -1,7 +1,6 @@
 import React from "react";
 import SketchImage from "./SketchImage";
 import PropTypes from "prop-types";
-import * as routePaths from "../../constants/RoutePaths";
 import ChaosGame1920 from "../../images/chaosGame/chaosGame-1920w.jpeg";
 import ChaosGame1080 from "../../images/chaosGame/chaosGame-1080w.jpeg";
 import ChaosGame720 from "../../images/chaosGame/chaosGame-720w.jpeg";
@@ -21,7 +20,6 @@ function ChaosGameImg(props) {
     return (
         <SketchImage
             image={ChaosGame1920}
-            routerPath={routePaths.chaosGame}
             srcset={srcSetString}
             sizes='80vw'
             loading={props.loading}

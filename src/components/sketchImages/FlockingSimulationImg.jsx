@@ -1,7 +1,6 @@
 import React from "react";
 import SketchImage from "./SketchImage";
 import PropTypes from "prop-types";
-import * as routePaths from "../../constants/RoutePaths";
 import FlockingSimulation1920 from "../../images/flockingSimulation/flockingSimulation-1920w.jpeg";
 import FlockingSimulation1080 from "../../images/flockingSimulation/flockingSimulation-1080w.jpeg";
 import FlockingSimulation720 from "../../images/flockingSimulation/flockingSimulation-720w.jpeg";
@@ -21,7 +20,6 @@ function FlockingSimulationImg(props) {
     return (
         <SketchImage
             image={FlockingSimulation1920}
-            routerPath={routePaths.flockingSimulation}
             srcset={srcSetString}
             sizes='80vw'
             loading={props.loading}

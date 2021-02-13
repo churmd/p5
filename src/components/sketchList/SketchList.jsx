@@ -11,6 +11,7 @@ import LissajousCurveTableImg from "../sketchImages/LissajousCurveTableImg";
 import MaurerRoseImg from "../sketchImages/MaurerRose";
 import ChaosGameImg from "../sketchImages/ChaosGameImg";
 import HexesImg from "../sketchImages/HexesImg";
+import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
 
 function SketchList(props) {
     return (
@@ -18,7 +19,7 @@ function SketchList(props) {
             <SketchTile
                 title='Maze Generator'
                 desc='Generates a solvable maze.'
-                image={<HexesImg loading='auto' />}
+                image={<MazeGeneratorImg loading='auto' />}
                 routerPath={routePaths.mazeGenerator}
                 isMobileFriendly
             />

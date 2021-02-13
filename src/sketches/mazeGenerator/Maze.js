@@ -140,6 +140,10 @@ export default class Maze {
         }
     }
 
+    completed() {
+        return this.walls.length === 0;
+    }
+
     update() {
         this.__createMazeUntilWallRemoved();
     }

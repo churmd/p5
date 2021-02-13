@@ -25,13 +25,18 @@ class MazeGeneratoe extends React.Component {
             cnv.parent("canvas");
             cnv.style("display", "block");
 
-            p.frameRate(4);
+            p.frameRate(60);
 
             maze = new Maze(20, 20);
         };
 
         p.draw = () => {
             p.background(51);
+
+            // if (maze.completed()) {
+            //     maze = new Maze(20, 20);
+            // }
+
             maze.show(p, getCanvasWidth(), getCanvasHeight());
             maze.update();
         };
