@@ -14,11 +14,17 @@ import * as routePaths from "./constants/RoutePaths";
 import Home from "./components/home/Home";
 import BeautifulTrig from "./sketches/beautifulTrig/BeautifulTrig";
 import Hexes from "./sketches/hexes/Hexes";
+import CuneiformConverter from "./sketches/cuneiformNumConverter/CuneiformConverter";
 
 const routing = (
     <Router>
         <Switch>
             <Route exact path={routePaths.home} component={Home} />
+            <Route
+                exact
+                path={routePaths.cuneiformNumberConverter}
+                component={CuneiformConverter}
+            />
             <Route
                 exact
                 path={routePaths.moduloTimesTable}

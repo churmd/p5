@@ -17,6 +17,12 @@ function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
+                title='Cuneiform Number Converter'
+                desc='Converts numbers into the Cuneiform format.'
+                image={<MazeGeneratorImg loading='auto' />}
+                routerPath={routePaths.cuneiformNumberConverter}
+            />
+            <SketchTile
                 title='Maze Generator'
                 desc='Generates a solvable maze.'
                 image={<MazeGeneratorImg loading='auto' />}
@@ -33,7 +39,7 @@ function SketchList(props) {
             <SketchTile
                 title='Beautiful Trigonometry'
                 desc='Points on the spokes of a circle following a main point as it rotates around the edge of the circle. Press the button to show how the points are calulated and how trigonometry is related to circles.'
-                image={<BeautifulTrigImg loading='auto' />}
+                image={<BeautifulTrigImg />}
                 routerPath={routePaths.beautifulTrig}
                 isMobileFriendly
             />
