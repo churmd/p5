@@ -2,6 +2,7 @@ import React from "react";
 import p5 from "p5";
 import "./CuneiformNum";
 import CuneiformNum from "./CuneiformNum";
+import "./CunieformConverter.scss";
 
 class CuneiformConverter extends React.Component {
     constructor(props) {
@@ -27,6 +28,15 @@ class CuneiformConverter extends React.Component {
             p.background(0);
             p.fill(255);
             p.rect(x, y, 50, 50);
+
+            p.textSize(40);
+
+            const myNum = 4271;
+            let cn = new CuneiformNum(myNum);
+
+            p.text(cn.toString(), 200, 200);
+
+            p.text("𒐀", 300, 300);
         };
 
         p.windowResized = () => {
@@ -39,7 +49,11 @@ class CuneiformConverter extends React.Component {
     }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div id='canvas' ref={this.myRef}>
+                <span>𒐀</span>
+            </div>
+        );
     }
 }
 export default CuneiformConverter;

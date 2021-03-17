@@ -3,7 +3,7 @@ export default class CuneiformNum {
      * @param {Integer} val The value to dusplay
      */
     constructor(val) {
-        this.val = val;
+        this.base60Format = this.__toBase60Array(val).reverse();
     }
 
     /**
@@ -19,13 +19,30 @@ export default class CuneiformNum {
      * @param {Integer} val The value to convert to base 60
      */
     __toBase60Array(val) {
-        const quotient = Math.floor(val / 60);
-        const remainder = val % 60;
-
-        if (quotient === 0) {
-            return [remainder];
+        if (val < 60) {
+            return [val];
         } else {
+            const quotient = Math.floor(val / 60);
+            const remainder = val % 60;
+
             return [remainder].concat(this.__toBase60Array(quotient));
+        }
+    }
+
+    toString() {
+        return this.base60Format.toString();
+    }
+
+    toUnicodeString() {
+        const unicodeGroups = this.base60Format.map(
+            this.__getUnicodeForSection
+        );
+        return unicodeGroups.join(" | ");
+    }
+
+    __getUnicodeForSection(val) {
+        if (val === 0) {
+            return String.fromCodePoint();
         }
     }
 }
