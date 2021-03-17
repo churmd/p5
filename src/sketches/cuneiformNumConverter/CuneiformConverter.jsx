@@ -17,8 +17,10 @@ class CuneiformConverter extends React.Component {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.style("display", "block");
 
-            let cn = new CuneiformNum(10);
-            console.log(cn.__toPower60Array());
+            // const myNum = 4271; [11,11,1]
+            const myNum = 601;
+            let cn = new CuneiformNum(myNum);
+            console.log(cn.__toBase60Array(myNum));
         };
 
         p.draw = () => {
