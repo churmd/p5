@@ -42,7 +42,7 @@ export default class CuneiformNum {
 
     __getUnicodeForSection(val) {
         if (val === 0) {
-            return String.fromCodePoint();
+            return "U+1244A";
         }
     }
 }

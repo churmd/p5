@@ -3,6 +3,7 @@ import p5 from "p5";
 import "./CuneiformNum";
 import CuneiformNum from "./CuneiformNum";
 import CuneiformFont from "./CuneiformOB.ttf";
+import { CuneiformUnicodes } from "./CuniformStrings";
 
 class CuneiformConverter extends React.Component {
     constructor(props) {
@@ -13,9 +14,10 @@ class CuneiformConverter extends React.Component {
     sketch = (p) => {
         let x = 100;
         let y = 100;
+        let cuneiformFont;
 
         p.preload = () => {
-            p.loadFont(CuneiformFont);
+            cuneiformFont = p.loadFont(CuneiformFont);
         };
 
         p.setup = () => {
@@ -40,7 +42,12 @@ class CuneiformConverter extends React.Component {
 
             p.text(cn.toString(), 200, 200);
 
-            p.text("𒐀", 300, 300);
+            p.push();
+            p.textFont(cuneiformFont);
+
+            p.text(CuneiformUnicodes.Fifty, 300, 300);
+            p.text(CuneiformUnicodes.Five, 400, 300);
+            p.pop();
         };
 
         p.windowResized = () => {
