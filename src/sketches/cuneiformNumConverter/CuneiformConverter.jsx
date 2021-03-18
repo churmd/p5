@@ -2,7 +2,7 @@ import React from "react";
 import p5 from "p5";
 import "./CuneiformNum";
 import CuneiformNum from "./CuneiformNum";
-import "./CunieformConverter.scss";
+import CuneiformFont from "./CuneiformOB.ttf";
 
 class CuneiformConverter extends React.Component {
     constructor(props) {
@@ -13,6 +13,10 @@ class CuneiformConverter extends React.Component {
     sketch = (p) => {
         let x = 100;
         let y = 100;
+
+        p.preload = () => {
+            p.loadFont(CuneiformFont);
+        };
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
