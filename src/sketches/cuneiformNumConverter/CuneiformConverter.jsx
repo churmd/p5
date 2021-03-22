@@ -3,7 +3,7 @@ import p5 from "p5";
 import "./CuneiformNum";
 import CuneiformNum from "./CuneiformNum";
 import CuneiformFont from "./CuneiformOB.ttf";
-import { CuneiformUnicodes } from "./CuniformStrings";
+import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
 class CuneiformConverter extends React.Component {
     constructor(props) {
@@ -12,46 +12,68 @@ class CuneiformConverter extends React.Component {
     }
 
     sketch = (p) => {
-        let x = 100;
-        let y = 100;
         let cuneiformFont;
+        let cuneiformCounter;
+
+        const getCanvasHeight = () => {
+            return window.innerHeight;
+        };
+
+        const getCanvasWidth = () => {
+            return window.innerWidth;
+        };
+
+        const getTextSize = (textLen) => {
+            const minDim = Math.min(getCanvasWidth(), getCanvasHeight());
+            return minDim / textLen;
+        };
 
         p.preload = () => {
             cuneiformFont = p.loadFont(CuneiformFont);
         };
 
         p.setup = () => {
-            const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+            const cnv = p.createCanvas(getCanvasWidth(), getCanvasHeight());
+            cnv.parent("canvas");
             cnv.style("display", "block");
 
-            // const myNum = 4271; [11,11,1]
-            const myNum = 601;
-            let cn = new CuneiformNum(myNum);
-            console.log(cn.__toBase60Array(myNum));
+            p.frameRate(1);
+
+            cuneiformCounter = new CuneiformNum(0);
         };
 
         p.draw = () => {
             p.background(0);
+
+            const cuniformText = cuneiformCounter.toUnicodeString();
+            const textSize = getTextSize(cuniformText.length);
+
+            p.textSize(textSize);
+            p.textAlign(p.CENTER, p.CENTER);
             p.fill(255);
-            p.rect(x, y, 50, 50);
-
-            p.textSize(40);
-
-            const myNum = 4271;
-            let cn = new CuneiformNum(myNum);
-
-            p.text(cn.toString(), 200, 200);
-
-            p.push();
             p.textFont(cuneiformFont);
 
-            p.text(CuneiformUnicodes.Fifty, 300, 300);
-            p.text(CuneiformUnicodes.Five, 400, 300);
-            p.pop();
+            p.text(cuniformText, getCanvasWidth() / 2, getCanvasHeight() / 2);
+
+            p.stroke(255);
+            p.line(
+                getCanvasWidth() / 2,
+                0,
+                getCanvasWidth() / 2,
+                getCanvasHeight()
+            );
+            p.line(
+                0,
+                getCanvasHeight() / 2,
+                getCanvasWidth(),
+                getCanvasHeight() / 2
+            );
+
+            cuneiformCounter.add(1);
         };
 
         p.windowResized = () => {
-            p.resizeCanvas(window.innerWidth, window.innerHeight);
+            p.resizeCanvas(getCanvasWidth(), getCanvasHeight());
         };
     };
 
@@ -61,8 +83,8 @@ class CuneiformConverter extends React.Component {
 
     render() {
         return (
-            <div id='canvas' ref={this.myRef}>
-                <span>𒐀</span>
+            <div ref={this.myRef}>
+                <FullscreenElem id='canvas' />
             </div>
         );
     }
