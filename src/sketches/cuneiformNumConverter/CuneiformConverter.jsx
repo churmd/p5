@@ -43,7 +43,7 @@ class CuneiformConverter extends React.Component {
         };
 
         p.draw = () => {
-            p.background(0);
+            p.background(51);
 
             const cuniformText = cuneiformCounter.toUnicodeString();
             const textSize = getTextSize(cuniformText.length);
@@ -54,20 +54,6 @@ class CuneiformConverter extends React.Component {
             p.textFont(cuneiformFont);
 
             p.text(cuniformText, getCanvasWidth() / 2, getCanvasHeight() / 2);
-
-            p.stroke(255);
-            p.line(
-                getCanvasWidth() / 2,
-                0,
-                getCanvasWidth() / 2,
-                getCanvasHeight()
-            );
-            p.line(
-                0,
-                getCanvasHeight() / 2,
-                getCanvasWidth(),
-                getCanvasHeight() / 2
-            );
 
             cuneiformCounter.add(1);
         };

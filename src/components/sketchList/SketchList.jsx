@@ -12,6 +12,7 @@ import MaurerRoseImg from "../sketchImages/MaurerRose";
 import ChaosGameImg from "../sketchImages/ChaosGameImg";
 import HexesImg from "../sketchImages/HexesImg";
 import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
+import CuneiformCounterImg from "../sketchImages/CuneiformCounterImg";
 
 function SketchList(props) {
     return (
@@ -19,8 +20,9 @@ function SketchList(props) {
             <SketchTile
                 title='Cuneiform Number Converter'
                 desc='Converts numbers into the Cuneiform format.'
-                image={<MazeGeneratorImg loading='auto' />}
+                image={<CuneiformCounterImg loading='auto' />}
                 routerPath={routePaths.cuneiformNumberConverter}
+                isMobileFriendly
             />
             <SketchTile
                 title='Maze Generator'
