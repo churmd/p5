@@ -1,0 +1,17 @@
+export const CuneiformUnicodes = {
+    Zero: "\u{1244A}",
+    One: "\u{12415}",
+    Two: "\u{12416}",
+    Three: "\u{12417}",
+    Four: "\u{12418}",
+    Five: "\u{12419}",
+    Six: "\u{1241A}",
+    Seven: "\u{1241B}",
+    Eight: "\u{1241C}",
+    Nine: "\u{1241D}",
+    Ten: "\u{1241E}",
+    Twenty: "\u{1241F}",
+    Thirty: "\u{12420}",
+    Forty: "\u{12421}",
+    Fifty: "\u{12422}",
+};

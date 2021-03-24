@@ -12,10 +12,18 @@ import MaurerRoseImg from "../sketchImages/MaurerRose";
 import ChaosGameImg from "../sketchImages/ChaosGameImg";
 import HexesImg from "../sketchImages/HexesImg";
 import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
+import CuneiformCounterImg from "../sketchImages/CuneiformCounterImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
+            <SketchTile
+                title='Cuneiform Number Counter'
+                desc='A simple counter that starts at 0 and increases by 1 every second, displayed in Babylonian cuneiform numerals'
+                image={<CuneiformCounterImg loading='auto' />}
+                routerPath={routePaths.cuneiformNumberConverter}
+                isMobileFriendly
+            />
             <SketchTile
                 title='Maze Generator'
                 desc='Generates a solvable maze.'
@@ -33,7 +41,7 @@ function SketchList(props) {
             <SketchTile
                 title='Beautiful Trigonometry'
                 desc='Points on the spokes of a circle following a main point as it rotates around the edge of the circle. Press the button to show how the points are calulated and how trigonometry is related to circles.'
-                image={<BeautifulTrigImg loading='auto' />}
+                image={<BeautifulTrigImg />}
                 routerPath={routePaths.beautifulTrig}
                 isMobileFriendly
             />

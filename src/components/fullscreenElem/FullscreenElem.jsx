@@ -16,7 +16,6 @@ class FullscreenElem extends React.Component {
 
     openFullScreen = (elem) => {
         if (elem.requestFullscreen) {
-            console.log(elem);
             elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) {
             /* Safari */
