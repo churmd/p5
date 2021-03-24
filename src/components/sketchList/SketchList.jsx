@@ -18,8 +18,8 @@ function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
-                title='Cuneiform Number Converter'
-                desc='Converts numbers into the Cuneiform format.'
+                title='Cuneiform Number Counter'
+                desc='A simple counter that starts at 0 and increases by 1 every second, displayed in Babylonian cuneiform numerals'
                 image={<CuneiformCounterImg loading='auto' />}
                 routerPath={routePaths.cuneiformNumberConverter}
                 isMobileFriendly
