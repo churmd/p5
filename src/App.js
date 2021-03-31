@@ -14,7 +14,7 @@ import * as routePaths from "./constants/RoutePaths";
 import Home from "./components/home/Home";
 import BeautifulTrig from "./sketches/beautifulTrig/BeautifulTrig";
 import Hexes from "./sketches/hexes/Hexes";
-import CuneiformConverter from "./sketches/cuneiformNumConverter/CuneiformConverter";
+import Cuneiform from "./sketches/cuneiformNumConverter/Cuneiform";
 
 const routing = (
     <Router>
@@ -23,7 +23,7 @@ const routing = (
             <Route
                 exact
                 path={routePaths.cuneiformNumberConverter}
-                component={CuneiformConverter}
+                component={Cuneiform}
             />
             <Route
                 exact
