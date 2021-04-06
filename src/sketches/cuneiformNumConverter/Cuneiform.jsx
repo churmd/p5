@@ -2,6 +2,7 @@ import React from "react";
 import p5 from "p5";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 import { CounterSketch, ClockSketch } from "./Sketchs";
+import "./Cuneiform.scss";
 
 class Cuneiform extends React.Component {
     constructor(props) {
@@ -32,8 +33,8 @@ class Cuneiform extends React.Component {
             <div ref={this.myRef}>
                 <FullscreenElem id='canvas' />
                 <div id='controls'>
-                    <button onClick={this.setCounterSketch}>Counter</button>
                     <button onClick={this.setClockSketch}>Clock</button>
+                    <button onClick={this.setCounterSketch}>Counter</button>
                 </div>
             </div>
         );

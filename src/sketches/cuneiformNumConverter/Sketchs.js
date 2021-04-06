@@ -38,8 +38,8 @@ export const CounterSketch = (p) => {
         const cuniformText = cuneiformCounter.toUnicodeString();
         const textSize = getTextSize(
             cuniformText.length,
-            getCanvasWidth(),
-            getCanvasHeight()
+            getCanvasWidth() * 0.75,
+            getCanvasHeight() * 0.75
         );
 
         p.textSize(textSize);

@@ -12,21 +12,21 @@ import MaurerRoseImg from "../sketchImages/MaurerRose";
 import ChaosGameImg from "../sketchImages/ChaosGameImg";
 import HexesImg from "../sketchImages/HexesImg";
 import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
-import CuneiformCounterImg from "../sketchImages/CuneiformCounterImg";
+import CuneiformClockImg from "../sketchImages/CuneiformClockImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
-                title='Cuneiform Number Counter'
-                desc='A simple counter that starts at 0 and increases by 1 every second, displayed in Babylonian cuneiform numerals'
-                image={<CuneiformCounterImg loading='auto' />}
+                title='Cuneiform Number Collection'
+                desc='A simple 24 hour clock and counter, displayed in Babylonian cuneiform numerals'
+                image={<CuneiformClockImg loading='auto' />}
                 routerPath={routePaths.cuneiformNumberConverter}
                 isMobileFriendly
             />
             <SketchTile
                 title='Maze Generator'
-                desc='Generates a solvable maze.'
+                desc='Repeatedly generates a solvable maze.'
                 image={<MazeGeneratorImg loading='auto' />}
                 routerPath={routePaths.mazeGenerator}
                 isMobileFriendly
