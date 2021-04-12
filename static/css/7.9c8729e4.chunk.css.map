@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/sketches/cuneiformNumConverter/Cuneiform.scss"],"names":[],"mappings":"AAAA,iBAEQ,WAAY,CACZ,oBAAqB,CACrB,SAAU,CACV,eAAgB","file":"7.9c8729e4.chunk.css","sourcesContent":["#controls {\n    button {\n        margin: auto;\n        display: inline-block;\n        width: 40%;\n        font-size: large;\n    }\n}\n"]}
