@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/sketches/flockingSimulation/FlockingSimulation.scss"],"names":[],"mappings":"AAAA,UACC,YAAa,CACb,QAGA,WAAY,CACZ,iBAAkB","file":"10.b7e7007a.chunk.css","sourcesContent":["#controls {\n\tdisplay: flex;\n}\n\n.slider {\n\tflex-grow: 1;\n\ttext-align: center;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/sketches/beautifulTrig/BeautifulTrig.scss"],"names":[],"mappings":"AAAA,wCAIG,qBAAgB","file":"9.84ca598e.chunk.css","sourcesContent":[".beautiful-trig-sketch {\n\t#controls {\n\t\tbutton {\n\t\t\tmargin: auto;\n\t\t\tmargin-top: 10px;\n\t\t}\n\t}\n}\n"]}
