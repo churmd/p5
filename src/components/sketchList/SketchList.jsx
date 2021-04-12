@@ -34,7 +34,7 @@ function SketchList(props) {
             <SketchTile
                 title='Hexes'
                 desc='A page of tiled hexes that grow/shrink in a random or center-out pattern. Click on the hexes animation to make it full screen.'
-                image={<HexesImg loading='auto' />}
+                image={<HexesImg />}
                 routerPath={routePaths.hexes}
                 isMobileFriendly
             />

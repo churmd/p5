@@ -1,8 +1,10 @@
 .sketch-list {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-	.sketch-tile {
-		margin-bottom: 1em;
-	}
+    .sketch-tile {
+        content-visibility: auto;
+        contain-intrinsic-size: 80vh 100vw;
+        margin-bottom: 1em;
+    }
 }
