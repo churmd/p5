@@ -31,6 +31,9 @@ class Cuneiform extends React.Component {
     render() {
         return (
             <div ref={this.myRef}>
+                <div id='p5_loading' class='loadingclass'>
+                    Loading custom font ...
+                </div>
                 <FullscreenElem id='canvas' />
                 <div id='controls'>
                     <button onClick={this.setClockSketch}>Clock</button>
