@@ -32,7 +32,7 @@ class RayCastingFps extends React.Component {
                 p,
                 world.getWidth(),
                 world.getHeight(),
-                60
+                p.radians(60)
             );
         };
 
@@ -44,7 +44,7 @@ class RayCastingFps extends React.Component {
             player.show();
 
             p.translate(world.getWidth(), 0);
-            projectionPlane.show();
+            projectionPlane.show(player);
         };
 
         const handleMovement = (p, player) => {
