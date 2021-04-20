@@ -8,6 +8,10 @@ class Player {
         this.heading = heading;
     }
 
+    changeHeading(offset) {
+        this.heading += offset;
+    }
+
     show() {
         this.p.push();
 
