@@ -27,7 +27,7 @@ class RayCastingFps extends React.Component {
 
             p.angleMode(p.RADIANS);
 
-            player = new Player(p, 100, 100, p.PI / 2);
+            player = new Player(p, 1.5, 1.5, p.HALF_PI);
             projectionPlane = new ProjectionPlane(
                 p,
                 world.getWidth(),
@@ -41,7 +41,7 @@ class RayCastingFps extends React.Component {
 
             p.background(0);
             world.show();
-            player.show();
+            player.show(world.blockSize);
 
             p.translate(world.getWidth(), 0);
             projectionPlane.show(player);

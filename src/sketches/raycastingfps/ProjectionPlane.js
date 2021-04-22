@@ -37,7 +37,7 @@ class ProjectionPlane {
         this.p.pop();
     }
 
-    distancesToWalls(player) {
+    distancesToWalls(player, world) {
         let angle = player.heading - this.fov / 2;
         const distances = [];
         for (let i = 0; i < this.width; i++) {
@@ -50,9 +50,56 @@ class ProjectionPlane {
         return distances;
     }
 
-    distanceToWall(origin, angle) {
+    distanceToWall(origin, angle, world) {
+        // used to calculate length of line along a heading given only 1 coord
+        const headingVec = p5.Vector.fromAngle(angle);
+        const sx = this.p.sqrt(1 + this.p.sq(headingVec.y, headingVec.x));
+        const sy = this.p.sqrt(1 + this.p.sq(headingVec.x, headingVec.y));
+
+        // x y directions of travel
+        const { xMult, yMult } = this.getXYDirectionMultipliers(angle);
+
+        // Get inital distances to first grid line in x and y
+        const ax = this.getXInitOffset(origin.x, xMult);
+        const ay = this.getYInitOffset(origin.y, yMult);
+
         // Add DDA algorithm
         return 100;
+    }
+
+    /**
+     * Multipliers to move along a angle in the correct x y direction.
+     * @param {number} angle
+     * @returns {x: number, y: number} (x,y) direction multipliers
+     */
+    getXYDirectionMultipliers(angle) {
+        let mults = { x: 1, y: 1 };
+
+        if (angle < this.p.PI) {
+            mults.y = -1;
+        }
+
+        if (angle >= this.p.HALF_PI && angle < this.p.PI + this.p.HALF_PI) {
+            mults.x = -1;
+        }
+
+        return mults;
+    }
+
+    getXInitOffset(xCoord, xMult) {
+        if (xMult === -1) {
+            return xCoord % 1;
+        } else {
+            return 1 - (xCoord % 1);
+        }
+    }
+
+    getYInitOffset(yCoord, yMult) {
+        if (yMult === -1) {
+            return yCoord % 1;
+        } else {
+            return 1 - (yCoord % 1);
+        }
     }
 }
 
