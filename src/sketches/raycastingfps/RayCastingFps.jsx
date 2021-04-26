@@ -20,6 +20,8 @@ class RayCastingFps extends React.Component {
         let projectionPlane;
 
         p.setup = () => {
+            p.frameRate(30);
+
             world = new World(p);
 
             const cnv = p.createCanvas(world.getWidth() * 2, world.getHeight());
@@ -27,27 +29,24 @@ class RayCastingFps extends React.Component {
 
             p.angleMode(p.RADIANS);
 
-            player = new Player(p, 1.5, 1.5, p.HALF_PI);
-            projectionPlane = new ProjectionPlane(
-                p,
-                world.getWidth(),
-                world.getHeight(),
-                p.radians(60)
-            );
+            player = new Player(p, 1.5, 1.5, 0);
+            projectionPlane = new ProjectionPlane(p, 320, 200, p.radians(60));
         };
 
         p.draw = () => {
-            handleMovement(p, player);
+            handleMovement(player);
 
             p.background(0);
             world.show();
             player.show(world.blockSize);
 
             p.translate(world.getWidth(), 0);
-            projectionPlane.show(player);
+            projectionPlane.show(player, world);
+
+            p.noLoop();
         };
 
-        const handleMovement = (p, player) => {
+        const handleMovement = (player) => {
             if (p.keyIsDown(p.LEFT_ARROW)) {
                 player.changeHeading(0.1);
             } else if (p.keyIsDown(p.RIGHT_ARROW)) {

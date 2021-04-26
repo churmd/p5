@@ -6,12 +6,12 @@ class ProjectionPlane {
         this.p = p5Instance;
         this.width = width;
         this.height = height;
-        this.distanceToPlan = width / 2 / this.p.tan(fov / 2);
+        this.distanceToPlane = width / 2 / this.p.tan(fov / 2);
         this.fov = fov;
-        this.angleBetweenRays = this.p.radians(fov / width);
+        this.angleBetweenRays = fov / width;
     }
 
-    show(player) {
+    show(player, world) {
         this.p.push();
         this.p.noStroke();
 
@@ -26,11 +26,19 @@ class ProjectionPlane {
         // if there is no stroke the walls look tranparent as they are only 1 pixel wide
         this.p.stroke(0, 0, 100);
         this.p.rectMode(this.p.CENTER);
-        const distToWalls = this.distancesToWalls(player);
+        const distToWalls = this.distancesToWalls(player, world);
         for (let i = 0; i < distToWalls.length; i++) {
             const wallDist = distToWalls[i];
 
-            this.p.rect(i, this.height / 2, 1, wallDist);
+            const distInWorldToWall = this.p.round(wallDist * world.blockSize);
+            const wallHeight =
+                (world.blockSize / distInWorldToWall) * this.distanceToPlane;
+
+            if (wallDist > 0) {
+                this.p.fill(0, wallHeight, 100);
+                this.p.stroke(0, wallHeight, 100);
+                this.p.rect(i, this.height / 2, 1, wallHeight);
+            }
         }
 
         this.p.pop();
@@ -41,7 +49,8 @@ class ProjectionPlane {
         let angle = player.heading - this.fov / 2;
         const distances = [];
         for (let i = 0; i < this.width; i++) {
-            const d = this.distanceToWall(player.position, angle);
+            let d = this.distanceToWall(player.position, angle, world);
+            d = d * this.p.cos(player.heading - angle);
             distances.push(d);
 
             angle += this.angleBetweenRays;
@@ -52,19 +61,67 @@ class ProjectionPlane {
 
     distanceToWall(origin, angle, world) {
         // used to calculate length of line along a heading given only 1 coord
-        const headingVec = p5.Vector.fromAngle(angle);
-        const sx = this.p.sqrt(1 + this.p.sq(headingVec.y, headingVec.x));
-        const sy = this.p.sqrt(1 + this.p.sq(headingVec.x, headingVec.y));
+        const headingVec = p5.Vector.fromAngle(angle, 1);
+
+        const sx = this.p.sqrt(1 + this.p.sq(headingVec.y / headingVec.x));
+        const sy = this.p.sqrt(1 + this.p.sq(headingVec.x / headingVec.y));
 
         // x y directions of travel
-        const { xMult, yMult } = this.getXYDirectionMultipliers(angle);
+        const mults = this.getXYDirectionMultipliers(angle);
+        const xMult = mults.x;
+        const yMult = mults.y;
 
         // Get inital distances to first grid line in x and y
         const ax = this.getXInitOffset(origin.x, xMult);
         const ay = this.getYInitOffset(origin.y, yMult);
 
-        // Add DDA algorithm
-        return 100;
+        let nextXCoord = origin.x;
+        let nextYCoord = origin.y;
+
+        let nextXDist = ax * sx;
+        let nextYDist = ay * sy;
+
+        let distToWall = this.p.min(nextXDist, nextYDist);
+
+        const maxRayLen = this.p.sqrt(
+            this.p.sq(world.getWidth()) + this.p.sq(world.getHeight())
+        );
+
+        while (this.p.min(nextXDist, nextYDist) <= maxRayLen) {
+            if (world.isCoordWall(nextXCoord, nextYCoord)) {
+                const headingVec2 = p5.Vector.fromAngle(-angle);
+                let tyemp = p5.Vector.add(
+                    origin,
+                    p5.Vector.mult(headingVec2, distToWall)
+                );
+
+                tyemp.mult(world.blockSize);
+
+                tyemp = p5.Vector.sub(
+                    tyemp,
+                    this.p.createVector(world.getWidth())
+                );
+
+                this.p.fill(100, 0, 0);
+                this.p.circle(tyemp.x, tyemp.y, 10);
+
+                console.log(`wall at ${nextXCoord} ${nextYCoord}`);
+
+                return distToWall;
+            }
+
+            if (nextXDist < nextYDist) {
+                nextXCoord += xMult;
+                distToWall = nextXDist;
+                nextXDist += sx;
+            } else {
+                nextYCoord += yMult;
+                distToWall = nextYDist;
+                nextYDist += sy;
+            }
+        }
+
+        return -1;
     }
 
     /**

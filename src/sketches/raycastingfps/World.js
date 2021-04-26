@@ -5,10 +5,13 @@ class World {
         this.p = p5Instance;
         this.blockSize = 64;
         this.blocks = [
-            [1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 1],
-            [1, 0, 1, 0, 1],
-            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1],
         ];
     }
 
@@ -18,6 +21,22 @@ class World {
 
     getHeight() {
         return this.blocks.length * this.blockSize;
+    }
+
+    isCoordWall(x, y) {
+        x = this.p.floor(x);
+        y = this.p.floor(y);
+
+        if (
+            x < this.blocks[0].length &&
+            x >= 0 &&
+            y < this.blocks.length &&
+            y >= 0
+        ) {
+            return this.blocks[y][x] === 1;
+        }
+
+        return false;
     }
 
     show() {
