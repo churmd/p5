@@ -1,5 +1,6 @@
 import p5 from "p5";
 import { number } from "prop-types";
+import { mod } from "../../constants/Mod";
 
 class Player {
     constructor(p5Instance, x, y, heading) {
@@ -10,14 +11,7 @@ class Player {
 
     changeHeading(offset) {
         this.heading += offset;
-
-        if (this.heading >= this.p.TWO_PI) {
-            this.heading -= this.p.TWO_PI;
-        }
-
-        if (this.heading < 0) {
-            this.heading += this.p.TWO_PI;
-        }
+        this.heading = mod(this.heading, this.p.TWO_PI);
     }
 
     getPixelXY(blockSize) {

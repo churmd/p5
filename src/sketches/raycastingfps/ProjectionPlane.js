@@ -1,5 +1,6 @@
 import p5 from "p5";
 import { number } from "prop-types";
+import { mod } from "../../constants/Mod";
 
 class ProjectionPlane {
     constructor(p5Instance, width, height, fov) {
@@ -49,15 +50,7 @@ class ProjectionPlane {
         let angle = player.heading - this.fov / 2;
         const distances = [];
         for (let i = 0; i < this.width; i++) {
-            let wrappedAngle = angle;
-
-            if (wrappedAngle >= this.p.TWO_PI) {
-                wrappedAngle -= this.p.TWO_PI;
-            }
-
-            if (wrappedAngle < 0) {
-                wrappedAngle += this.p.TWO_PI;
-            }
+            const wrappedAngle = mod(angle, this.p.TWO_PI);
 
             let d = this.distanceToWall(player.position, wrappedAngle, world);
             d = d * this.p.cos(player.heading - angle);
