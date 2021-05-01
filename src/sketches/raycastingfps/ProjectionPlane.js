@@ -16,34 +16,46 @@ class ProjectionPlane {
         this.p.push();
         this.p.noStroke();
 
+        // draw sky
         this.p.fill(0, 0, 230);
         this.p.rect(0, 0, this.width, this.height / 2);
 
+        // draw floor
         this.p.fill(150);
         this.p.rect(0, this.height / 2, this.width, this.height / 2);
 
+        this.drawWalls(player, world);
+
+        this.p.pop();
+    }
+
+    drawWalls(player, world) {
         this.p.push();
-        this.p.fill(0, 0, 100);
-        // if there is no stroke the walls look tranparent as they are only 1 pixel wide
-        this.p.stroke(0, 0, 100);
         this.p.rectMode(this.p.CENTER);
+
         const distToWalls = this.distancesToWalls(player, world);
         for (let i = 0; i < distToWalls.length; i++) {
-            const wallDist = distToWalls[i];
-
-            const distInWorldToWall = this.p.round(wallDist * world.blockSize);
-            const wallHeight =
-                (world.blockSize / distInWorldToWall) * this.distanceToPlane;
-
-            if (wallDist > 0) {
-                this.p.fill(0, wallHeight, 100);
-                this.p.stroke(0, wallHeight, 100);
-                this.p.rect(i, this.height / 2, 1, wallHeight);
-            }
+            this.drawWallInColumn(distToWalls[i], world.blockSize, i);
         }
 
         this.p.pop();
-        this.p.pop();
+    }
+
+    drawWallInColumn(distToWall, blockSize, column) {
+        if (distToWall > 0) {
+            this.p.push();
+
+            const distInWorldToWall = this.p.round(distToWall * blockSize);
+            const wallHeight =
+                (blockSize / distInWorldToWall) * this.distanceToPlane;
+
+            this.p.fill(0, wallHeight, 100);
+            // if there is no stroke the walls look tranparent as they are only 1 pixel wide
+            this.p.stroke(0, wallHeight, 100);
+            this.p.rect(column, this.height / 2, 1, wallHeight);
+
+            this.p.pop();
+        }
     }
 
     distancesToWalls(player, world) {
@@ -126,7 +138,7 @@ class ProjectionPlane {
     }
 
     /**
-     * Multipliers to move along a angle in the correct x y direction.
+     * Multipliers to move along an angle in the correct x y direction.
      * @param {number} angle
      * @returns {x: number, y: number} (x,y) direction multipliers
      */
