@@ -30,7 +30,12 @@ class RayCastingFps extends React.Component {
             p.angleMode(p.RADIANS);
 
             player = new Player(p, 1.5, 1.5, 0);
-            projectionPlane = new ProjectionPlane(p, 320, 200, p.radians(60));
+            projectionPlane = new ProjectionPlane(
+                p,
+                world.getWidth(),
+                world.getHeight(),
+                p.radians(60)
+            );
         };
 
         p.draw = () => {
@@ -43,7 +48,7 @@ class RayCastingFps extends React.Component {
             p.translate(world.getWidth(), 0);
             projectionPlane.show(player, world);
 
-            p.noLoop();
+            // p.noLoop();
         };
 
         const handleMovement = (player) => {

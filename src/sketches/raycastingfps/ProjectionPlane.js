@@ -49,7 +49,17 @@ class ProjectionPlane {
         let angle = player.heading - this.fov / 2;
         const distances = [];
         for (let i = 0; i < this.width; i++) {
-            let d = this.distanceToWall(player.position, angle, world);
+            let wrappedAngle = angle;
+
+            if (wrappedAngle >= this.p.TWO_PI) {
+                wrappedAngle -= this.p.TWO_PI;
+            }
+
+            if (wrappedAngle < 0) {
+                wrappedAngle += this.p.TWO_PI;
+            }
+
+            let d = this.distanceToWall(player.position, wrappedAngle, world);
             d = d * this.p.cos(player.heading - angle);
             distances.push(d);
 
@@ -104,8 +114,6 @@ class ProjectionPlane {
 
                 this.p.fill(100, 0, 0);
                 this.p.circle(tyemp.x, tyemp.y, 10);
-
-                console.log(`wall at ${nextXCoord} ${nextYCoord}`);
 
                 return distToWall;
             }
