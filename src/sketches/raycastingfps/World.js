@@ -7,10 +7,10 @@ class World {
         this.blocks = [
             [1, 1, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 1],
             [1, 0, 0, 0, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 1, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1],
         ];
     }
@@ -39,7 +39,7 @@ class World {
         return false;
     }
 
-    show() {
+    show(collisions) {
         for (let y = 0; y < this.blocks.length; y++) {
             for (let x = 0; x < this.blocks[0].length; x++) {
                 const yOffset = y * this.blockSize;
@@ -54,6 +54,19 @@ class World {
                 this.p.rect(xOffset, yOffset, this.blockSize, this.blockSize);
             }
         }
+
+        collisions.forEach((collision) => {
+            const headingVec = p5.Vector.fromAngle(-collision.angle);
+            let tyemp = p5.Vector.add(
+                collision.origin,
+                p5.Vector.mult(headingVec, collision.getDistance())
+            );
+
+            tyemp.mult(this.blockSize);
+
+            this.p.fill(100, 0, 0);
+            this.p.circle(tyemp.x, tyemp.y, 10);
+        });
     }
 }
 

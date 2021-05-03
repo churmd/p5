@@ -1,6 +1,9 @@
 import p5 from "p5";
-import { number } from "prop-types";
+import { number, instanceOf } from "prop-types";
 import { mod } from "../../constants/Mod";
+import Player from "./Player";
+import RayCollision from "./RayColision";
+import World from "./World";
 
 class ProjectionPlane {
     constructor(p5Instance, width, height, fov) {
@@ -12,7 +15,11 @@ class ProjectionPlane {
         this.angleBetweenRays = fov / width;
     }
 
-    show(player, world) {
+    showMap(collision, world) {
+        world.show();
+    }
+
+    showProjection(collisions, world) {
         this.p.push();
         this.p.noStroke();
 
@@ -24,28 +31,27 @@ class ProjectionPlane {
         this.p.fill(150);
         this.p.rect(0, this.height / 2, this.width, this.height / 2);
 
-        this.drawWalls(player, world);
-
-        this.p.pop();
-    }
-
-    drawWalls(player, world) {
-        this.p.push();
         this.p.rectMode(this.p.CENTER);
-
-        const distToWalls = this.distancesToWalls(player, world);
-        for (let i = 0; i < distToWalls.length; i++) {
-            this.drawWallInColumn(distToWalls[i], world.blockSize, i);
+        for (let i = 0; i < collisions.length; i++) {
+            this.__drawWallInColumn(collisions[i], world.blockSize, i);
         }
 
         this.p.pop();
     }
 
-    drawWallInColumn(distToWall, blockSize, column) {
-        if (distToWall > 0) {
+    /**
+     *
+     * @param {RayCollision} collision
+     * @param {number} blockSize
+     * @param {number} column
+     */
+    __drawWallInColumn(collision, blockSize, column) {
+        if (collision.didCollide) {
             this.p.push();
 
-            const distInWorldToWall = this.p.round(distToWall * blockSize);
+            const distInWorldToWall = this.p.round(
+                collision.distanceWithoutFishEye * blockSize
+            );
             const wallHeight =
                 (blockSize / distInWorldToWall) * this.distanceToPlane;
 
@@ -58,23 +64,36 @@ class ProjectionPlane {
         }
     }
 
-    distancesToWalls(player, world) {
-        let angle = player.heading - this.fov / 2;
-        const distances = [];
+    /**
+     * Finds all the ray colisions from the player.
+     * @param {Player} player The player casting the rays.
+     * @param {World} world The world the rays will be cast into.
+     * @returns {RayCollision[]} The list of ray colisions with walls found.
+     */
+    findRayColisions(player, world) {
+        let angle = player.heading + this.fov / 2;
+        const collisions = [];
         for (let i = 0; i < this.width; i++) {
             const wrappedAngle = mod(angle, this.p.TWO_PI);
 
-            let d = this.distanceToWall(player.position, wrappedAngle, world);
-            d = d * this.p.cos(player.heading - angle);
-            distances.push(d);
+            let c = this.__distanceToWall(player.position, wrappedAngle, world);
+            c.removeFishEyeEffect(player.heading, angle);
+            collisions.push(c);
 
-            angle += this.angleBetweenRays;
+            angle -= this.angleBetweenRays;
         }
 
-        return distances;
+        return collisions;
     }
 
-    distanceToWall(origin, angle, world) {
+    /**
+     *
+     * @param {p5.Vector} origin
+     * @param {number} angle
+     * @param {World} world
+     * @returns {RayCollision}
+     */
+    __distanceToWall(origin, angle, world) {
         // used to calculate length of line along a heading given only 1 coord
         const headingVec = p5.Vector.fromAngle(angle, 1);
 
@@ -82,13 +101,13 @@ class ProjectionPlane {
         const sy = this.p.sqrt(1 + this.p.sq(headingVec.x / headingVec.y));
 
         // x y directions of travel
-        const mults = this.getXYDirectionMultipliers(angle);
+        const mults = this.__getXYDirectionMultipliers(angle);
         const xMult = mults.x;
         const yMult = mults.y;
 
         // Get inital distances to first grid line in x and y
-        const ax = this.getXInitOffset(origin.x, xMult);
-        const ay = this.getYInitOffset(origin.y, yMult);
+        const ax = this.__getXInitOffset(origin.x, xMult);
+        const ay = this.__getYInitOffset(origin.y, yMult);
 
         let nextXCoord = origin.x;
         let nextYCoord = origin.y;
@@ -104,23 +123,7 @@ class ProjectionPlane {
 
         while (this.p.min(nextXDist, nextYDist) <= maxRayLen) {
             if (world.isCoordWall(nextXCoord, nextYCoord)) {
-                const headingVec2 = p5.Vector.fromAngle(-angle);
-                let tyemp = p5.Vector.add(
-                    origin,
-                    p5.Vector.mult(headingVec2, distToWall)
-                );
-
-                tyemp.mult(world.blockSize);
-
-                tyemp = p5.Vector.sub(
-                    tyemp,
-                    this.p.createVector(world.getWidth())
-                );
-
-                this.p.fill(100, 0, 0);
-                this.p.circle(tyemp.x, tyemp.y, 10);
-
-                return distToWall;
+                return new RayCollision(true, origin, angle, distToWall);
             }
 
             if (nextXDist < nextYDist) {
@@ -134,7 +137,7 @@ class ProjectionPlane {
             }
         }
 
-        return -1;
+        return new RayCollision();
     }
 
     /**
@@ -142,7 +145,7 @@ class ProjectionPlane {
      * @param {number} angle
      * @returns {x: number, y: number} (x,y) direction multipliers
      */
-    getXYDirectionMultipliers(angle) {
+    __getXYDirectionMultipliers(angle) {
         let mults = { x: 1, y: 1 };
 
         if (angle < this.p.PI) {
@@ -156,7 +159,7 @@ class ProjectionPlane {
         return mults;
     }
 
-    getXInitOffset(xCoord, xMult) {
+    __getXInitOffset(xCoord, xMult) {
         if (xMult === -1) {
             return xCoord % 1;
         } else {
@@ -164,7 +167,7 @@ class ProjectionPlane {
         }
     }
 
-    getYInitOffset(yCoord, yMult) {
+    __getYInitOffset(yCoord, yMult) {
         if (yMult === -1) {
             return yCoord % 1;
         } else {
@@ -174,7 +177,7 @@ class ProjectionPlane {
 }
 
 ProjectionPlane.propTypes = {
-    p5Instance: p5,
+    p5Instance: instanceOf(p5),
     width: number,
     height: number,
     fov: number,

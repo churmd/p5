@@ -40,13 +40,14 @@ class RayCastingFps extends React.Component {
 
         p.draw = () => {
             handleMovement(player);
+            const collisions = projectionPlane.findRayColisions(player, world);
 
             p.background(0);
-            world.show();
+            world.show(collisions);
             player.show(world.blockSize);
 
             p.translate(world.getWidth(), 0);
-            projectionPlane.show(player, world);
+            projectionPlane.showProjection(collisions, world);
 
             // p.noLoop();
         };
