@@ -15,10 +15,6 @@ class ProjectionPlane {
         this.angleBetweenRays = fov / width;
     }
 
-    showMap(collision, world) {
-        world.show();
-    }
-
     showProjection(collisions, world) {
         this.p.push();
         this.p.noStroke();

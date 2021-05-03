@@ -1,8 +1,11 @@
 import p5 from "p5";
+import { instanceOf } from "prop-types";
+import Player from "./Player";
 
 class World {
-    constructor(p5Instance) {
+    constructor(p5Instance, player) {
         this.p = p5Instance;
+        this.player = player;
         this.blockSize = 64;
         this.blocks = [
             [1, 1, 1, 1, 1, 1, 1],
@@ -40,6 +43,8 @@ class World {
     }
 
     show(collisions) {
+        this.p.push();
+
         for (let y = 0; y < this.blocks.length; y++) {
             for (let x = 0; x < this.blocks[0].length; x++) {
                 const yOffset = y * this.blockSize;
@@ -55,23 +60,33 @@ class World {
             }
         }
 
+        this.player.show(this.blockSize);
+
+        this.p.fill(150, 0, 0);
+        this.p.stroke(200, 0, 0);
+
         collisions.forEach((collision) => {
-            const headingVec = p5.Vector.fromAngle(-collision.angle);
-            let tyemp = p5.Vector.add(
-                collision.origin,
-                p5.Vector.mult(headingVec, collision.getDistance())
-            );
+            if (collision.didCollide) {
+                const headingVec = p5.Vector.fromAngle(-collision.angle);
+                let tyemp = p5.Vector.add(
+                    collision.origin,
+                    p5.Vector.mult(headingVec, collision.getDistance())
+                );
 
-            tyemp.mult(this.blockSize);
+                tyemp.mult(this.blockSize);
 
-            this.p.fill(100, 0, 0);
-            this.p.circle(tyemp.x, tyemp.y, 10);
+                this.p.fill(100, 0, 0);
+                this.p.circle(tyemp.x, tyemp.y, 10);
+            }
         });
+
+        this.p.pop();
     }
 }
 
 World.propTypes = {
-    p5Instance: p5,
+    p5Instance: instanceOf(p5),
+    player: instanceOf(Player),
 };
 
 export default World;

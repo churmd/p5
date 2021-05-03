@@ -14,6 +14,22 @@ class Player {
         this.heading = mod(this.heading, this.p.TWO_PI);
     }
 
+    moveUp(amount) {
+        this.position.add(this.p.createVector(0, -amount));
+    }
+
+    moveDown(amount) {
+        this.position.add(this.p.createVector(0, amount));
+    }
+
+    moveLeft(amount) {
+        this.position.add(this.p.createVector(-amount, 0));
+    }
+
+    moveRight(amount) {
+        this.position.add(this.p.createVector(amount, 0));
+    }
+
     getPixelXY(blockSize) {
         const pixelX = this.p.round(this.position.x * blockSize);
         const pixelY = this.p.round(this.position.y * blockSize);
