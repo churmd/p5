@@ -7,27 +7,42 @@ class Player {
         this.p = p5Instance;
         this.position = this.p.createVector(x, y);
         this.heading = heading;
+        this.walkSpeed = 0.05;
+        this.turnSpeed = 0.075;
     }
 
-    changeHeading(offset) {
-        this.heading += offset;
+    turnRight() {
+        this.heading -= this.turnSpeed;
         this.heading = mod(this.heading, this.p.TWO_PI);
     }
 
-    moveUp(amount) {
-        this.position.add(this.p.createVector(0, -amount));
+    turnLeft() {
+        this.heading += this.turnSpeed;
+        this.heading = mod(this.heading, this.p.TWO_PI);
     }
 
-    moveDown(amount) {
-        this.position.add(this.p.createVector(0, amount));
+    moveForward() {
+        let dir = p5.Vector.fromAngle(-this.heading);
+        dir.mult(this.walkSpeed);
+        this.position.add(dir);
     }
 
-    moveLeft(amount) {
-        this.position.add(this.p.createVector(-amount, 0));
+    moveBackward() {
+        let dir = p5.Vector.fromAngle(-this.heading);
+        dir.mult(-this.walkSpeed);
+        this.position.add(dir);
+    }
+
+    moveLeft() {
+        let dir = p5.Vector.fromAngle(-(this.heading + this.p.HALF_PI));
+        dir.mult(this.walkSpeed);
+        this.position.add(dir);
     }
 
     moveRight(amount) {
-        this.position.add(this.p.createVector(amount, 0));
+        let dir = p5.Vector.fromAngle(-(this.heading - this.p.HALF_PI));
+        dir.mult(this.walkSpeed);
+        this.position.add(dir);
     }
 
     getPixelXY(blockSize) {

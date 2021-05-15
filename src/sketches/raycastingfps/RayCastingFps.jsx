@@ -57,22 +57,22 @@ class RayCastingFps extends React.Component {
 
         const handleMovement = (player) => {
             if (p.keyIsDown(p.LEFT_ARROW)) {
-                player.changeHeading(0.1);
+                player.turnLeft();
             } else if (p.keyIsDown(p.RIGHT_ARROW)) {
-                player.changeHeading(-0.1);
+                player.turnRight();
             }
 
             if (p.keyIsDown(KeyCodeW)) {
-                player.moveUp(0.1);
+                player.moveForward();
             }
             if (p.keyIsDown(KeyCodeA)) {
-                player.moveLeft(0.1);
+                player.moveLeft();
             }
             if (p.keyIsDown(KeyCodeS)) {
-                player.moveDown(0.1);
+                player.moveBackward();
             }
             if (p.keyIsDown(KeyCodeD)) {
-                player.moveRight(0.1);
+                player.moveRight();
             }
         };
 
