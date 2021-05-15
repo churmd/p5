@@ -10,4 +10,5 @@ export const matrixRain = "/matrixRain";
 export const maurerRose = "/maurerRose";
 export const mazeGenerator = "/mazeGenerator";
 export const moduloTimesTable = "/moduloTimesTable";
+export const rayCastingFps = "/RayCastingFps";
 export const snowflakeGenerator = "/snowflakeGenerator";
