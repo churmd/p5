@@ -2,8 +2,7 @@ import p5 from "p5";
 import { number, instanceOf } from "prop-types";
 import { mod } from "../../constants/Mod";
 import Player from "./Player";
-import RayCollision from "./RayColision";
-import World from "./World";
+import RayCollision from "./PlayerRay";
 
 class ProjectionPlane {
     constructor(p5Instance, width, height, fov) {
@@ -66,14 +65,13 @@ class ProjectionPlane {
      * @param {World} world The world the rays will be cast into.
      * @returns {RayCollision[]} The list of ray colisions with walls found.
      */
-    findRayColisions(player, world) {
+    findRayCollisions(player, world) {
         let angle = player.heading + this.fov / 2;
         const collisions = [];
         for (let i = 0; i < this.width; i++) {
             const wrappedAngle = mod(angle, this.p.TWO_PI);
 
-            let c = this.__distanceToWall(player.position, wrappedAngle, world);
-            c.removeFishEyeEffect(player.heading, angle);
+            let c = this.__distanceToWall(player, wrappedAngle, world);
             collisions.push(c);
 
             angle -= this.angleBetweenRays;
@@ -84,12 +82,14 @@ class ProjectionPlane {
 
     /**
      *
-     * @param {p5.Vector} origin
+     * @param {Player} player
      * @param {number} angle
      * @param {World} world
      * @returns {RayCollision}
      */
-    __distanceToWall(origin, angle, world) {
+    __distanceToWall(player, angle, world) {
+        const origin = player.position;
+
         // used to calculate length of line along a heading given only 1 coord
         const headingVec = p5.Vector.fromAngle(angle, 1);
 
@@ -119,7 +119,13 @@ class ProjectionPlane {
 
         while (this.p.min(nextXDist, nextYDist) <= maxRayLen) {
             if (world.isCoordWall(nextXCoord, nextYCoord)) {
-                return new RayCollision(true, origin, angle, distToWall);
+                return new RayCollision(
+                    true,
+                    origin,
+                    player.heading,
+                    angle,
+                    distToWall
+                );
             }
 
             if (nextXDist < nextYDist) {

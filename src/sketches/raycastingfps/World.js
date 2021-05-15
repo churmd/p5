@@ -42,7 +42,7 @@ class World {
         return false;
     }
 
-    show(collisions) {
+    show(playerRays) {
         this.p.push();
 
         for (let y = 0; y < this.blocks.length; y++) {
@@ -65,18 +65,27 @@ class World {
         this.p.fill(150, 0, 0);
         this.p.stroke(200, 0, 0);
 
-        collisions.forEach((collision) => {
-            if (collision.didCollide) {
-                const headingVec = p5.Vector.fromAngle(-collision.angle);
-                let tyemp = p5.Vector.add(
-                    collision.origin,
-                    p5.Vector.mult(headingVec, collision.getDistance())
+        playerRays.forEach((playerRay) => {
+            if (playerRay.didCollide) {
+                const headingVec = p5.Vector.fromAngle(-playerRay.angle);
+                const vecToCollsion = p5.Vector.mult(
+                    headingVec,
+                    playerRay.distance
+                );
+                const collsionPointInGrid = p5.Vector.add(
+                    playerRay.playerPosition,
+                    vecToCollsion
+                );
+                const collsionPointInWorld = collsionPointInGrid.mult(
+                    this.blockSize
                 );
 
-                tyemp.mult(this.blockSize);
-
                 this.p.fill(100, 0, 0);
-                this.p.circle(tyemp.x, tyemp.y, 10);
+                this.p.circle(
+                    collsionPointInWorld.x,
+                    collsionPointInWorld.y,
+                    10
+                );
             }
         });
 
