@@ -51,9 +51,9 @@ class World {
                 const xOffset = x * this.blockSize;
 
                 if (this.blocks[y][x] === 0) {
-                    this.p.fill("black");
+                    this.p.fill(150);
                 } else {
-                    this.p.fill("white");
+                    this.p.fill(51, 204, 255);
                 }
 
                 this.p.rect(xOffset, yOffset, this.blockSize, this.blockSize);
@@ -61,9 +61,6 @@ class World {
         }
 
         this.player.show(this.blockSize);
-
-        this.p.fill(150, 0, 0);
-        this.p.stroke(200, 0, 0);
 
         playerRays.forEach((playerRay) => {
             if (playerRay.didCollide) {
@@ -80,7 +77,8 @@ class World {
                     this.blockSize
                 );
 
-                this.p.fill(100, 0, 0);
+                this.p.fill(0, 51, 204);
+                this.p.noStroke();
                 this.p.circle(
                     collsionPointInWorld.x,
                     collsionPointInWorld.y,

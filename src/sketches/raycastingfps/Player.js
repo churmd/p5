@@ -56,8 +56,8 @@ class Player {
 
         this.p.push();
 
-        this.p.stroke(255);
-        this.p.fill(150);
+        this.p.stroke(0);
+        this.p.fill(255);
         this.p.translate(pixelPos.x, pixelPos.y);
         this.p.rotate(-(this.heading - this.p.HALF_PI));
 
