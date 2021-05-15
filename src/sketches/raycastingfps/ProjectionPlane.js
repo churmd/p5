@@ -19,7 +19,7 @@ class ProjectionPlane {
         this.p.noStroke();
 
         // draw sky
-        this.p.fill(0, 0, 230);
+        this.p.fill(204, 255, 255);
         this.p.rect(0, 0, this.width, this.height / 2);
 
         // draw floor
@@ -50,9 +50,22 @@ class ProjectionPlane {
             const wallHeight =
                 (blockSize / distInWorldToWall) * this.distanceToPlane;
 
-            this.p.fill(0, wallHeight, 100);
+            const maxViewDist = 6;
+            const wallBrightness = this.p.map(
+                collision.distanceWithoutFishEye,
+                0,
+                maxViewDist,
+                100,
+                0,
+                true
+            );
+            const wallColour = this.p.color(
+                `hsb(195, 100%, ${wallBrightness}%)`
+            );
+
             // if there is no stroke the walls look tranparent as they are only 1 pixel wide
-            this.p.stroke(0, wallHeight, 100);
+            this.p.stroke(wallColour);
+            this.p.fill(wallColour);
             this.p.rect(column, this.height / 2, 1, wallHeight);
 
             this.p.pop();
