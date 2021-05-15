@@ -58,13 +58,10 @@ class Player {
 
         this.p.stroke(255);
         this.p.fill(150);
-        this.p.circle(pixelPos.x, pixelPos.y, 50);
+        this.p.translate(pixelPos.x, pixelPos.y);
+        this.p.rotate(-(this.heading - this.p.HALF_PI));
 
-        const headingVec = p5.Vector.fromAngle(-this.heading).mult(100);
-        const headingEnd = p5.Vector.add(pixelPos, headingVec);
-
-        this.p.stroke(255, 0, 0);
-        this.p.line(pixelPos.x, pixelPos.y, headingEnd.x, headingEnd.y);
+        this.p.triangle(-10, 10, 0, -10, 10, 10);
 
         this.p.pop();
     }
