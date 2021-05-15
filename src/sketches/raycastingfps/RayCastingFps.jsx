@@ -40,6 +40,7 @@ class RayCastingFps extends React.Component {
 
             const cnv = p.createCanvas(world.getWidth() * 2, world.getHeight());
             cnv.style("display", "block");
+            cnv.parent("canvas");
         };
 
         p.draw = () => {
@@ -51,8 +52,6 @@ class RayCastingFps extends React.Component {
 
             p.translate(world.getWidth(), 0);
             projectionPlane.showProjection(collisions, world);
-
-            // p.noLoop();
         };
 
         const handleMovement = (player) => {
@@ -86,7 +85,16 @@ class RayCastingFps extends React.Component {
     }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <div id='canvas' />
+                <p>Controls:</p>
+                <ul>
+                    <li>move with w, a, s, d</li>
+                    <li>turn with left and right arrow keys</li>
+                </ul>
+            </div>
+        );
     }
 }
 export default RayCastingFps;

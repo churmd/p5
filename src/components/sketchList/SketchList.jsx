@@ -13,10 +13,17 @@ import ChaosGameImg from "../sketchImages/ChaosGameImg";
 import HexesImg from "../sketchImages/HexesImg";
 import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
 import CuneiformClockImg from "../sketchImages/CuneiformClockImg";
+import RayCastFpsImg from "../sketchImages/RayCastFpsImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
+            <SketchTile
+                title='Ray Casting'
+                desc='A ray casting engine from games of the 90s'
+                image={<RayCastFpsImg loading='auto' />}
+                routerPath={routePaths.rayCastingFps}
+            />
             <SketchTile
                 title='Cuneiform Number Collection'
                 desc='A simple 24 hour clock and counter, displayed in Babylonian cuneiform numerals'
@@ -27,7 +34,7 @@ function SketchList(props) {
             <SketchTile
                 title='Maze Generator'
                 desc='Repeatedly generates a solvable maze.'
-                image={<MazeGeneratorImg loading='auto' />}
+                image={<MazeGeneratorImg />}
                 routerPath={routePaths.mazeGenerator}
                 isMobileFriendly
             />
