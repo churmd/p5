@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/sketches/lissajousCurveTable/LissajousCurveTable.scss"],"names":[],"mappings":"AAAA,uBACC,qBAAiC","file":"9.c898594e.chunk.css","sourcesContent":[".lissajous-curve-table {\n\tbackground-color: rgb(51, 51, 51);\n}\n"]}
