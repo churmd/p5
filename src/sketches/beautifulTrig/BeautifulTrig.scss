@@ -1,8 +1,11 @@
 .beautiful-trig-sketch {
-	#controls {
-		button {
-			margin: auto;
-			margin-top: 10px;
-		}
-	}
+    #controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            margin-top: 10px;
+        }
+    }
 }

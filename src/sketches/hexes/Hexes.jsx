@@ -63,11 +63,13 @@ class Hexes extends React.Component {
             patternRadioGroup = p.createRadio();
             patternRadioGroup.option(randomPattern);
             patternRadioGroup.option(centerOutPattern);
-            patternRadioGroup.parent("radioOptions");
+            patternRadioGroup.parent("controls");
+            patternRadioGroup.style("margin", "auto");
+            patternRadioGroup.style("text-align", "center");
 
             patternRadioGroup.selected(randomPattern);
 
-            currentPattern = patternRadioGroup.selected();
+            currentPattern = patternRadioGroup.value();
         };
 
         p.setup = () => {
@@ -84,8 +86,8 @@ class Hexes extends React.Component {
         p.draw = () => {
             p.background(51);
 
-            if (patternRadioGroup.selected() !== currentPattern) {
-                currentPattern = patternRadioGroup.selected();
+            if (patternRadioGroup.value() !== currentPattern) {
+                currentPattern = patternRadioGroup.value();
                 hexGrid = createHexGrid();
             }
 
@@ -107,9 +109,7 @@ class Hexes extends React.Component {
         return (
             <div ref={this.myRef}>
                 <FullscreenElem id='canvas' />
-                <div id='controls'>
-                    <div id='radioOptions'></div>
-                </div>
+                <div id='controls'></div>
             </div>
         );
     }
