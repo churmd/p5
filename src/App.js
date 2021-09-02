@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
 import * as routePaths from "./constants/RoutePaths";
 import Notfound from "./NotFound";
+import BezierCurve from "./sketches/bezierCurve/BezierCurve";
 import RayCastingFps from "./sketches/raycastingfps/RayCastingFps";
 
 const ModuloTimesTable = lazy(() =>
@@ -36,6 +37,11 @@ const routing = (
         <Suspense fallback={<div>Page is Loading...</div>}>
             <Switch>
                 <Route exact path={routePaths.home} component={Home} />
+                <Route
+                    exact
+                    path={routePaths.bezierCurve}
+                    component={BezierCurve}
+                />
                 <Route
                     exact
                     path={routePaths.rayCastingFps}

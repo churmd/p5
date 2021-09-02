@@ -19,6 +19,12 @@ function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
+                title='Bezier Curve'
+                desc='Bezier Curve'
+                image={<RayCastFpsImg loading='auto' />}
+                routerPath={routePaths.bezierCurve}
+            />
+            <SketchTile
                 title='Ray Casting'
                 desc='A ray casting engine from games of the 90s'
                 image={<RayCastFpsImg loading='auto' />}
@@ -27,7 +33,7 @@ function SketchList(props) {
             <SketchTile
                 title='Cuneiform Number Collection'
                 desc='A simple 24 hour clock and counter, displayed in Babylonian cuneiform numerals'
-                image={<CuneiformClockImg loading='auto' />}
+                image={<CuneiformClockImg />}
                 routerPath={routePaths.cuneiformNumberConverter}
                 isMobileFriendly
             />
