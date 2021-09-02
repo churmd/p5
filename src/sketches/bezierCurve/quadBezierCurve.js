@@ -9,23 +9,31 @@ class QuadBezierCurve {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
-        this.iterations = 20;
+        this.iterations = 25;
     }
 
     show() {
         const curve = this.createCurve();
 
+        this.showLines(curve);
+        this.showCurveDots(curve);
+
+        this.pointA.show();
+        this.pointB.show();
+        this.pointC.show();
+
+        this.p.pop();
+    }
+
+    showLines(curve) {
         this.p.push();
 
-        this.p.noFill();
-        this.p.stroke(255);
-        this.p.strokeWeight(5);
+        const colourRange = 360;
+        this.p.colorMode(this.p.HSL, colourRange);
+        this.p.strokeWeight(2);
 
         curve.forEach((curvePoint, index) => {
-            this.p.push();
-
-            this.p.colorMode(this.p.HSL, 360);
-            const hue = (index / curve.length) * 360;
+            const hue = (index / curve.length) * colourRange;
             const colour = this.p.color(hue, 250, 200);
             this.p.stroke(colour);
 
@@ -35,19 +43,23 @@ class QuadBezierCurve {
                 curvePoint.bcLerp.x,
                 curvePoint.bcLerp.y
             );
+        });
 
-            this.p.pop();
+        this.p.pop();
+    }
 
+    showCurveDots(curve) {
+        this.p.push();
+
+        this.p.stroke(255);
+
+        curve.forEach((curvePoint) => {
             this.p.circle(
                 curvePoint.combinedLerp.x,
                 curvePoint.combinedLerp.y,
                 10
             );
         });
-
-        this.pointA.show();
-        this.pointB.show();
-        this.pointC.show();
 
         this.p.pop();
     }
