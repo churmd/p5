@@ -2,6 +2,7 @@ import React from "react";
 import p5 from "p5";
 import Point from "./Point";
 import QuadBezierCurve from "./quadBezierCurve";
+import { NotListedLocationSharp } from "@material-ui/icons";
 
 class BezierCurve extends React.Component {
     constructor(props) {
@@ -38,6 +39,8 @@ class BezierCurve extends React.Component {
             }
 
             pB.y += direction;
+
+            // p.noLoop();
         };
 
         p.windowResized = () => {

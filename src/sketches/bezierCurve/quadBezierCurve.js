@@ -1,6 +1,7 @@
 import p5 from "p5";
 import { instanceOf } from "prop-types";
 import Point from "./Point";
+import QuadLerpPoints from "./QuadLerpPoints";
 
 class QuadBezierCurve {
     constructor(p5Instance, pointA, pointB, pointC) {
@@ -8,12 +9,11 @@ class QuadBezierCurve {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
-        this.iterations = 10;
-        this.curve = this.createCurve();
+        this.iterations = 20;
     }
 
     show() {
-        this.curve = this.createCurve();
+        const curve = this.createCurve();
 
         this.p.push();
 
@@ -21,8 +21,28 @@ class QuadBezierCurve {
         this.p.stroke(255);
         this.p.strokeWeight(5);
 
-        this.curve.forEach((curvePoint) => {
-            this.p.circle(curvePoint.x, curvePoint.y, 10);
+        curve.forEach((curvePoint, index) => {
+            this.p.push();
+
+            this.p.colorMode(this.p.HSL, 360);
+            const hue = (index / curve.length) * 360;
+            const colour = this.p.color(hue, 250, 200);
+            this.p.stroke(colour);
+
+            this.p.line(
+                curvePoint.abLerp.x,
+                curvePoint.abLerp.y,
+                curvePoint.bcLerp.x,
+                curvePoint.bcLerp.y
+            );
+
+            this.p.pop();
+
+            this.p.circle(
+                curvePoint.combinedLerp.x,
+                curvePoint.combinedLerp.y,
+                10
+            );
         });
 
         this.pointA.show();
@@ -36,12 +56,15 @@ class QuadBezierCurve {
         let curve = [];
 
         const curveIncrements = 1 / this.iterations;
-        for (let i = 0; i < this.iterations; i++) {
+        for (let i = 0; i <= this.iterations; i++) {
             const curvePerc = i * curveIncrements;
-            const l1 = this.lerpPoint(this.pointA, this.pointB, curvePerc);
-            const l2 = this.lerpPoint(this.pointB, this.pointC, curvePerc);
-            const curvePoint = p5.Vector.lerp(l1, l2, curvePerc);
-            curve[i] = curvePoint;
+            const quadLerpPoints = new QuadLerpPoints(
+                this.pointA.getPos(),
+                this.pointB.getPos(),
+                this.pointC.getPos(),
+                curvePerc
+            );
+            curve[i] = quadLerpPoints;
         }
 
         return curve;
