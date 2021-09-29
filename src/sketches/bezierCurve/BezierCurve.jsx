@@ -57,6 +57,7 @@ class BezierCurve extends React.Component {
             }
 
             pC.y += directionC;
+            p.noLoop();
         };
 
         p.windowResized = () => {

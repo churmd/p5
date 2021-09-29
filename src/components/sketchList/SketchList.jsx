@@ -14,14 +14,15 @@ import HexesImg from "../sketchImages/HexesImg";
 import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
 import CuneiformClockImg from "../sketchImages/CuneiformClockImg";
 import RayCastFpsImg from "../sketchImages/RayCastFpsImg";
+import BezierCurveImg from "../sketchImages/BezierCurveImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
                 title='Bezier Curve'
-                desc='Bezier Curve'
-                image={<RayCastFpsImg loading='auto' />}
+                desc='A smooth curve draw between a series of points'
+                image={<BezierCurveImg loading='auto' />}
                 routerPath={routePaths.bezierCurve}
             />
             <SketchTile
