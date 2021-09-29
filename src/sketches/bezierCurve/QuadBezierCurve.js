@@ -12,29 +12,24 @@ class QuadBezierCurve {
         this.iterations = 25;
     }
 
-    show() {
+    show(showLines = true, showCurveDots = true, opactity = 1) {
         const curve = this.createCurve();
 
-        this.showLines(curve);
-        this.showCurveDots(curve);
-
-        this.pointA.show();
-        this.pointB.show();
-        this.pointC.show();
-
-        this.p.pop();
+        if (showCurveDots) this.showCurveDots(curve, opactity);
+        if (showLines) this.showLines(curve, opactity);
     }
 
-    showLines(curve) {
+    showLines(curve, opactity) {
         this.p.push();
 
         const colourRange = 360;
+        const alpha = colourRange * opactity;
         this.p.colorMode(this.p.HSL, colourRange);
         this.p.strokeWeight(2);
 
         curve.forEach((curvePoint, index) => {
             const hue = (index / curve.length) * colourRange;
-            const colour = this.p.color(hue, 250, 200);
+            const colour = this.p.color(hue, 250, 200, alpha);
             this.p.stroke(colour);
 
             this.p.line(
@@ -48,10 +43,10 @@ class QuadBezierCurve {
         this.p.pop();
     }
 
-    showCurveDots(curve) {
+    showCurveDots(curve, opactity) {
         this.p.push();
 
-        this.p.stroke(255);
+        this.p.stroke(255, opactity);
 
         curve.forEach((curvePoint) => {
             this.p.circle(
@@ -64,6 +59,9 @@ class QuadBezierCurve {
         this.p.pop();
     }
 
+    /***
+     * @returns {[QuadLerpPoints]}
+     */
     createCurve() {
         let curve = [];
 
@@ -80,10 +78,6 @@ class QuadBezierCurve {
         }
 
         return curve;
-    }
-
-    lerpPoint(p1, p2, perc) {
-        return p5.Vector.lerp(p1.getPos(), p2.getPos(), perc);
     }
 }
 

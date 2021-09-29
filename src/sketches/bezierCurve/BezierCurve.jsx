@@ -1,8 +1,8 @@
 import React from "react";
 import p5 from "p5";
 import Point from "./Point";
-import QuadBezierCurve from "./quadBezierCurve";
-import { NotListedLocationSharp } from "@material-ui/icons";
+import QubeBezierCurve from "./QubeBezierCurve";
+import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
 class BezierCurve extends React.Component {
     constructor(props) {
@@ -11,36 +11,52 @@ class BezierCurve extends React.Component {
     }
 
     sketch = (p) => {
-        let pA, pB, pC;
+        let pA, pB, pC, pD;
         let curve;
-        let direction = 10;
+        let directionB = 10;
+        let directionC = 10;
 
         p.setup = () => {
             const cnv = p.createCanvas(getCanvasWidth(), getCanvasHeight());
+            cnv.parent("canvas");
             cnv.style("display", "block");
 
             pA = new Point(p, 0, getCanvasHeight() / 2, 50);
-            pB = new Point(p, getCanvasWidth() / 2, getCanvasHeight(), 50);
-            pC = new Point(p, getCanvasWidth(), getCanvasHeight() / 2, 50);
-            curve = new QuadBezierCurve(p, pA, pB, pC);
+            pB = new Point(p, getCanvasWidth() / 3, getCanvasHeight(), 50);
+            pC = new Point(p, (getCanvasWidth() * 2) / 3, 0, 50);
+            pD = new Point(p, getCanvasWidth(), getCanvasHeight() / 2, 50);
+            curve = new QubeBezierCurve(p, pA, pB, pC, pD);
         };
 
         p.draw = () => {
             p.background(51);
 
+            pA.show();
+            pB.show();
+            pC.show();
+            pD.show();
+
             curve.show();
 
             if (pB.y > getCanvasHeight()) {
-                direction = -10;
+                directionB = -10;
             }
 
             if (pB.y < 0) {
-                direction = 10;
+                directionB = 10;
             }
 
-            pB.y += direction;
+            pB.y += directionB;
 
-            // p.noLoop();
+            if (pC.y > getCanvasHeight()) {
+                directionC = -10;
+            }
+
+            if (pC.y < 0) {
+                directionC = 10;
+            }
+
+            pC.y += directionC;
         };
 
         p.windowResized = () => {
@@ -61,7 +77,11 @@ class BezierCurve extends React.Component {
     }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <FullscreenElem id='canvas' />
+            </div>
+        );
     }
 }
 export default BezierCurve;

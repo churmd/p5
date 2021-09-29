@@ -10,9 +10,9 @@ class QuadLerpPoints {
 }
 
 QuadLerpPoints.proptypes = {
-    x: instanceOf(p5.Vector),
-    y: instanceOf(p5.Vector),
-    r: instanceOf(p5.Vector),
+    a: instanceOf(p5.Vector),
+    b: instanceOf(p5.Vector),
+    c: instanceOf(p5.Vector),
 };
 
 export default QuadLerpPoints;
