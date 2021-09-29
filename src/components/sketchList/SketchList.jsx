@@ -14,10 +14,17 @@ import HexesImg from "../sketchImages/HexesImg";
 import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
 import CuneiformClockImg from "../sketchImages/CuneiformClockImg";
 import RayCastFpsImg from "../sketchImages/RayCastFpsImg";
+import BezierCurveImg from "../sketchImages/BezierCurveImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
+            <SketchTile
+                title='Bezier Curve'
+                desc='A smooth curve draw between a series of points'
+                image={<BezierCurveImg loading='auto' />}
+                routerPath={routePaths.bezierCurve}
+            />
             <SketchTile
                 title='Ray Casting'
                 desc='A ray casting engine from games of the 90s'
@@ -27,7 +34,7 @@ function SketchList(props) {
             <SketchTile
                 title='Cuneiform Number Collection'
                 desc='A simple 24 hour clock and counter, displayed in Babylonian cuneiform numerals'
-                image={<CuneiformClockImg loading='auto' />}
+                image={<CuneiformClockImg />}
                 routerPath={routePaths.cuneiformNumberConverter}
                 isMobileFriendly
             />

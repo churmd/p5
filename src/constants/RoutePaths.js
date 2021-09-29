@@ -1,5 +1,5 @@
 export const home = "/";
-
+export const bezierCurve = "/bezierCurve";
 export const chaosGame = "/chaosGame";
 export const cuneiformNumberConverter = "/cuneiformNumberConverter";
 export const beautifulTrig = "/beautifulTrigonometry";
