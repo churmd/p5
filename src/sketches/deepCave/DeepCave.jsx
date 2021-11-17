@@ -1,5 +1,6 @@
 import React from "react";
 import p5 from "p5";
+import Layer from "./Layer";
 
 class DeepCave extends React.Component {
     constructor(props) {
@@ -8,18 +9,27 @@ class DeepCave extends React.Component {
     }
 
     sketch = (p) => {
-        let x = 100;
-        let y = 100;
+        let l1, l2, l3;
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.style("display", "block");
+
+            l1 = new Layer(p, 0.8, 0.1);
+            l2 = new Layer(p, 0.6, 0.1);
+            l3 = new Layer(p, 0.4, 0.1);
         };
 
         p.draw = () => {
             p.background(0);
-            p.fill(255);
-            p.rect(x, y, 50, 50);
+
+            l1.show(window.innerWidth, window.innerHeight, 150);
+            l2.show(window.innerWidth, window.innerHeight, 200);
+            l3.show(window.innerWidth, window.innerHeight, 255);
+
+            l1.scrollUp(window.innerHeight, 0.001);
+            l2.scrollUp(window.innerHeight, 0.002);
+            l3.scrollUp(window.innerHeight, 0.003);
         };
 
         p.windowResized = () => {
