@@ -12,3 +12,4 @@ export const mazeGenerator = "/mazeGenerator";
 export const moduloTimesTable = "/moduloTimesTable";
 export const rayCastingFps = "/RayCastingFps";
 export const snowflakeGenerator = "/snowflakeGenerator";
+export const deepCave = "/deepcave";

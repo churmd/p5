@@ -3,6 +3,7 @@ import { Route, HashRouter as Router, Switch } from "react-router-dom";
 import * as routePaths from "./constants/RoutePaths";
 import Notfound from "./NotFound";
 import BezierCurve from "./sketches/bezierCurve/BezierCurve";
+import DeepCave from "./sketches/deepCave/DeepCave";
 import RayCastingFps from "./sketches/raycastingfps/RayCastingFps";
 
 const ModuloTimesTable = lazy(() =>
@@ -37,6 +38,7 @@ const routing = (
         <Suspense fallback={<div>Page is Loading...</div>}>
             <Switch>
                 <Route exact path={routePaths.home} component={Home} />
+                <Route exact path={routePaths.deepCave} component={DeepCave} />
                 <Route
                     exact
                     path={routePaths.bezierCurve}
