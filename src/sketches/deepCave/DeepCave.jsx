@@ -1,6 +1,7 @@
 import React from "react";
 import p5 from "p5";
 import Layer from "./Layer";
+import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
 class DeepCave extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class DeepCave extends React.Component {
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+            cnv.parent("canvas");
             cnv.style("display", "block");
 
             const hiddenPercStep = 1 / numLayers;
@@ -62,7 +64,11 @@ class DeepCave extends React.Component {
     }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <FullscreenElem id='canvas' />
+            </div>
+        );
     }
 }
 export default DeepCave;
