@@ -9,27 +9,40 @@ class DeepCave extends React.Component {
     }
 
     sketch = (p) => {
-        let l1, l2, l3;
+        const numLayers = 10;
+        let layers = [];
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.style("display", "block");
 
-            l1 = new Layer(p, 0.8, 0.1);
-            l2 = new Layer(p, 0.6, 0.1);
-            l3 = new Layer(p, 0.4, 0.1);
+            for (let i = 0; i < numLayers; i++) {
+                const hiddenPerc = i * 0.1;
+                const l = new Layer(p, hiddenPerc, 0.1);
+                layers.unshift(l);
+            }
         };
 
         p.draw = () => {
-            p.background(0);
+            const hue = 260;
+            const sat = 50;
+            const lightMin = 15;
+            const lightMax = 75;
+            const lightStep = (lightMax - lightMin) / numLayers;
+            const lightBackground = 5;
 
-            l1.show(window.innerWidth, window.innerHeight, 150);
-            l2.show(window.innerWidth, window.innerHeight, 200);
-            l3.show(window.innerWidth, window.innerHeight, 255);
+            p.colorMode(p.HSL, 360, 100, 100, 1);
 
-            l1.scrollUp(window.innerHeight, 0.001);
-            l2.scrollUp(window.innerHeight, 0.002);
-            l3.scrollUp(window.innerHeight, 0.003);
+            p.background(p.color(hue, sat, lightBackground));
+
+            layers.forEach((layer, index) => {
+                const lightness = lightMin + index * lightStep;
+                const colour = p.color(hue, sat, lightness);
+                layer.show(window.innerWidth, window.innerHeight, colour);
+
+                const speed = 0.0001 * (index + 1);
+                layer.scrollUp(window.innerHeight, speed);
+            });
         };
 
         p.windowResized = () => {

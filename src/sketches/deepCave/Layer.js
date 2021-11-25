@@ -5,7 +5,7 @@ class Layer {
     /**
      * Creates a depth layer with 'walls' on the left and right of the canvas centre
      * @param {p5} p5Instance Instance of a p5 sketch
-     * @param {Number} coveredPerc Percentage of the canvas to hide, must be 0 < visiblePerc <= 1
+     * @param {Number} coveredPerc Percentage of the canvas to hide, must be 0 < coveredPerc <= 1
      * @param {Number} delta Percentage of the canvas the visible section can vary by
      */
     constructor(p5Instance, coveredPerc, delta) {
@@ -25,6 +25,7 @@ class Layer {
 
     show(canvasWidth, canvasHeight, colour) {
         this.p.push();
+        this.p.noStroke();
         this.p.fill(colour);
 
         const sectionHeight = canvasHeight / this.resolution;
@@ -58,7 +59,7 @@ class Layer {
 
 Layer.prototypes = {
     p5Instance: instanceOf(p5),
-    visiblePerc: number,
+    coveredPerc: number,
     delta: number,
 };
 
