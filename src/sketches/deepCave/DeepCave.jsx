@@ -9,16 +9,23 @@ class DeepCave extends React.Component {
     }
 
     sketch = (p) => {
-        const numLayers = 10;
+        const numLayers = 20;
+        const layerResolution = 20;
         let layers = [];
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.style("display", "block");
 
+            const hiddenPercStep = 1 / numLayers;
             for (let i = 0; i < numLayers; i++) {
-                const hiddenPerc = i * 0.1;
-                const l = new Layer(p, hiddenPerc, 0.1);
+                const hiddenPerc = i * hiddenPercStep;
+                const l = new Layer(
+                    p,
+                    hiddenPerc,
+                    layerResolution - i / 2,
+                    hiddenPercStep
+                );
                 layers.unshift(l);
             }
         };
@@ -37,7 +44,7 @@ class DeepCave extends React.Component {
 
             layers.forEach((layer, index) => {
                 const lightness = lightMin + index * lightStep;
-                const colour = p.color(hue, sat, lightness);
+                const colour = p.color(hue, sat, lightness, 1);
                 layer.show(window.innerWidth, window.innerHeight, colour);
 
                 const speed = 0.0001 * (index + 1);
