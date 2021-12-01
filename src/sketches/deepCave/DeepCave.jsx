@@ -2,6 +2,7 @@ import React from "react";
 import p5 from "p5";
 import Layer from "./Layer";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
+import "./DeepCave.scss";
 
 // TODO Smooth layer edges
 // TODO shift from going to dark to going to light
@@ -14,14 +15,17 @@ class DeepCave extends React.Component {
     }
 
     sketch = (p) => {
-        const numLayers = 10;
+        const numLayers = 20;
         const layerResolution = 20;
         let layers = [];
+        let darkToLight = true;
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.parent("canvas");
             cnv.style("display", "block");
+
+            createControls();
 
             const hiddenPercStep = 1 / numLayers;
             for (let i = 0; i < numLayers; i++) {
@@ -36,21 +40,39 @@ class DeepCave extends React.Component {
             }
         };
 
+        const createControls = () => {
+            const darkToLightButton = p.createButton("Dark to light");
+            darkToLightButton.parent("controls");
+
+            darkToLightButton.mousePressed(() => {
+                darkToLight = !darkToLight;
+            });
+        };
+
         p.draw = () => {
             const hue = 260;
             const sat = 50;
             const lightMin = 15;
             const lightMax = 75;
             const lightStep = (lightMax - lightMin) / numLayers;
-            const lightBackground = 5;
+            let lightBackground = 5;
+            if (!darkToLight) {
+                lightBackground = 80;
+            }
 
             p.colorMode(p.HSL, 360, 100, 100, 1);
 
             p.background(p.color(hue, sat, lightBackground));
 
             layers.forEach((layer, index) => {
-                const lightness = lightMin + index * lightStep;
+                let lightDelta = index;
+                if (!darkToLight) {
+                    lightDelta = layers.length - 1 - index;
+                }
+
+                const lightness = lightMin + lightDelta * lightStep;
                 const colour = p.color(hue, sat, lightness, 1);
+
                 layer.show(window.innerWidth, window.innerHeight, colour);
 
                 const speed = 0.0001 * (index + 1);
@@ -71,6 +93,7 @@ class DeepCave extends React.Component {
         return (
             <div ref={this.myRef}>
                 <FullscreenElem id='canvas' />
+                <div id='controls' />
             </div>
         );
     }
