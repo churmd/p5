@@ -41,11 +41,17 @@ class DeepCave extends React.Component {
         };
 
         const createControls = () => {
-            const darkToLightButton = p.createButton("Dark to light");
+            const darkToLightButton = p.createButton("Towards light");
             darkToLightButton.parent("controls");
 
             darkToLightButton.mousePressed(() => {
-                darkToLight = !darkToLight;
+                if (darkToLight) {
+                    darkToLightButton.html("In to darkness");
+                    darkToLight = false;
+                } else {
+                    darkToLightButton.html("Towards light");
+                    darkToLight = true;
+                }
             });
         };
 
