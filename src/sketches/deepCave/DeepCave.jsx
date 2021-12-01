@@ -3,6 +3,10 @@ import p5 from "p5";
 import Layer from "./Layer";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
+// TODO Smooth layer edges
+// TODO shift from going to dark to going to light
+// TODO add bridges
+
 class DeepCave extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +14,7 @@ class DeepCave extends React.Component {
     }
 
     sketch = (p) => {
-        const numLayers = 20;
+        const numLayers = 10;
         const layerResolution = 20;
         let layers = [];
 
@@ -26,7 +30,7 @@ class DeepCave extends React.Component {
                     p,
                     hiddenPerc,
                     layerResolution - i / 2,
-                    hiddenPercStep
+                    hiddenPercStep / 2
                 );
                 layers.unshift(l);
             }

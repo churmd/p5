@@ -1,6 +1,18 @@
 import p5 from "p5";
 import { instanceOf, number } from "prop-types";
 
+class Section {
+    constructor(left, right) {
+        this.left = left;
+        this.right = right;
+    }
+}
+
+Section.prototypes = {
+    left: number,
+    right: number,
+};
+
 class Layer {
     /**
      * Creates a depth layer with 'walls' on the left and right of the canvas centre
@@ -19,8 +31,7 @@ class Layer {
         this.scrolled = 0;
 
         for (let i = 0; i < this.numSections; i++) {
-            const offset = this.p.random(this.delta);
-            this.sections.push(this.coveredPerc + offset);
+            this.createSection();
         }
     }
 
@@ -33,11 +44,12 @@ class Layer {
 
         this.sections.forEach((section, index) => {
             const y = index * sectionHeight - this.scrolled;
-            const wallLength = (canvasWidth * section) / 2;
-            const rightX = canvasWidth - wallLength;
+            const leftWallLen = canvasWidth * section.left;
+            const rightWallLen = canvasWidth * section.right;
+            const rightX = canvasWidth - rightWallLen;
 
-            this.p.rect(0, y, wallLength, sectionHeight);
-            this.p.rect(rightX, y, wallLength, sectionHeight);
+            this.p.rect(0, y, leftWallLen, sectionHeight);
+            this.p.rect(rightX, y, rightWallLen, sectionHeight);
         });
 
         this.p.pop();
@@ -52,9 +64,19 @@ class Layer {
 
             this.sections.shift();
 
-            const offset = this.p.random(this.delta);
-            this.sections.push(this.coveredPerc + offset);
+            this.createSection();
         }
+    }
+
+    createSection() {
+        const coveredPercPerSide = this.coveredPerc / 2;
+        const offsetLeft = this.p.random(this.delta);
+        const offsetRight = this.p.random(this.delta);
+        const section = new Section(
+            coveredPercPerSide + offsetLeft,
+            coveredPercPerSide + offsetRight
+        );
+        this.sections.push(section);
     }
 }
 
