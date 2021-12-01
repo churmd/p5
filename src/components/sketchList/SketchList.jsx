@@ -15,20 +15,29 @@ import MazeGeneratorImg from "../sketchImages/MazeGeneratorImg";
 import CuneiformClockImg from "../sketchImages/CuneiformClockImg";
 import RayCastFpsImg from "../sketchImages/RayCastFpsImg";
 import BezierCurveImg from "../sketchImages/BezierCurveImg";
+import DescentImg from "../sketchImages/DescentImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
+                title='Descent'
+                desc='Mimics moving downwards in a long tunnel'
+                image={<DescentImg loading='auto' />}
+                routerPath={routePaths.descent}
+                isMobileFriendly
+            />
+            <SketchTile
                 title='Bezier Curve'
-                desc='A smooth curve draw between a series of points'
+                desc='A smooth curve drawn between a series of points'
                 image={<BezierCurveImg loading='auto' />}
                 routerPath={routePaths.bezierCurve}
+                isMobileFriendly
             />
             <SketchTile
                 title='Ray Casting'
                 desc='A ray casting engine from games of the 90s'
-                image={<RayCastFpsImg loading='auto' />}
+                image={<RayCastFpsImg />}
                 routerPath={routePaths.rayCastingFps}
             />
             <SketchTile
