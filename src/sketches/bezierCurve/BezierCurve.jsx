@@ -21,6 +21,10 @@ class BezierCurve extends React.Component {
             cnv.parent("canvas");
             cnv.style("display", "block");
 
+            createCurve();
+        };
+
+        const createCurve = () => {
             pA = new Point(p, 0, getCanvasHeight() / 2, 50);
             pB = new Point(p, getCanvasWidth() / 3, getCanvasHeight(), 50);
             pC = new Point(p, (getCanvasWidth() * 2) / 3, 0, 50);
@@ -61,6 +65,7 @@ class BezierCurve extends React.Component {
 
         p.windowResized = () => {
             p.resizeCanvas(getCanvasWidth(), getCanvasHeight());
+            createCurve();
         };
 
         const getCanvasHeight = () => {

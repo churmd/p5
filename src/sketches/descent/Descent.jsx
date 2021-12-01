@@ -2,13 +2,13 @@ import React from "react";
 import p5 from "p5";
 import Layer from "./Layer";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
-import "./DeepCave.scss";
+import "./Descent.scss";
 
 // TODO Smooth layer edges
 // TODO shift from going to dark to going to light
 // TODO add bridges
 
-class DeepCave extends React.Component {
+class Descent extends React.Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
@@ -104,4 +104,4 @@ class DeepCave extends React.Component {
         );
     }
 }
-export default DeepCave;
+export default Descent;
