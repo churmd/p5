@@ -5,7 +5,6 @@ import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 import "./Descent.scss";
 
 // TODO Smooth layer edges
-// TODO shift from going to dark to going to light
 // TODO add bridges
 
 class Descent extends React.Component {
