@@ -1,7 +1,7 @@
 import React from "react";
 import p5 from "p5";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
-import Sun from "./Sun";
+import SunAndMoon from "./Sun";
 
 class Winter2021 extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class Winter2021 extends React.Component {
 
             p.angleMode(p.RADIANS);
 
-            sun = new Sun(p);
+            sun = new SunAndMoon(p);
         };
 
         p.draw = () => {
