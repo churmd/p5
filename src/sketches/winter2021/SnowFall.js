@@ -3,19 +3,19 @@ import PropTypes from "prop-types";
 import SceneElement from "./SceneElement";
 
 class Snowflake extends SceneElement {
-    constructor(p5Instance, x, y, velocity) {
+    constructor(p5Instance, x, y, velocity, drift) {
         super(p5Instance);
         this.x = x;
         this.y = y;
         this.velocity = velocity;
-        this.drift = this.p.random(0.001, 0.002);
-
-        if (this.p.random() > 0.5) {
-            this.drift *= -1;
-        }
+        this.drift = drift;
     }
 
     update() {
+        if (this.p.random() > 0.99) {
+            this.drift *= -1;
+        }
+
         this.y += this.velocity;
         this.x += this.drift;
     }
@@ -45,8 +45,9 @@ class SnowFall extends SceneElement {
     createSnowflake() {
         const x = this.p.random();
         const y = this.p.random();
-        const velocity = this.p.random(0.001, 0.01);
-        const snowflake = new Snowflake(this.p, x, y, velocity);
+        const velocity = this.p.random(0.005, 0.01);
+        const drift = this.p.random(0.0001, 0.001);
+        const snowflake = new Snowflake(this.p, x, y, velocity, drift);
         return snowflake;
     }
 
