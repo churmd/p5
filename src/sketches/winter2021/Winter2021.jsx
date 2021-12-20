@@ -1,7 +1,7 @@
 import React from "react";
 import p5 from "p5";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
-import SunAndMoon from "./Sun";
+import Scene from "./Scene";
 
 class Winter2021 extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class Winter2021 extends React.Component {
     }
 
     sketch = (p) => {
-        let sun;
+        let scene;
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
@@ -19,13 +19,13 @@ class Winter2021 extends React.Component {
 
             p.angleMode(p.RADIANS);
 
-            sun = new SunAndMoon(p);
+            scene = new Scene(p);
         };
 
         p.draw = () => {
             p.background(196, 237, 241);
-            sun.show(this.width(), this.height());
-            sun.update();
+            scene.show(this.width(), this.height());
+            scene.update();
         };
 
         p.windowResized = () => {

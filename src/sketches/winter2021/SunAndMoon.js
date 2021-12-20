@@ -1,9 +1,10 @@
 import p5 from "p5";
 import PropTypes from "prop-types";
+import SceneElement from "./SceneElement";
 
-class SunAndMoon {
+class SunAndMoon extends SceneElement {
     constructor(p5Instance) {
-        this.p = p5Instance;
+        super(p5Instance);
         this.yOffset = 0.9;
         this.rotation = 0;
     }
@@ -16,12 +17,15 @@ class SunAndMoon {
     }
 
     show(width, height) {
-        this.p.push();
-
+        this.dimming(width, height);
         this.showSunAndMoon(width, height);
+    }
 
+    dimming(width, height) {
         const distToNight = this.p.PI - this.p.abs(this.p.PI - this.rotation);
         const nightAlpha = this.p.map(distToNight, 0, this.p.PI, 0, 100);
+
+        this.p.push();
 
         this.p.noStroke();
         this.p.fill(0, 0, 0, nightAlpha);
@@ -42,7 +46,7 @@ class SunAndMoon {
         this.p.fill(247, 247, 123);
         this.p.circle(0, height * -this.yOffset, smallestDim / 20);
 
-        this.p.fill(255);
+        this.p.fill(242);
         this.p.circle(0, height * this.yOffset, smallestDim / 20);
 
         this.p.pop();
