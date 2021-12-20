@@ -36,6 +36,4 @@ export default class RandomHexGrid extends HexGrid {
 
         this.p.pop();
     }
-
-    __;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import p5 from "p5";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
+import Sun from "./Sun";
 
 class Winter2021 extends React.Component {
     constructor(props) {
@@ -9,15 +10,22 @@ class Winter2021 extends React.Component {
     }
 
     sketch = (p) => {
+        let sun;
+
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.parent("canvas");
             cnv.style("display", "block");
+
+            p.angleMode(p.RADIANS);
+
+            sun = new Sun(p);
         };
 
         p.draw = () => {
             p.background(196, 237, 241);
-            p.circle(this.halfWidth(), 100, 50);
+            sun.show(this.width(), this.height());
+            sun.update();
         };
 
         p.windowResized = () => {
