@@ -8,7 +8,7 @@ class Section {
     }
 }
 
-Section.prototypes = {
+Section.propTypes = {
     left: number,
     right: number,
 };
@@ -80,7 +80,7 @@ class Layer {
     }
 }
 
-Layer.prototypes = {
+Layer.propTypes = {
     p5Instance: instanceOf(p5),
     coveredPerc: number,
     resolution: number,

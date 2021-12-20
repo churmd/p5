@@ -3,7 +3,6 @@ import { Route, HashRouter as Router, Switch } from "react-router-dom";
 import * as routePaths from "./constants/RoutePaths";
 import Notfound from "./NotFound";
 import BezierCurve from "./sketches/bezierCurve/BezierCurve";
-import Descent from "./sketches/descent/Descent";
 import RayCastingFps from "./sketches/raycastingfps/RayCastingFps";
 
 const ModuloTimesTable = lazy(() =>
@@ -32,12 +31,19 @@ const Hexes = lazy(() => import("./sketches/hexes/Hexes"));
 const Cuneiform = lazy(() =>
     import("./sketches/cuneiformNumConverter/Cuneiform")
 );
+const Descent = lazy(() => import("./sketches/descent/Descent"));
+const Winter2021 = lazy(() => import("./sketches/winter2021/Winter2021"));
 
 const routing = (
     <Router>
         <Suspense fallback={<div>Page is Loading...</div>}>
             <Switch>
                 <Route exact path={routePaths.home} component={Home} />
+                <Route
+                    exact
+                    path={routePaths.winter2021}
+                    component={Winter2021}
+                />
                 <Route exact path={routePaths.descent} component={Descent} />
                 <Route
                     exact

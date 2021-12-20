@@ -2,16 +2,13 @@ import React from "react";
 import p5 from "p5";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
-class ExampleSketch extends React.Component {
+class Winter2021 extends React.Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
     }
 
     sketch = (p) => {
-        let x = 100;
-        let y = 100;
-
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.parent("canvas");
@@ -19,15 +16,30 @@ class ExampleSketch extends React.Component {
         };
 
         p.draw = () => {
-            p.background(0);
-            p.fill(255);
-            p.rect(x, y, 50, 50);
+            p.background(196, 237, 241);
+            p.circle(this.halfWidth(), 100, 50);
         };
 
         p.windowResized = () => {
             p.resizeCanvas(window.innerWidth, window.innerHeight);
         };
     };
+
+    width() {
+        return window.innerWidth;
+    }
+
+    height() {
+        return window.innerHeight;
+    }
+
+    halfWidth() {
+        return this.width() / 2;
+    }
+
+    halfHeight() {
+        return this.height() / 2;
+    }
 
     componentDidMount() {
         this.myP5 = new p5(this.sketch, this.myRef.current);
@@ -42,4 +54,4 @@ class ExampleSketch extends React.Component {
         );
     }
 }
-export default ExampleSketch;
+export default Winter2021;
