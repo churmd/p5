@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./SketchTile.scss";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MobileFriendly from "@material-ui/icons/MobileFriendly";
 
 function SketchTile(props) {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     function handleClick() {
-        history.push(props.routerPath);
+        navigate(props.routerPath);
     }
 
     return (

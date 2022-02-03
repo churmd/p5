@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Route, HashRouter as Router, Switch } from "react-router-dom";
+import { Route, HashRouter as Router, Routes } from "react-router-dom";
 import * as routePaths from "./constants/RoutePaths";
 import Notfound from "./NotFound";
 import BezierCurve from "./sketches/bezierCurve/BezierCurve";
@@ -36,72 +36,72 @@ const Cuneiform = lazy(() =>
 const routing = (
     <Router>
         <Suspense fallback={<div>Page is Loading...</div>}>
-            <Switch>
-                <Route exact path={routePaths.home} component={Home} />
-                <Route exact path={routePaths.descent} component={Descent} />
+            <Routes>
+                <Route exact path={routePaths.home} element={<Home />} />
+                <Route exact path={routePaths.descent} element={<Descent />} />
                 <Route
                     exact
                     path={routePaths.bezierCurve}
-                    component={BezierCurve}
+                    element={<BezierCurve />}
                 />
                 <Route
                     exact
                     path={routePaths.rayCastingFps}
-                    component={RayCastingFps}
+                    element={<RayCastingFps />}
                 />
                 <Route
                     exact
                     path={routePaths.cuneiformNumberConverter}
-                    component={Cuneiform}
+                    element={<Cuneiform />}
                 />
                 <Route
                     exact
                     path={routePaths.moduloTimesTable}
-                    component={ModuloTimesTable}
+                    element={<ModuloTimesTable />}
                 />
                 <Route
                     exact
                     path={routePaths.snowflakeGenerator}
-                    component={SnowflakeGenerator}
+                    element={<SnowflakeGenerator />}
                 />
                 <Route
                     exact
                     path={routePaths.flockingSimulation}
-                    component={FlockingSimulation}
+                    element={<FlockingSimulation />}
                 />
                 <Route
                     exact
                     path={routePaths.lissajousCurveTable}
-                    component={LissajousCurveTable}
+                    element={<LissajousCurveTable />}
                 />
                 <Route
                     exact
                     path={routePaths.matrixRain}
-                    component={MatrixRain}
+                    element={<MatrixRain />}
                 />
                 <Route
                     exact
                     path={routePaths.maurerRose}
-                    component={MaurerRose}
+                    element={<MaurerRose />}
                 />
                 <Route
                     exact
                     path={routePaths.mazeGenerator}
-                    component={MazeGenerator}
+                    element={<MazeGenerator />}
                 />
                 <Route
                     exact
                     path={routePaths.chaosGame}
-                    component={ChaosGame}
+                    element={<ChaosGame />}
                 />
                 <Route
                     exact
                     path={routePaths.beautifulTrig}
-                    component={BeautifulTrig}
+                    element={<BeautifulTrig />}
                 />
-                <Route exact path={routePaths.hexes} component={Hexes} />
-                <Route component={Notfound} />
-            </Switch>
+                <Route exact path={routePaths.hexes} element={<Hexes />} />
+                <Route path='*' element={<Notfound />} />
+            </Routes>
         </Suspense>
     </Router>
 );
