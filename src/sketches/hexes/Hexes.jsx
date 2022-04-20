@@ -105,6 +105,11 @@ class Hexes extends React.Component {
         this.myP5 = new p5(this.sketch, this.myRef.current);
     }
 
+    componentWillUnmount() {
+        document.getElementById("canvas").replaceChildren();
+        document.getElementById("controls").replaceChildren();
+    }
+
     render() {
         return (
             <div ref={this.myRef}>

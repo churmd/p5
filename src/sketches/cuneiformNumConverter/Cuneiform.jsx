@@ -28,10 +28,14 @@ class Cuneiform extends React.Component {
         this.setClockSketch();
     }
 
+    componentWillUnmount() {
+        document.getElementById("canvas").replaceChildren();
+    }
+
     render() {
         return (
             <div ref={this.myRef}>
-                <div id='p5_loading' class='loadingclass'>
+                <div id='p5_loading' className='loadingclass'>
                     Loading custom font ...
                 </div>
                 <FullscreenElem id='canvas' />

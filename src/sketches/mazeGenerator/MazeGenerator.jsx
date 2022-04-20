@@ -56,6 +56,10 @@ class MazeGeneratoe extends React.Component {
         this.myP5 = new p5(this.sketch, this.myRef.current);
     }
 
+    componentWillUnmount() {
+        document.getElementById("canvas").replaceChildren();
+    }
+
     render() {
         return (
             <div ref={this.myRef}>

@@ -21,6 +21,7 @@ class MaurerRose extends React.Component {
             cnvWidth = p.windowWidth;
             cnvHeight = p.windowHeight * 0.9;
             var cnv = p.createCanvas(cnvWidth, cnvHeight);
+            cnv.parent("canvas");
             cnv.style("display", "block");
             size = p.min(cnvWidth / 2, cnvHeight / 2) - 2;
 
@@ -92,13 +93,11 @@ class MaurerRose extends React.Component {
         };
 
         this.createControls = () => {
-            let controls = p.createDiv();
-
             let sliderDiv = p.createDiv();
             sliderDiv.style("width", "50%");
             sliderDiv.style("display", "inline-block");
             sliderDiv.style("text-align", "center");
-            sliderDiv.parent(controls);
+            sliderDiv.parent("controls");
 
             let nDiv = p.createDiv("N value");
             nDiv.parent(sliderDiv);
@@ -116,7 +115,7 @@ class MaurerRose extends React.Component {
             buttonDiv.style("width", "50%");
             buttonDiv.style("display", "inline-block");
             buttonDiv.style("text-align", "center");
-            buttonDiv.parent(controls);
+            buttonDiv.parent("controls");
 
             let pauseButton = p.createButton("Pause");
             pauseButton.parent(buttonDiv);
@@ -143,8 +142,18 @@ class MaurerRose extends React.Component {
         this.myP5 = new p5(this.sketch, this.myRef.current);
     }
 
+    componentWillUnmount() {
+        document.getElementById("canvas").replaceChildren();
+        document.getElementById("controls").replaceChildren();
+    }
+
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <div id='canvas'></div>
+                <div id='controls'></div>
+            </div>
+        );
     }
 }
 export default MaurerRose;

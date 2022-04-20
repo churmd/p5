@@ -16,6 +16,7 @@ class BeautifulTrig extends React.Component {
 
         p.setup = () => {
             const cnv = p.createCanvas(getCanvasWidth(), getCanvasHeight());
+            cnv.parent("canvas");
             cnv.style("display", "block");
 
             createControls();
@@ -211,10 +212,15 @@ class BeautifulTrig extends React.Component {
         this.myP5 = new p5(this.sketch, this.myRef.current);
     }
 
+    componentWillUnmount() {
+        document.getElementById("canvas").replaceChildren();
+        document.getElementById("controls").replaceChildren();
+    }
+
     render() {
         return (
-            <div className='beautiful-trig-sketch'>
-                <div ref={this.myRef}></div>
+            <div className='beautiful-trig-sketch' ref={this.myRef}>
+                <div id='canvas'></div>
                 <div id='controls'></div>
             </div>
         );
