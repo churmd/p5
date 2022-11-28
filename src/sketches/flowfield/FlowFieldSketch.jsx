@@ -17,14 +17,13 @@ class FlowFieldSketch extends React.Component {
             cnv.parent("canvas");
             cnv.style("display", "block");
 
-            flowField = new FlowField(p, 10, 10);
+            flowField = new FlowField(p, 20, 20);
         };
 
         p.draw = () => {
             p.background(0);
             flowField.show(window.innerWidth, window.innerHeight);
-
-            p.noLoop();
+            flowField.update();
         };
 
         p.windowResized = () => {

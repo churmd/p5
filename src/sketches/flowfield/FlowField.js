@@ -36,7 +36,6 @@ class FlowField {
                 const xPixel = x * cellWidth;
                 const yPixel = y * cellHeight;
 
-                console.log(`cell ${x} ${y}`);
                 const colour = this.grid[x][y] * 255;
                 this.p.fill(colour);
                 this.p.rect(xPixel, yPixel, cellWidth, cellHeight);
@@ -44,6 +43,16 @@ class FlowField {
         }
 
         this.p.pop();
+    }
+
+    update() {
+        this.time += 0.001;
+
+        for (let x = 0; x < this.width; x++) {
+            for (let y = 0; y < this.height; y++) {
+                this.grid[x][y] = this.p.noise(x, y, this.time);
+            }
+        }
     }
 }
 
