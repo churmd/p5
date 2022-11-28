@@ -15,7 +15,7 @@ const SnowflakeGenerator = lazy(() =>
 const FlockingSimulation = lazy(() =>
     import("./sketches/flockingSimulation/FlockingSimulation")
 );
-const FlowField = lazy(() => import("./sketches/flowfield/FlowField"));
+const FlowField = lazy(() => import("./sketches/flowfield/FlowFieldSketch"));
 const LissajousCurveTable = lazy(() =>
     import("./sketches/lissajousCurveTable/LissajousCurveTable")
 );

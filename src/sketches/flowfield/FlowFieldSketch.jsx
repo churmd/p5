@@ -1,25 +1,30 @@
 import React from "react";
 import p5 from "p5";
+import FlowField from "./FlowField";
+import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
-class FlowField extends React.Component {
+class FlowFieldSketch extends React.Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
     }
 
     sketch = (p) => {
-        let x = 100;
-        let y = 100;
+        let flowField;
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+            cnv.parent("canvas");
             cnv.style("display", "block");
+
+            flowField = new FlowField(p, 10, 10);
         };
 
         p.draw = () => {
             p.background(0);
-            p.fill(255);
-            p.rect(x, y, 50, 50);
+            flowField.show(window.innerWidth, window.innerHeight);
+
+            p.noLoop();
         };
 
         p.windowResized = () => {
@@ -31,11 +36,17 @@ class FlowField extends React.Component {
         this.myP5 = new p5(this.sketch, this.myRef.current);
     }
 
-    componentWillUnmount() {}
+    componentWillUnmount() {
+        document.getElementById("canvas").replaceChildren();
+    }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <FullscreenElem id='canvas' />
+            </div>
+        );
     }
 }
 
-export default FlowField;
+export default FlowFieldSketch;
