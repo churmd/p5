@@ -15,6 +15,7 @@ const SnowflakeGenerator = lazy(() =>
 const FlockingSimulation = lazy(() =>
     import("./sketches/flockingSimulation/FlockingSimulation")
 );
+const FlowField = lazy(() => import("./sketches/flowfield/FlowField"));
 const LissajousCurveTable = lazy(() =>
     import("./sketches/lissajousCurveTable/LissajousCurveTable")
 );
@@ -38,6 +39,11 @@ const routing = (
         <Suspense fallback={<div>Page is Loading...</div>}>
             <Routes>
                 <Route exact path={routePaths.home} element={<Home />} />
+                <Route
+                    exact
+                    path={routePaths.flowField}
+                    element={<FlowField />}
+                />
                 <Route exact path={routePaths.descent} element={<Descent />} />
                 <Route
                     exact

@@ -21,6 +21,13 @@ function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
+                title='Flow Field'
+                desc='Flow Field'
+                image={<DescentImg loading='auto' />}
+                routerPath={routePaths.flowField}
+                isMobileFriendly
+            />
+            <SketchTile
                 title='Descent'
                 desc='Mimics moving downwards in a long tunnel'
                 image={<DescentImg loading='auto' />}
@@ -30,7 +37,7 @@ function SketchList(props) {
             <SketchTile
                 title='Bezier Curve'
                 desc='A smooth curve drawn between a series of points'
-                image={<BezierCurveImg loading='auto' />}
+                image={<BezierCurveImg />}
                 routerPath={routePaths.bezierCurve}
                 isMobileFriendly
             />
