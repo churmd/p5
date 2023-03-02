@@ -1,3 +1,4 @@
+import { sum } from "mathjs";
 import p5 from "p5";
 import { instanceOf, number } from "prop-types";
 
@@ -95,8 +96,48 @@ class FlowField {
         );
         const gridY = this.p.floor(gridYPercent);
 
-        const angle = this.grid[gridX][gridY] * this.p.TWO_PI;
+        const surroundingGridAngles = this.getSurroundingAngles(gridX, gridY);
+        const averageAngle =
+            sum(surroundingGridAngles) / surroundingGridAngles.length;
+
+        const angle = averageAngle * this.p.TWO_PI;
         return p5.Vector.fromAngle(angle, 1);
+    }
+
+    /**
+     * Returns a list the angles in the grid around a point, including the point itself.
+     * If a surrounding index is out of bounds, it is skipped and not returned in the list.
+     * @param {Number} x grid x index
+     * @param {Number} y grid y index
+     * @returns {Array<Number>} List of all the angles in the grid around a point
+     */
+    getSurroundingAngles(x, y) {
+        const gridPoints = [
+            [x - 1, y - 1],
+            [x - 1, y],
+            [x - 1, y + 1],
+            [x, y - 1],
+            [x, y],
+            [x, y + 1],
+            [x + 1, y - 1],
+            [x + 1, 0],
+            [x + 1, y + 1],
+        ];
+
+        const angles = [];
+        gridPoints.forEach((gridPoint) => {
+            if (
+                gridPoint[0] >= 0 &&
+                gridPoint[1] >= 0 &&
+                gridPoint[0] < this.width &&
+                gridPoint[1] < this.height
+            ) {
+                const angle = this.grid[gridPoint[0]][gridPoint[1]];
+                angles.push(angle);
+            }
+        });
+
+        return angles;
     }
 }
 

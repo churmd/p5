@@ -1,3 +1,4 @@
+import { re } from "mathjs";
 import p5 from "p5";
 import { instanceOf } from "prop-types";
 import FlowField from "./FlowField";
@@ -14,11 +15,23 @@ class ParticlesOnFlowField {
 
         this.flowField = new FlowField(this.p, 20, 20);
 
+        this.numParticles = 200;
         this.particles = [];
 
-        this.particles.push(
-            new Particle(this.p, canvasWidth / 2, canvasHeight / 2)
-        );
+        for (var i = 0; i < this.numParticles; i++) {
+            this.createRandomParticle(canvasWidth, canvasHeight);
+        }
+    }
+
+    /**
+     * @param {Number} canvasWidth
+     * @param {Number} canvasHeight
+     */
+    createRandomParticle(canvasWidth, canvasHeight) {
+        const x = this.p.random(canvasWidth);
+        const y = this.p.random(canvasHeight);
+        const particle = new Particle(this.p, x, y);
+        this.particles.push(particle);
     }
 
     /**
@@ -54,6 +67,14 @@ class ParticlesOnFlowField {
 
             particle.addVelocityAndMove(flowFieldVelocity);
         });
+
+        this.particles = this.particles.filter((particle) => {
+            return !particle.isOutOfBounds(canvasWidth, canvasHeight);
+        });
+
+        while (this.particles.length !== this.numParticles) {
+            this.createRandomParticle(canvasWidth, canvasHeight);
+        }
     }
 }
 

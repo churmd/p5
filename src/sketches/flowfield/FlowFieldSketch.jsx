@@ -23,8 +23,6 @@ class FlowFieldSketch extends React.Component {
                 window.innerWidth,
                 window.innerHeight
             );
-
-            p.frameRate(5);
         };
 
         p.draw = () => {

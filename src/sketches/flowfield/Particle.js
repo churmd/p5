@@ -29,6 +29,22 @@ class Particle {
         this.velocity.normalize();
         this.position = this.position.add(this.velocity);
     }
+
+    /**
+     * @param {Number} canvasWidth
+     * @param {Number} canvasHeight
+     */
+    isOutOfBounds(canvasWidth, canvasHeight) {
+        if (this.position.x < 0 || this.position.y < 0) {
+            return true;
+        }
+
+        if (this.position.x > canvasWidth || this.position.y > canvasHeight) {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 Particle.prototypes = {
