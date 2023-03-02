@@ -2,6 +2,7 @@ import React from "react";
 import p5 from "p5";
 import FlowField from "./FlowField";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
+import ParticlesOnFlowField from "./ParticlesOnFlowField";
 
 class FlowFieldSketch extends React.Component {
     constructor(props) {
@@ -17,13 +18,19 @@ class FlowFieldSketch extends React.Component {
             cnv.parent("canvas");
             cnv.style("display", "block");
 
-            flowField = new FlowField(p, 20, 20);
+            flowField = new ParticlesOnFlowField(
+                p,
+                window.innerWidth,
+                window.innerHeight
+            );
+
+            p.frameRate(5);
         };
 
         p.draw = () => {
             p.background(0);
             flowField.show(window.innerWidth, window.innerHeight);
-            flowField.update();
+            flowField.update(window.innerWidth, window.innerHeight);
         };
 
         p.windowResized = () => {

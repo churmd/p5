@@ -47,7 +47,7 @@ class FlowField {
                     yPixel + cellHeight / 2
                 );
 
-                this.p.rotate(this.grid[x][y] * this.p.PI);
+                this.p.rotate(this.grid[x][y] * this.p.TWO_PI);
 
                 this.p.line(0, 0, cellHeight / 2, 0);
 
@@ -66,6 +66,37 @@ class FlowField {
                 this.grid[x][y] = this.p.noise(x, y, this.time);
             }
         }
+    }
+
+    /**
+     * @param {p5.Vector} position
+     * @param {Number} canvasWidth
+     * @param {Number} canvasHeight
+     * @returns {p5.Vector} the velocity of the flow between 0 and 2 PI
+     */
+    flowVelocityFromPixelPosition(position, canvasWidth, canvasHeight) {
+        const gridXPercent = this.p.map(
+            position.x,
+            0,
+            canvasWidth,
+            0,
+            this.width,
+            true
+        );
+        const gridX = this.p.floor(gridXPercent);
+
+        const gridYPercent = this.p.map(
+            position.y,
+            0,
+            canvasHeight,
+            0,
+            this.height,
+            true
+        );
+        const gridY = this.p.floor(gridYPercent);
+
+        const angle = this.grid[gridX][gridY] * this.p.TWO_PI;
+        return p5.Vector.fromAngle(angle, 1);
     }
 }
 
