@@ -1,4 +1,3 @@
-import { re } from "mathjs";
 import p5 from "p5";
 import { instanceOf } from "prop-types";
 import FlowField from "./FlowField";
