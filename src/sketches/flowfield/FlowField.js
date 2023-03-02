@@ -39,6 +39,19 @@ class FlowField {
                 const colour = this.grid[x][y] * 255;
                 this.p.fill(colour);
                 this.p.rect(xPixel, yPixel, cellWidth, cellHeight);
+
+                this.p.push();
+
+                this.p.translate(
+                    xPixel + cellWidth / 2,
+                    yPixel + cellHeight / 2
+                );
+
+                this.p.rotate(this.grid[x][y] * this.p.PI);
+
+                this.p.line(0, 0, cellHeight / 2, 0);
+
+                this.p.pop();
             }
         }
 
