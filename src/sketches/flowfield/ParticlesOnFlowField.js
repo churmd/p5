@@ -79,6 +79,11 @@ class ParticlesOnFlowField {
         if (this.particles.length !== this.numParticles) {
             this.createParticleAtMouse(canvasWidth, canvasHeight);
         }
+
+        // If there is still space, create another random particle to keep the animation interesting
+        if (this.particles.length !== this.numParticles) {
+            this.createRandomParticle(canvasWidth, canvasHeight);
+        }
     }
 }
 

@@ -37,9 +37,9 @@ class FlowField {
                 const xPixel = x * cellWidth;
                 const yPixel = y * cellHeight;
 
-                const colour = this.grid[x][y] * 255;
-                this.p.fill(colour);
-                this.p.rect(xPixel, yPixel, cellWidth, cellHeight);
+                // const colour = this.grid[x][y] * 255;
+                // this.p.fill(colour);
+                // this.p.rect(xPixel, yPixel, cellWidth, cellHeight);
 
                 this.p.push();
 
