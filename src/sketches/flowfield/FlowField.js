@@ -43,14 +43,27 @@ class FlowField {
 
                 this.p.push();
 
+                const halfCellHeight = cellHeight / 2;
+
                 this.p.translate(
                     xPixel + cellWidth / 2,
-                    yPixel + cellHeight / 2
+                    yPixel + halfCellHeight
                 );
 
                 this.p.rotate(this.grid[x][y] * this.p.TWO_PI);
 
-                this.p.line(0, 0, cellHeight / 2, 0);
+                this.p.fill(0);
+
+                this.p.line(0, 0, halfCellHeight, 0);
+
+                this.p.triangle(
+                    halfCellHeight,
+                    0,
+                    halfCellHeight - cellHeight / 10,
+                    -cellHeight / 20,
+                    halfCellHeight - cellHeight / 10,
+                    cellHeight / 20
+                );
 
                 this.p.pop();
             }
