@@ -33,6 +33,11 @@ class ParticlesOnFlowField {
         this.particles.push(particle);
     }
 
+    createParticleAtMouse() {
+        const particle = new Particle(this.p, this.p.mouseX, this.p.mouseY);
+        this.particles.push(particle);
+    }
+
     /**
      * @param {Number} canvasWidth
      * @param {Number} canvasHeight
@@ -71,8 +76,8 @@ class ParticlesOnFlowField {
             return !particle.isOutOfBounds(canvasWidth, canvasHeight);
         });
 
-        while (this.particles.length !== this.numParticles) {
-            this.createRandomParticle(canvasWidth, canvasHeight);
+        if (this.particles.length !== this.numParticles) {
+            this.createParticleAtMouse(canvasWidth, canvasHeight);
         }
     }
 }
