@@ -26,7 +26,7 @@ class FlowFieldSketch extends React.Component {
         };
 
         p.draw = () => {
-            p.background(150);
+            p.background(51);
             flowField.show(window.innerWidth, window.innerHeight);
             flowField.update(window.innerWidth, window.innerHeight);
         };

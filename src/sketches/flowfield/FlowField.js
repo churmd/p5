@@ -52,7 +52,12 @@ class FlowField {
 
                 this.p.rotate(this.grid[x][y] * this.p.TWO_PI);
 
-                this.p.fill(0);
+                this.p.colorMode(this.p.HSL, 360);
+                const hue = this.p.degrees(this.grid[x][y] * this.p.TWO_PI);
+                const colour = this.p.color(hue, 250, 200);
+
+                this.p.stroke(colour);
+                this.p.fill(colour);
 
                 this.p.line(0, 0, halfCellHeight, 0);
 

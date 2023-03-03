@@ -12,7 +12,7 @@ class ParticlesOnFlowField {
     constructor(p5Instance, canvasWidth, canvasHeight) {
         this.p = p5Instance;
 
-        this.flowField = new FlowField(this.p, 20, 20);
+        this.flowField = new FlowField(this.p, 30, 30);
 
         this.numParticles = 200;
         this.particles = [];
