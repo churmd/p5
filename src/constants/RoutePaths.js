@@ -4,6 +4,7 @@ export const chaosGame = "/chaosGame";
 export const cuneiformNumberConverter = "/cuneiformNumberConverter";
 export const beautifulTrig = "/beautifulTrigonometry";
 export const flockingSimulation = "/flockingSimulation";
+export const flowField = "/flowfield";
 export const hexes = "/hexes";
 export const lissajousCurveTable = "/lissajousCurveTable";
 export const matrixRain = "/matrixRain";
