@@ -16,16 +16,16 @@ import CuneiformClockImg from "../sketchImages/CuneiformClockImg";
 import RayCastFpsImg from "../sketchImages/RayCastFpsImg";
 import BezierCurveImg from "../sketchImages/BezierCurveImg";
 import DescentImg from "../sketchImages/DescentImg";
+import FlowFieldImg from "../sketchImages/FlowFieldImg";
 
 function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
                 title='Flow Field'
-                desc='Flow Field'
-                image={<DescentImg loading='auto' />}
+                desc='Flow field made from perlin noise simulating a water current with particles flowing along it'
+                image={<FlowFieldImg loading='auto' />}
                 routerPath={routePaths.flowField}
-                isMobileFriendly
             />
             <SketchTile
                 title='Descent'

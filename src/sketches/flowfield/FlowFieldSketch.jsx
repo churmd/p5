@@ -1,6 +1,5 @@
 import React from "react";
 import p5 from "p5";
-import FlowField from "./FlowField";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 import ParticlesOnFlowField from "./ParticlesOnFlowField";
 
