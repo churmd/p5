@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./SketchTile.scss";
 import { useNavigate } from "react-router-dom";
-import MobileFriendly from "@material-ui/icons/MobileFriendly";
 
 function SketchTile(props) {
     const navigate = useNavigate();
@@ -16,7 +15,7 @@ function SketchTile(props) {
             <div className='text'>
                 {props.image}
                 <h2>
-                    {props.title} {props.isMobileFriendly && <MobileFriendly />}
+                    {props.title}
                 </h2>
                 <p>{props.desc}</p>
             </div>
