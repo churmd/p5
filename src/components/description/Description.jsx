@@ -1,5 +1,4 @@
 import React from "react";
-import MobileFriendly from "@material-ui/icons/MobileFriendly";
 
 function Description(props) {
     return (
@@ -9,10 +8,6 @@ function Description(props) {
                 <a href='https://p5js.org/'>P5.js</a>, source code for this
                 website can be found on{" "}
                 <a href='https://github.com/churmd/p5'>github</a>
-            </p>
-            <p>
-                Some animations are intensive to run, so mobile friendly ones
-                are marked with the icon <MobileFriendly />
             </p>
             <p>
                 Many of these projects have been inspired by the following
