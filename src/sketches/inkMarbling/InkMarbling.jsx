@@ -1,6 +1,8 @@
 import React from "react";
 import p5 from "p5";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
+import InkDrop from "./InkDrop";
+import { forEach } from "mathjs";
 
 class InkMarblingSketch extends React.Component {
     constructor(props) {
@@ -9,8 +11,8 @@ class InkMarblingSketch extends React.Component {
     }
 
     sketch = (p) => {
-        let x = 100;
-        let y = 100;
+
+        let drops = [];
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
@@ -19,9 +21,16 @@ class InkMarblingSketch extends React.Component {
         };
 
         p.draw = () => {
-            p.background(0);
-            p.fill(255);
-            p.rect(x, y, 50, 50);
+            p.background(51);
+
+            drops.unshift(new InkDrop(p, p.mouseX, p.mouseY, 100))
+            if (drops.length > 100) {
+                drops.pop();
+            }
+            
+            drops.forEach((drop) => {
+                drop.show();
+            })
         };
 
         p.windowResized = () => {
