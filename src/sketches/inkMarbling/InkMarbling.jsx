@@ -18,13 +18,19 @@ class InkMarblingSketch extends React.Component {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.parent("canvas");
             cnv.style("display", "block");
+            p.frameRate(1);
         };
 
         p.draw = () => {
             p.background(51);
 
-            drops.unshift(new InkDrop(p, p.mouseX, p.mouseY, 100))
-            if (drops.length > 100) {
+            let newDrop = new InkDrop(p, p.mouseX, p.mouseY, 100);
+            drops.forEach((drop) => {
+                drop.displaceByInDrop(newDrop);
+            })
+
+            drops.unshift(newDrop);
+            if (drops.length > 10) {
                 drops.pop();
             }
             
