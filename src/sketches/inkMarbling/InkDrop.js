@@ -7,11 +7,13 @@ class InkDrop {
      * @param {Number} centerX
      * @param {Number} centerY
      * @param {Number} radius
+     * @param {p5.Color} colour 
      */
-    constructor(p5Instance, centerX, centerY, radius) {
+    constructor(p5Instance, centerX, centerY, radius, colour) {
         this.p = p5Instance;
         this.center = this.p.createVector(centerX, centerY);
         this.radius = radius;
+        this.colour = colour;
 
         this.vertices = [];
         let numVertices = 100;
@@ -27,7 +29,7 @@ class InkDrop {
     show() {
         this.p.push();
         this.p.noStroke();
-        this.p.fill(255);
+        this.p.fill(this.colour);
        
         this.p.beginShape();
         this.vertices.forEach((vertex) => {
