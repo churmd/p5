@@ -22,6 +22,12 @@ function SketchList(props) {
     return (
         <div className='sketch-list'>
             <SketchTile
+                title='Ink Marbling'
+                desc='Simulation of ink drops being placed on top of water to create a marbling effect'
+                image={<FlowFieldImg loading='auto' />}
+                routerPath={routePaths.inkMarbling}
+            />
+            <SketchTile
                 title='Flow Field'
                 desc='Flow field made from perlin noise simulating a water current with particles flowing along it'
                 image={<FlowFieldImg loading='auto' />}

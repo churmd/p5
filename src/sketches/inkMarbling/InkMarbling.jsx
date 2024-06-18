@@ -2,7 +2,7 @@ import React from "react";
 import p5 from "p5";
 import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
-class ExampleSketch extends React.Component {
+class InkMarblingSketch extends React.Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
@@ -45,4 +45,5 @@ class ExampleSketch extends React.Component {
         );
     }
 }
-export default ExampleSketch;
+
+export default InkMarblingSketch;
