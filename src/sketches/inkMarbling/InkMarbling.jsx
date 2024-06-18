@@ -4,6 +4,9 @@ import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 import InkDrop from "./InkDrop";
 import { forEach } from "mathjs";
 
+/**
+ * Original CodingTrain video https://www.youtube.com/watch?v=p7IGZTjC008
+ */
 class InkMarblingSketch extends React.Component {
     constructor(props) {
         super(props);
