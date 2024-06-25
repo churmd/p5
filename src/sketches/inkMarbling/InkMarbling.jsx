@@ -17,29 +17,50 @@ class InkMarblingSketch extends React.Component {
 
         let drops = [];
         let colourMode = false;
+        let spawnModeRandom = true;
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.parent("canvas");
             cnv.style("display", "block");
-            p.frameRate(10);
+            p.frameRate(8);
 
             createControls();
         };
 
         const createControls = () => {
-            const greyScaleButton = p.createButton("GreyScale");
-            greyScaleButton.parent("controls");
+            const colourSection = p.createDiv();
+            colourSection.parent("controls");
+
+            const greyScaleButton = p.createButton("Greyscale");
+            greyScaleButton.parent(colourSection);
             greyScaleButton.mousePressed(() => {
                 drops = [];
                 colourMode = false;
             });
 
             const colourButton = p.createButton("Colour");
-            colourButton.parent("controls");
+            colourButton.parent(colourSection);
             colourButton.mousePressed(() => {
                 drops = [];
                 colourMode = true;
+            })
+
+            const spawnSection = p.createDiv();
+            spawnSection.parent("controls");
+
+            const spawnAtMouseButton = p.createButton("At mouse");
+            spawnAtMouseButton.parent(spawnSection);
+            spawnAtMouseButton.mousePressed(() => {
+                drops = [];
+                spawnModeRandom = false;
+            });
+
+            const spawnAtRandomButton = p.createButton("Random");
+            spawnAtRandomButton.parent(spawnSection);
+            spawnAtRandomButton.mousePressed(() => {
+                drops = [];
+                spawnModeRandom = true;
             })
         };
 
@@ -59,13 +80,22 @@ class InkMarblingSketch extends React.Component {
                 
             }
 
-            let newDrop = new InkDrop(p, p.mouseX, p.mouseY, 100, colour);
+            let x, y;
+            if (spawnModeRandom) {
+                x = p.random(0, window.innerWidth);
+                y = p.random(0, window.innerHeight);
+            } else {
+                x = p.mouseX;
+                y = p.mouseY;
+            }
+
+            let newDrop = new InkDrop(p, x, y, 100, colour);
             drops.forEach((drop) => {
                 drop.displaceByInDrop(newDrop);
             })
 
             drops.push(newDrop);
-            if (drops.length > 30) {
+            if (drops.length > 50) {
                 drops.shift();
             }
             
