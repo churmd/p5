@@ -44,6 +44,7 @@ class InkMarblingSketch extends React.Component {
 
         p.windowResized = () => {
             p.resizeCanvas(window.innerWidth, window.innerHeight);
+            drops = [];
         };
     };
 
