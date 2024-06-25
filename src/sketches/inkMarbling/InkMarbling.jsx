@@ -23,7 +23,7 @@ class InkMarblingSketch extends React.Component {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
             cnv.parent("canvas");
             cnv.style("display", "block");
-            p.frameRate(8);
+            p.frameRate(10);
 
             createControls();
         };
@@ -69,27 +69,7 @@ class InkMarblingSketch extends React.Component {
 
             p.push();
 
-            let colour; 
-            if (colourMode) {
-                p.colorMode(p.HSL, 360);
-                const hue = p.random(0, 361)
-                colour = p.color(hue, 250, 200);
-            } else {
-                p.colorMode(p.RGB, 255)
-                colour = p.color(p.random(0, 256))
-                
-            }
-
-            let x, y;
-            if (spawnModeRandom) {
-                x = p.random(0, window.innerWidth);
-                y = p.random(0, window.innerHeight);
-            } else {
-                x = p.mouseX;
-                y = p.mouseY;
-            }
-
-            let newDrop = new InkDrop(p, x, y, 100, colour);
+            let newDrop = createInkDrop();
             drops.forEach((drop) => {
                 drop.displaceByInDrop(newDrop);
             })
@@ -105,6 +85,30 @@ class InkMarblingSketch extends React.Component {
 
             p.pop();
         };
+
+        const createInkDrop = () => {
+            let colour;
+            if (colourMode) {
+                p.colorMode(p.HSL, 360);
+                const hue = p.random(0, 361);
+                colour = p.color(hue, 250, 200);
+            } else {
+                p.colorMode(p.RGB, 255);
+                colour = p.color(p.random(0, 256));
+
+            }
+
+            let x, y;
+            if (spawnModeRandom) {
+                x = p.random(0, window.innerWidth);
+                y = p.random(0, window.innerHeight);
+            } else {
+                x = p.mouseX;
+                y = p.mouseY;
+            }
+
+            return new InkDrop(p, x, y, 100, colour);
+        }
 
         p.windowResized = () => {
             p.resizeCanvas(window.innerWidth, window.innerHeight);
