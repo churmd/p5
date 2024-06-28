@@ -1,5 +1,6 @@
 import React from "react";
 import p5 from "p5";
+import FullscreenElem from "../../components/fullscreenElem/FullscreenElem";
 
 class ExampleSketch extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class ExampleSketch extends React.Component {
 
         p.setup = () => {
             const cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+            cnv.parent("canvas");
             cnv.style("display", "block");
         };
 
@@ -36,7 +38,11 @@ class ExampleSketch extends React.Component {
     }
 
     render() {
-        return <div ref={this.myRef}></div>;
+        return (
+            <div ref={this.myRef}>
+                <FullscreenElem id='canvas' />
+            </div>
+        );
     }
 }
 export default ExampleSketch;

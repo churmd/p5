@@ -33,12 +33,20 @@ const Hexes = lazy(() => import("./sketches/hexes/Hexes"));
 const Cuneiform = lazy(() =>
     import("./sketches/cuneiformNumConverter/Cuneiform")
 );
+const InkMarbling = lazy(() =>
+    import("./sketches/inkMarbling/InkMarbling")
+);
 
 const routing = (
     <Router>
         <Suspense fallback={<div>Page is Loading...</div>}>
             <Routes>
                 <Route exact path={routePaths.home} element={<Home />} />
+                <Route
+                    exact
+                    path={routePaths.inkMarbling}
+                    element={<InkMarbling />}
+                />
                 <Route
                     exact
                     path={routePaths.flowField}

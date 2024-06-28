@@ -14,3 +14,4 @@ export const moduloTimesTable = "/moduloTimesTable";
 export const rayCastingFps = "/RayCastingFps";
 export const snowflakeGenerator = "/snowflakeGenerator";
 export const descent = "/descent";
+export const inkMarbling ="/inkMarbling";

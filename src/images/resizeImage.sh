@@ -2,6 +2,8 @@
 # 
 # A script to convert an image into multiple sizes
 # install imagemagick first
+# sudo apt install imagemagick
+
 # Usage: ./resizeImage.sh <path_to_image>
 
 fileName=$1
