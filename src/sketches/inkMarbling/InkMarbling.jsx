@@ -66,9 +66,13 @@ class InkMarblingSketch extends React.Component {
 
         p.draw = () => {
             p.background(51);
+            updateInkDrops();
+            drops.forEach((drop) => {
+                drop.show();
+            })
+        };
 
-            p.push();
-
+        const updateInkDrops = () => {
             let newDrop = createInkDrop();
             drops.forEach((drop) => {
                 drop.displaceByInDrop(newDrop);
@@ -79,13 +83,7 @@ class InkMarblingSketch extends React.Component {
             drops = drops.filter((drop) => {
                 return drop.isOnScreen(window.innerWidth, window.innerHeight);
             })
-
-            drops.forEach((drop) => {
-                drop.show();
-            })
-
-            p.pop();
-        };
+        }
 
         const createInkDrop = () => {
             let colour;
