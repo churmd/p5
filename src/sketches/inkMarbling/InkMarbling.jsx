@@ -16,7 +16,7 @@ class InkMarblingSketch extends React.Component {
     sketch = (p) => {
 
         let drops = [];
-        let colourMode = false;
+        let colourMode = true;
         let spawnModeRandom = true;
 
         p.setup = () => {
@@ -90,13 +90,9 @@ class InkMarblingSketch extends React.Component {
         const createInkDrop = () => {
             let colour;
             if (colourMode) {
-                p.colorMode(p.HSL, 360);
-                const hue = p.random(0, 361);
-                colour = p.color(hue, 250, 200);
+                colour = p.color(p.random(0, 256), p.random(0, 256), p.random(0, 256));
             } else {
-                p.colorMode(p.RGB, 255);
                 colour = p.color(p.random(0, 256));
-
             }
 
             let x, y;
