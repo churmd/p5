@@ -59,6 +59,28 @@ class InkDrop {
         })
     }
 
+    /**
+     * Returns true if any part of the InkDrop is on screen.
+     * @param {Number} screenWidth 
+     * @param {Number} screenHeight 
+     * @returns {Boolean}
+     */
+    isOnScreen(screenWidth, screenHeight) {
+        const vertexOnScreen = (vertex) => {
+            const xOnScreen = vertex.x >= 0 && vertex.x <= screenWidth
+            const yOnScreen = vertex.y >= 0 && vertex.y <= screenHeight
+            return xOnScreen && yOnScreen
+        }
+
+        for (let index = 0; index < this.vertices.length; index++) {
+            const vertex = this.vertices[index];
+            if (vertexOnScreen(vertex)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
 

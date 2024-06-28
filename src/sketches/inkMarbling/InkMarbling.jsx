@@ -75,10 +75,11 @@ class InkMarblingSketch extends React.Component {
             })
 
             drops.push(newDrop);
-            if (drops.length > 50) {
-                drops.shift();
-            }
-            
+
+            drops = drops.filter((drop) => {
+                return drop.isOnScreen(window.innerWidth, window.innerHeight);
+            })
+
             drops.forEach((drop) => {
                 drop.show();
             })
